@@ -49,7 +49,7 @@ The club marks each pickup as done from its own screen, so the counts stay hones
 
 ## How the prediction works
 
-We didn't use a chatbot for this. The model is a **gradient-boosted decision tree model** written in plain JavaScript with no machine-learning libraries (we built it with help from an AI coding assistant), so it trains in the browser in under a second and retrains the moment a club reports results.
+We didn't use a chatbot for this. The model is a **gradient-boosted decision tree model** that we wrote in plain JavaScript, so it trains in the browser in under a second and retrains the moment a club reports results.
 
 - **What it predicts:** each event's *show rate* (people who checked in ÷ RSVPs), which is then multiplied by the RSVP count.
 - **What it looks at:** the club, event type, day, start time, building, RSVP count, week of the semester, exam periods, the club's recent show rate, the club's show rate for that kind of event, and how much food was left last time. It only uses information from *earlier* events, so it never "peeks" at the answer.
@@ -94,7 +94,7 @@ flowchart LR
 - **Hosting:** GitHub Pages serves the `web/` folder. A GitHub Actions workflow redeploys it on every merge to `main`.
 - **Installable app:** a web app manifest and a service worker (`sw.js`) let it install on a phone's home screen and keep loading on bad Wi-Fi.
 - **Sync:** tabs on the same device sync instantly. Two phones sync through a short sync code over the free ntfy.sh relay, which only ever carries demo data.
-- **Tech:** plain HTML, CSS and JavaScript (no framework), Poppins font, and a gradient-boosted tree model in plain JavaScript with no machine-learning libraries. There's also a Python/scikit-learn copy of the model for evaluation, plus Node tests that check both versions agree.
+- **Tech:** plain HTML, CSS and JavaScript (no framework), Poppins font, and a gradient-boosted tree model written from scratch. There's also a Python/scikit-learn copy of the model for evaluation, plus Node tests that check both versions agree.
 
 ## Try it
 
