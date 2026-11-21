@@ -1,250 +1,244 @@
-event_id,club,event_type,date,day_of_week,start_hour,location,rsvps,checked_in,food_item,caterer,allergens,servings_ordered,servings_left,leftover_pct,semester,week,is_sample
-S0034,Society of Women Engineers,General meeting,2026-01-13,Tue,18,ENB,44,25,pizza,Papa John's (Fletcher Ave),gluten|dairy,45,22,48.9,Spring 2026,1,1
-S0070,Finance Association,General meeting,2026-01-13,Tue,18,BSN,43,17,wraps,Panera Bread,gluten|dairy,45,28,62.2,Spring 2026,1,1
-S0055,Pre-Med Society,Speaker panel,2026-01-13,Tue,19,ISA,57,27,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,54,26,48.1,Spring 2026,1,1
-S0091,Black Student Union,General meeting,2026-01-13,Tue,19,MSC,70,53,wings,Wingstop (Fowler Ave),soy,71,16,22.5,Spring 2026,1,1
-S0001,ACM,General meeting,2026-01-14,Wed,18,ENB,63,20,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,60,39,65.0,Spring 2026,1,1
-S0047,Indian Student Association,Social,2026-01-14,Wed,19,MSC,97,88,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,91,6,6.6,Spring 2026,1,1
-S0099,Vietnamese Student Association,Social,2026-01-14,Wed,19,CPR,58,35,banh mi,Pho Quyen (Fowler Ave),gluten|soy,67,33,49.3,Spring 2026,1,1
-S0015,Village STEM LLC,Floor event,2026-01-14,Wed,20,VIL,38,43,pizza,Domino's (Fowler Ave),gluten|dairy,42,3,7.1,Spring 2026,1,1
-S0112,Chess Club,Social,2026-01-16,Fri,15,LIB,21,10,donuts,Dunkin' (MSC),gluten|dairy|eggs,23,14,60.9,Spring 2026,1,1
-S0028,HackJam Workshops,Workshop,2026-01-17,Sat,13,ISA,57,11,sandwich platters,Jason's Deli,gluten|dairy,62,52,83.9,Spring 2026,1,1
-S0127,Campus Rec Outdoors,Social,2026-01-18,Sun,11,REC,24,12,subs,Jersey Mike's,gluten,27,15,55.6,Spring 2026,1,1
-S0035,Society of Women Engineers,General meeting,2026-01-20,Tue,18,ENB,40,19,pizza,Papa John's (Fletcher Ave),gluten|dairy,43,23,53.5,Spring 2026,2,1
-S0113,Chess Club,Social,2026-01-21,Wed,12,MSC,23,34,donuts,Dunkin' (MSC),gluten|dairy|eggs,27,0,0.0,Spring 2026,2,1
-S0016,Village STEM LLC,Floor event,2026-01-21,Wed,20,VIL,39,22,pizza,Domino's (Fowler Ave),gluten|dairy,41,21,51.2,Spring 2026,2,1
-S0056,Pre-Med Society,General meeting,2026-01-22,Thu,19,ISA,42,21,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,48,26,54.2,Spring 2026,2,1
-S0078,Robotics Club,Workshop,2026-01-23,Fri,16,ENB,27,20,pizza,Domino's (Fowler Ave),gluten|dairy,27,8,29.6,Spring 2026,2,1
-S0002,ACM,Social,2026-01-23,Fri,17,MSC,64,32,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,73,44,60.3,Spring 2026,2,1
-S0128,Campus Rec Outdoors,General meeting,2026-01-27,Tue,19,REC,38,16,subs,Jersey Mike's,gluten,40,24,60.0,Spring 2026,3,1
-S0003,ACM,General meeting,2026-01-28,Wed,18,ENB,74,19,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,80,62,77.5,Spring 2026,3,1
-S0071,Finance Association,Speaker panel,2026-01-28,Wed,18,BSN,36,14,wraps,Panera Bread,gluten|dairy,40,26,65.0,Spring 2026,3,1
-S0048,Indian Student Association,Social,2026-01-28,Wed,19,MSC,92,74,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,96,24,25.0,Spring 2026,3,1
-S0100,Vietnamese Student Association,Social,2026-01-28,Wed,19,CPR,74,55,banh mi,Pho Quyen (Fowler Ave),gluten|soy,74,19,25.7,Spring 2026,3,1
-S0017,Village STEM LLC,Floor event,2026-01-28,Wed,20,VIL,34,21,pizza,Domino's (Fowler Ave),gluten|dairy,34,14,41.2,Spring 2026,3,1
-S0036,Society of Women Engineers,Speaker panel,2026-01-29,Thu,18,MSC,44,38,pizza,Papa John's (Fletcher Ave),gluten|dairy,45,9,20.0,Spring 2026,3,1
-S0106,Entrepreneurship Club,Speaker panel,2026-01-29,Thu,18,BSN,37,12,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,38,26,68.4,Spring 2026,3,1
-S0057,Pre-Med Society,General meeting,2026-01-29,Thu,19,ISA,64,27,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,70,45,64.3,Spring 2026,3,1
-S0092,Black Student Union,Social,2026-01-29,Thu,19,MSC,75,58,wings,Wingstop (Fowler Ave),soy,86,33,38.4,Spring 2026,3,1
-S0114,Chess Club,Social,2026-01-30,Fri,15,LIB,15,9,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,8,47.1,Spring 2026,3,1
-S0079,Robotics Club,Workshop,2026-01-30,Fri,16,ENB,29,14,pizza,Domino's (Fowler Ave),gluten|dairy,29,16,55.2,Spring 2026,3,1
-S0037,Society of Women Engineers,General meeting,2026-02-03,Tue,18,ENB,44,20,pizza,Papa John's (Fletcher Ave),gluten|dairy,43,23,53.5,Spring 2026,4,1
-S0058,Pre-Med Society,Speaker panel,2026-02-03,Tue,19,ISA,52,25,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,58,34,58.6,Spring 2026,4,1
-S0080,Robotics Club,General meeting,2026-02-03,Tue,19,ENB,30,17,pizza,Domino's (Fowler Ave),gluten|dairy,32,14,43.8,Spring 2026,4,1
-S0004,ACM,General meeting,2026-02-04,Wed,18,ENB,74,17,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,84,68,81.0,Spring 2026,4,1
-S0018,Village STEM LLC,Floor event,2026-02-04,Wed,20,VIL,39,15,pizza,Domino's (Fowler Ave),gluten|dairy,38,23,60.5,Spring 2026,4,1
-S0115,Chess Club,Social,2026-02-06,Fri,15,LIB,21,12,donuts,Dunkin' (MSC),gluten|dairy|eggs,21,9,42.9,Spring 2026,4,1
-S0038,Society of Women Engineers,General meeting,2026-02-10,Tue,18,ENB,39,18,pizza,Papa John's (Fletcher Ave),gluten|dairy,45,26,57.8,Spring 2026,5,1
-S0081,Robotics Club,General meeting,2026-02-10,Tue,19,ENB,29,15,pizza,Domino's (Fowler Ave),gluten|dairy,34,20,58.8,Spring 2026,5,1
-S0093,Black Student Union,General meeting,2026-02-10,Tue,19,MSC,83,55,wings,Wingstop (Fowler Ave),soy,91,36,39.6,Spring 2026,5,1
-S0116,Chess Club,Social,2026-02-11,Wed,12,MSC,23,34,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,0,0.0,Spring 2026,5,1
-S0005,ACM,General meeting,2026-02-11,Wed,18,ENB,72,23,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,69,48,69.6,Spring 2026,5,1
-S0072,Finance Association,Speaker panel,2026-02-11,Wed,18,BSN,43,11,wraps,Panera Bread,gluten|dairy,47,37,78.7,Spring 2026,5,1
-S0101,Vietnamese Student Association,Social,2026-02-11,Wed,19,CPR,64,47,banh mi,Pho Quyen (Fowler Ave),gluten|soy,74,30,40.5,Spring 2026,5,1
-S0019,Village STEM LLC,Floor event,2026-02-11,Wed,20,VIL,42,15,pizza,Domino's (Fowler Ave),gluten|dairy,39,25,64.1,Spring 2026,5,1
-S0029,HackJam Workshops,Workshop,2026-02-12,Thu,18,MSC,50,19,sandwich platters,Jason's Deli,gluten|dairy,55,36,65.5,Spring 2026,5,1
-S0107,Entrepreneurship Club,Speaker panel,2026-02-12,Thu,18,BSN,38,8,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,35,27,77.1,Spring 2026,5,1
-S0059,Pre-Med Society,General meeting,2026-02-12,Thu,19,ISA,59,19,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,64,46,71.9,Spring 2026,5,1
-S0049,Indian Student Association,Cultural night,2026-02-13,Fri,19,MSC,106,69,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,115,52,45.2,Spring 2026,5,1
-S0129,Campus Rec Outdoors,Social,2026-02-15,Sun,11,REC,36,11,subs,Jersey Mike's,gluten,41,31,75.6,Spring 2026,5,1
-S0039,Society of Women Engineers,General meeting,2026-02-17,Tue,18,ENB,47,20,pizza,Papa John's (Fletcher Ave),gluten|dairy,53,33,62.3,Spring 2026,6,1
-S0082,Robotics Club,General meeting,2026-02-17,Tue,19,ENB,32,18,pizza,Domino's (Fowler Ave),gluten|dairy,35,17,48.6,Spring 2026,6,1
-S0117,Chess Club,Social,2026-02-18,Wed,12,MSC,19,28,donuts,Dunkin' (MSC),gluten|dairy|eggs,20,0,0.0,Spring 2026,6,1
-S0020,Village STEM LLC,Floor event,2026-02-18,Wed,20,VIL,39,9,pizza,Domino's (Fowler Ave),gluten|dairy,39,30,76.9,Spring 2026,6,1
-S0006,ACM,Workshop,2026-02-19,Thu,18,ENB,67,44,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,68,23,33.8,Spring 2026,6,1
-S0060,Pre-Med Society,General meeting,2026-02-19,Thu,19,ISA,63,24,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,64,41,64.1,Spring 2026,6,1
-S0040,Society of Women Engineers,General meeting,2026-02-24,Tue,18,ENB,46,18,pizza,Papa John's (Fletcher Ave),gluten|dairy,54,36,66.7,Spring 2026,7,1
-S0130,Campus Rec Outdoors,General meeting,2026-02-24,Tue,19,REC,34,11,subs,Jersey Mike's,gluten,35,24,68.6,Spring 2026,7,1
-S0108,Entrepreneurship Club,Workshop,2026-02-25,Wed,17,LIB,42,7,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,39,32,82.1,Spring 2026,7,1
-S0007,ACM,General meeting,2026-02-25,Wed,18,ENB,72,14,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,67,54,80.6,Spring 2026,7,1
-S0073,Finance Association,Speaker panel,2026-02-25,Wed,18,BSN,45,12,wraps,Panera Bread,gluten|dairy,50,38,76.0,Spring 2026,7,1
-S0021,Village STEM LLC,Floor event,2026-02-25,Wed,20,VIL,36,9,pizza,Domino's (Fowler Ave),gluten|dairy,38,30,78.9,Spring 2026,7,1
-S0061,Pre-Med Society,General meeting,2026-02-26,Thu,19,ISA,58,19,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,54,35,64.8,Spring 2026,7,1
-S0094,Black Student Union,Social,2026-02-26,Thu,19,MSC,75,45,wings,Wingstop (Fowler Ave),soy,75,29,38.7,Spring 2026,7,1
-S0118,Chess Club,Social,2026-02-27,Fri,15,LIB,19,12,donuts,Dunkin' (MSC),gluten|dairy|eggs,18,6,33.3,Spring 2026,7,1
-S0083,Robotics Club,Workshop,2026-02-27,Fri,16,ENB,25,13,pizza,Domino's (Fowler Ave),gluten|dairy,26,13,50.0,Spring 2026,7,1
-S0050,Indian Student Association,Cultural night,2026-02-27,Fri,19,MSC,105,63,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,115,55,47.8,Spring 2026,7,1
-S0030,HackJam Workshops,Workshop,2026-02-28,Sat,13,ISA,52,7,sandwich platters,Jason's Deli,gluten|dairy,61,54,88.5,Spring 2026,7,1
-S0102,Vietnamese Student Association,Cultural night,2026-02-28,Sat,18,MSC,83,35,banh mi,Pho Quyen (Fowler Ave),gluten|soy,82,48,58.5,Spring 2026,7,1
-S0008,ACM,General meeting,2026-03-04,Wed,18,ENB,72,15,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,68,54,79.4,Spring 2026,8,1
-S0062,Pre-Med Society,General meeting,2026-03-05,Thu,19,ISA,67,20,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,73,54,74.0,Spring 2026,8,1
-S0119,Chess Club,Social,2026-03-06,Fri,15,LIB,18,7,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,10,58.8,Spring 2026,8,1
-S0041,Society of Women Engineers,General meeting,2026-03-10,Tue,18,ENB,42,21,pizza,Papa John's (Fletcher Ave),gluten|dairy,40,19,47.5,Spring 2026,9,1
-S0131,Campus Rec Outdoors,General meeting,2026-03-10,Tue,19,REC,34,12,subs,Jersey Mike's,gluten,37,25,67.6,Spring 2026,9,1
-S0120,Chess Club,Social,2026-03-11,Wed,12,MSC,22,35,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,0,0.0,Spring 2026,9,1
-S0009,ACM,General meeting,2026-03-11,Wed,18,ENB,79,18,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,82,64,78.0,Spring 2026,9,1
-S0074,Finance Association,Speaker panel,2026-03-11,Wed,18,BSN,51,16,wraps,Panera Bread,gluten|dairy,60,45,75.0,Spring 2026,9,1
-S0022,Village STEM LLC,Floor event,2026-03-11,Wed,20,VIL,41,8,pizza,Domino's (Fowler Ave),gluten|dairy,44,36,81.8,Spring 2026,9,1
-S0063,Pre-Med Society,General meeting,2026-03-12,Thu,19,ISA,64,18,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,65,47,72.3,Spring 2026,9,1
-S0095,Black Student Union,Social,2026-03-12,Thu,19,MSC,74,53,wings,Wingstop (Fowler Ave),soy,76,24,31.6,Spring 2026,9,1
-S0084,Robotics Club,Workshop,2026-03-13,Fri,16,ENB,24,15,pizza,Domino's (Fowler Ave),gluten|dairy,25,11,44.0,Spring 2026,9,1
-S0051,Indian Student Association,Cultural night,2026-03-13,Fri,19,MSC,125,87,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,131,40,30.5,Spring 2026,9,1
-S0085,Robotics Club,General meeting,2026-03-17,Tue,19,ENB,30,18,pizza,Domino's (Fowler Ave),gluten|dairy,35,19,54.3,Spring 2026,10,1
-S0121,Chess Club,Social,2026-03-18,Wed,12,MSC,19,30,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,0,0.0,Spring 2026,10,1
-S0023,Village STEM LLC,Floor event,2026-03-18,Wed,20,VIL,40,10,pizza,Domino's (Fowler Ave),gluten|dairy,44,34,77.3,Spring 2026,10,1
-S0042,Society of Women Engineers,Speaker panel,2026-03-19,Thu,18,MSC,41,19,pizza,Papa John's (Fletcher Ave),gluten|dairy,46,28,60.9,Spring 2026,10,1
-S0064,Pre-Med Society,General meeting,2026-03-19,Thu,19,ISA,51,18,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,53,36,67.9,Spring 2026,10,1
-S0010,ACM,Social,2026-03-20,Fri,17,MSC,70,26,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,72,47,65.3,Spring 2026,10,1
-S0043,Society of Women Engineers,General meeting,2026-03-24,Tue,18,ENB,45,19,pizza,Papa John's (Fletcher Ave),gluten|dairy,44,26,59.1,Spring 2026,11,1
-S0086,Robotics Club,General meeting,2026-03-24,Tue,19,ENB,29,14,pizza,Domino's (Fowler Ave),gluten|dairy,30,16,53.3,Spring 2026,11,1
-S0096,Black Student Union,General meeting,2026-03-24,Tue,19,MSC,70,46,wings,Wingstop (Fowler Ave),soy,77,35,45.5,Spring 2026,11,1
-S0132,Campus Rec Outdoors,General meeting,2026-03-24,Tue,19,REC,31,13,subs,Jersey Mike's,gluten,36,23,63.9,Spring 2026,11,1
-S0011,ACM,General meeting,2026-03-25,Wed,18,ENB,63,19,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,72,52,72.2,Spring 2026,11,1
-S0075,Finance Association,Speaker panel,2026-03-25,Wed,18,BSN,49,12,wraps,Panera Bread,gluten|dairy,52,41,78.8,Spring 2026,11,1
-S0052,Indian Student Association,Social,2026-03-25,Wed,19,MSC,98,73,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,110,38,34.5,Spring 2026,11,1
-S0103,Vietnamese Student Association,Social,2026-03-25,Wed,19,CPR,72,51,banh mi,Pho Quyen (Fowler Ave),gluten|soy,77,25,32.5,Spring 2026,11,1
-S0024,Village STEM LLC,Floor event,2026-03-25,Wed,20,VIL,42,7,pizza,Domino's (Fowler Ave),gluten|dairy,43,36,83.7,Spring 2026,11,1
-S0031,HackJam Workshops,Workshop,2026-03-26,Thu,18,MSC,45,21,sandwich platters,Jason's Deli,gluten|dairy,43,21,48.8,Spring 2026,11,1
-S0109,Entrepreneurship Club,Speaker panel,2026-03-26,Thu,18,BSN,35,10,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,40,30,75.0,Spring 2026,11,1
-S0065,Pre-Med Society,General meeting,2026-03-26,Thu,19,ISA,48,16,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,49,33,67.3,Spring 2026,11,1
-S0122,Chess Club,Social,2026-03-27,Fri,15,LIB,27,12,donuts,Dunkin' (MSC),gluten|dairy|eggs,26,14,53.8,Spring 2026,11,1
-S0044,Society of Women Engineers,General meeting,2026-03-31,Tue,18,ENB,34,13,pizza,Papa John's (Fletcher Ave),gluten|dairy,32,20,62.5,Spring 2026,12,1
-S0066,Pre-Med Society,Speaker panel,2026-03-31,Tue,19,ISA,50,20,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,58,39,67.2,Spring 2026,12,1
-S0123,Chess Club,Social,2026-04-01,Wed,12,MSC,25,34,donuts,Dunkin' (MSC),gluten|dairy|eggs,27,0,0.0,Spring 2026,12,1
-S0025,Village STEM LLC,Floor event,2026-04-01,Wed,20,VIL,33,5,pizza,Domino's (Fowler Ave),gluten|dairy,37,32,86.5,Spring 2026,12,1
-S0012,ACM,Workshop,2026-04-02,Thu,18,ENB,54,32,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,61,31,50.8,Spring 2026,12,1
-S0087,Robotics Club,Workshop,2026-04-03,Fri,16,ENB,24,16,pizza,Domino's (Fowler Ave),gluten|dairy,27,10,37.0,Spring 2026,12,1
-S0097,Black Student Union,General meeting,2026-04-07,Tue,19,MSC,68,55,wings,Wingstop (Fowler Ave),soy,68,13,19.1,Spring 2026,13,1
-S0133,Campus Rec Outdoors,General meeting,2026-04-07,Tue,19,REC,34,13,subs,Jersey Mike's,gluten,37,25,67.6,Spring 2026,13,1
-S0124,Chess Club,Social,2026-04-08,Wed,12,MSC,20,28,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,0,0.0,Spring 2026,13,1
-S0076,Finance Association,Speaker panel,2026-04-08,Wed,18,BSN,41,15,wraps,Panera Bread,gluten|dairy,46,31,67.4,Spring 2026,13,1
-S0053,Indian Student Association,Social,2026-04-08,Wed,19,MSC,82,73,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,91,25,27.5,Spring 2026,13,1
-S0104,Vietnamese Student Association,Social,2026-04-08,Wed,19,CPR,56,29,banh mi,Pho Quyen (Fowler Ave),gluten|soy,64,34,53.1,Spring 2026,13,1
-S0026,Village STEM LLC,Floor event,2026-04-08,Wed,20,VIL,34,9,pizza,Domino's (Fowler Ave),gluten|dairy,32,23,71.9,Spring 2026,13,1
-S0110,Entrepreneurship Club,Speaker panel,2026-04-09,Thu,18,BSN,38,10,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,37,27,73.0,Spring 2026,13,1
-S0067,Pre-Med Society,General meeting,2026-04-09,Thu,19,ISA,64,20,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,67,47,70.1,Spring 2026,13,1
-S0088,Robotics Club,Workshop,2026-04-10,Fri,16,ENB,29,18,pizza,Domino's (Fowler Ave),gluten|dairy,32,13,40.6,Spring 2026,13,1
-S0013,ACM,Social,2026-04-10,Fri,17,MSC,65,29,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,62,35,56.5,Spring 2026,13,1
-S0032,HackJam Workshops,Workshop,2026-04-11,Sat,13,ISA,48,8,sandwich platters,Jason's Deli,gluten|dairy,51,43,84.3,Spring 2026,13,1
-S0068,Pre-Med Society,Speaker panel,2026-04-14,Tue,19,ISA,66,15,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,75,61,81.3,Spring 2026,14,1
-S0089,Robotics Club,General meeting,2026-04-14,Tue,19,ENB,32,11,pizza,Domino's (Fowler Ave),gluten|dairy,36,25,69.4,Spring 2026,14,1
-S0125,Chess Club,Social,2026-04-15,Wed,12,MSC,18,26,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,0,0.0,Spring 2026,14,1
-S0045,Society of Women Engineers,Speaker panel,2026-04-16,Thu,18,MSC,46,24,pizza,Papa John's (Fletcher Ave),gluten|dairy,49,27,55.1,Spring 2026,14,1
-S0069,Pre-Med Society,Speaker panel,2026-04-21,Tue,19,ISA,66,23,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,65,44,67.7,Spring 2026,15,1
-S0090,Robotics Club,General meeting,2026-04-21,Tue,19,ENB,30,9,pizza,Domino's (Fowler Ave),gluten|dairy,32,23,71.9,Spring 2026,15,1
-S0098,Black Student Union,General meeting,2026-04-21,Tue,19,MSC,85,36,wings,Wingstop (Fowler Ave),soy,86,51,59.3,Spring 2026,15,1
-S0134,Campus Rec Outdoors,General meeting,2026-04-21,Tue,19,REC,29,7,subs,Jersey Mike's,gluten,29,22,75.9,Spring 2026,15,1
-S0126,Chess Club,Social,2026-04-22,Wed,12,MSC,19,29,donuts,Dunkin' (MSC),gluten|dairy|eggs,21,0,0.0,Spring 2026,15,1
-S0111,Entrepreneurship Club,Workshop,2026-04-22,Wed,17,LIB,42,7,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,48,41,85.4,Spring 2026,15,1
-S0077,Finance Association,Speaker panel,2026-04-22,Wed,18,BSN,48,11,wraps,Panera Bread,gluten|dairy,52,41,78.8,Spring 2026,15,1
-S0054,Indian Student Association,Social,2026-04-22,Wed,19,MSC,77,50,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,73,21,28.8,Spring 2026,15,1
-S0105,Vietnamese Student Association,Social,2026-04-22,Wed,19,CPR,55,20,banh mi,Pho Quyen (Fowler Ave),gluten|soy,55,34,61.8,Spring 2026,15,1
-S0027,Village STEM LLC,Floor event,2026-04-22,Wed,20,VIL,40,5,pizza,Domino's (Fowler Ave),gluten|dairy,46,41,89.1,Spring 2026,15,1
-S0014,ACM,Workshop,2026-04-23,Thu,18,ENB,56,26,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,59,32,54.2,Spring 2026,15,1
-S0046,Society of Women Engineers,Speaker panel,2026-04-23,Thu,18,MSC,43,21,pizza,Papa John's (Fletcher Ave),gluten|dairy,40,20,50.0,Spring 2026,15,1
-S0033,HackJam Workshops,Workshop,2026-04-25,Sat,13,ISA,56,9,sandwich platters,Jason's Deli,gluten|dairy,53,44,83.0,Spring 2026,15,1
-S0163,Society of Women Engineers,General meeting,2026-08-25,Tue,18,ENB,41,27,pizza,Papa John's (Fletcher Ave),gluten|dairy,48,23,47.9,Fall 2026,1,1
-S0182,Pre-Med Society,Speaker panel,2026-08-25,Tue,19,ISA,58,26,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,63,36,57.1,Fall 2026,1,1
-S0232,Chess Club,Social,2026-08-26,Wed,12,MSC,19,30,donuts,Dunkin' (MSC),gluten|dairy|eggs,20,0,0.0,Fall 2026,1,1
-S0194,Finance Association,Speaker panel,2026-08-26,Wed,18,BSN,49,26,wraps,Panera Bread,gluten|dairy,48,21,43.8,Fall 2026,1,1
-S0175,Indian Student Association,Social,2026-08-26,Wed,19,MSC,84,77,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,87,14,16.1,Fall 2026,1,1
-S0145,Village STEM LLC,Floor event,2026-08-26,Wed,20,VIL,39,40,pizza,Domino's (Fowler Ave),gluten|dairy,43,3,7.0,Fall 2026,1,1
-S0226,Entrepreneurship Club,Speaker panel,2026-08-27,Thu,18,BSN,42,13,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,49,36,73.5,Fall 2026,1,1
-S0213,Black Student Union,Social,2026-08-27,Thu,19,MSC,79,64,wings,Wingstop (Fowler Ave),soy,81,22,27.2,Fall 2026,1,1
-S0201,Robotics Club,Workshop,2026-08-28,Fri,16,ENB,28,19,pizza,Domino's (Fowler Ave),gluten|dairy,29,10,34.5,Fall 2026,1,1
-S0135,ACM,Social,2026-08-28,Fri,17,MSC,63,33,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,62,29,46.8,Fall 2026,1,1
-S0158,HackJam Workshops,Workshop,2026-08-29,Sat,13,ISA,54,10,sandwich platters,Jason's Deli,gluten|dairy,63,54,85.7,Fall 2026,1,1
-S0220,Vietnamese Student Association,Cultural night,2026-08-29,Sat,18,MSC,101,77,banh mi,Pho Quyen (Fowler Ave),gluten|soy,93,14,15.1,Fall 2026,1,1
-S0243,Campus Rec Outdoors,Social,2026-08-30,Sun,11,REC,36,18,subs,Jersey Mike's,gluten,40,21,52.5,Fall 2026,1,1
-S0202,Robotics Club,General meeting,2026-09-01,Tue,19,ENB,32,15,pizza,Domino's (Fowler Ave),gluten|dairy,32,18,56.2,Fall 2026,2,1
-S0233,Chess Club,Social,2026-09-02,Wed,12,MSC,16,26,donuts,Dunkin' (MSC),gluten|dairy|eggs,15,0,0.0,Fall 2026,2,1
-S0136,ACM,General meeting,2026-09-02,Wed,18,ENB,53,15,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,61,46,75.4,Fall 2026,2,1
-S0146,Village STEM LLC,Floor event,2026-09-02,Wed,20,VIL,33,27,pizza,Domino's (Fowler Ave),gluten|dairy,37,10,27.0,Fall 2026,2,1
-S0164,Society of Women Engineers,Speaker panel,2026-09-03,Thu,18,MSC,32,21,pizza,Papa John's (Fletcher Ave),gluten|dairy,31,12,38.7,Fall 2026,2,1
-S0183,Pre-Med Society,General meeting,2026-09-03,Thu,19,ISA,59,24,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,64,41,64.1,Fall 2026,2,1
-S0195,Finance Association,General meeting,2026-09-08,Tue,18,BSN,39,13,wraps,Panera Bread,gluten|dairy,37,24,64.9,Fall 2026,3,1
-S0244,Campus Rec Outdoors,General meeting,2026-09-08,Tue,19,REC,34,14,subs,Jersey Mike's,gluten,40,26,65.0,Fall 2026,3,1
-S0137,ACM,General meeting,2026-09-09,Wed,18,ENB,63,21,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,62,42,67.7,Fall 2026,3,1
-S0221,Vietnamese Student Association,Social,2026-09-09,Wed,19,CPR,65,40,banh mi,Pho Quyen (Fowler Ave),gluten|soy,69,28,40.6,Fall 2026,3,1
-S0147,Village STEM LLC,Floor event,2026-09-09,Wed,20,VIL,40,23,pizza,Domino's (Fowler Ave),gluten|dairy,43,20,46.5,Fall 2026,3,1
-S0227,Entrepreneurship Club,Speaker panel,2026-09-10,Thu,18,BSN,43,14,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,41,28,68.3,Fall 2026,3,1
-S0184,Pre-Med Society,General meeting,2026-09-10,Thu,19,ISA,74,30,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,80,52,65.0,Fall 2026,3,1
-S0214,Black Student Union,Social,2026-09-10,Thu,19,MSC,71,55,wings,Wingstop (Fowler Ave),soy,76,22,28.9,Fall 2026,3,1
-S0234,Chess Club,Social,2026-09-11,Fri,15,LIB,20,12,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,11,50.0,Fall 2026,3,1
-S0203,Robotics Club,Workshop,2026-09-11,Fri,16,ENB,34,21,pizza,Domino's (Fowler Ave),gluten|dairy,38,16,42.1,Fall 2026,3,1
-S0176,Indian Student Association,Cultural night,2026-09-11,Fri,19,MSC,101,77,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,111,35,31.5,Fall 2026,3,1
-S0159,HackJam Workshops,Workshop,2026-09-12,Sat,13,ISA,59,11,sandwich platters,Jason's Deli,gluten|dairy,65,54,83.1,Fall 2026,3,1
-S0185,Pre-Med Society,Speaker panel,2026-09-15,Tue,19,ISA,59,26,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,61,37,60.7,Fall 2026,4,1
-S0235,Chess Club,Social,2026-09-16,Wed,12,MSC,16,26,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,0,0.0,Fall 2026,4,1
-S0148,Village STEM LLC,Floor event,2026-09-16,Wed,20,VIL,36,18,pizza,Domino's (Fowler Ave),gluten|dairy,34,16,47.1,Fall 2026,4,1
-S0165,Society of Women Engineers,Speaker panel,2026-09-17,Thu,18,MSC,34,27,pizza,Papa John's (Fletcher Ave),gluten|dairy,35,8,22.9,Fall 2026,4,1
-S0204,Robotics Club,Workshop,2026-09-18,Fri,16,ENB,27,17,pizza,Domino's (Fowler Ave),gluten|dairy,25,8,32.0,Fall 2026,4,1
-S0138,ACM,Social,2026-09-18,Fri,17,MSC,56,23,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,55,33,60.0,Fall 2026,4,1
-S0166,Society of Women Engineers,General meeting,2026-09-22,Tue,18,ENB,41,19,pizza,Papa John's (Fletcher Ave),gluten|dairy,47,30,63.8,Fall 2026,5,1
-S0215,Black Student Union,General meeting,2026-09-22,Tue,19,MSC,86,52,wings,Wingstop (Fowler Ave),soy,87,34,39.1,Fall 2026,5,1
-S0245,Campus Rec Outdoors,General meeting,2026-09-22,Tue,19,REC,35,17,subs,Jersey Mike's,gluten,41,24,58.5,Fall 2026,5,1
-S0228,Entrepreneurship Club,Workshop,2026-09-23,Wed,17,LIB,34,12,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,40,29,72.5,Fall 2026,5,1
-S0139,ACM,General meeting,2026-09-23,Wed,18,ENB,59,15,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,67,52,77.6,Fall 2026,5,1
-S0196,Finance Association,Speaker panel,2026-09-23,Wed,18,BSN,32,11,wraps,Panera Bread,gluten|dairy,36,25,69.4,Fall 2026,5,1
-S0177,Indian Student Association,Social,2026-09-23,Wed,19,MSC,71,64,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,76,13,17.1,Fall 2026,5,1
-S0222,Vietnamese Student Association,Social,2026-09-23,Wed,19,CPR,65,44,banh mi,Pho Quyen (Fowler Ave),gluten|soy,66,20,30.3,Fall 2026,5,1
-S0149,Village STEM LLC,Floor event,2026-09-23,Wed,20,VIL,39,13,pizza,Domino's (Fowler Ave),gluten|dairy,42,29,69.0,Fall 2026,5,1
-S0186,Pre-Med Society,General meeting,2026-09-24,Thu,19,ISA,49,16,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,51,35,68.6,Fall 2026,5,1
-S0236,Chess Club,Social,2026-09-25,Fri,15,LIB,17,11,donuts,Dunkin' (MSC),gluten|dairy|eggs,19,9,47.4,Fall 2026,5,1
-S0205,Robotics Club,Workshop,2026-09-25,Fri,16,ENB,29,14,pizza,Domino's (Fowler Ave),gluten|dairy,31,16,51.6,Fall 2026,5,1
-S0167,Society of Women Engineers,General meeting,2026-09-29,Tue,18,ENB,35,16,pizza,Papa John's (Fletcher Ave),gluten|dairy,33,16,48.5,Fall 2026,6,1
-S0187,Pre-Med Society,Speaker panel,2026-09-29,Tue,19,ISA,57,20,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,62,42,67.7,Fall 2026,6,1
-S0140,ACM,General meeting,2026-09-30,Wed,18,ENB,72,17,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,79,64,81.0,Fall 2026,6,1
-S0150,Village STEM LLC,Floor event,2026-09-30,Wed,20,VIL,36,12,pizza,Domino's (Fowler Ave),gluten|dairy,42,31,73.8,Fall 2026,6,1
-S0237,Chess Club,Social,2026-10-02,Fri,15,LIB,22,13,donuts,Dunkin' (MSC),gluten|dairy|eggs,23,10,43.5,Fall 2026,6,1
-S0206,Robotics Club,Workshop,2026-10-02,Fri,16,ENB,28,17,pizza,Domino's (Fowler Ave),gluten|dairy,27,10,37.0,Fall 2026,6,1
-S0168,Society of Women Engineers,General meeting,2026-10-06,Tue,18,ENB,40,12,pizza,Papa John's (Fletcher Ave),gluten|dairy,41,29,70.7,Fall 2026,7,1
-S0197,Finance Association,General meeting,2026-10-06,Tue,18,BSN,46,13,wraps,Panera Bread,gluten|dairy,43,30,69.8,Fall 2026,7,1
-S0188,Pre-Med Society,Speaker panel,2026-10-06,Tue,19,ISA,76,24,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,84,60,71.4,Fall 2026,7,1
-S0246,Campus Rec Outdoors,General meeting,2026-10-06,Tue,19,REC,36,12,subs,Jersey Mike's,gluten,38,25,65.8,Fall 2026,7,1
-S0151,Village STEM LLC,Floor event,2026-10-07,Wed,20,VIL,41,11,pizza,Domino's (Fowler Ave),gluten|dairy,44,33,75.0,Fall 2026,7,1
-S0141,ACM,Workshop,2026-10-08,Thu,18,ENB,70,39,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,67,28,41.8,Fall 2026,7,1
-S0229,Entrepreneurship Club,Speaker panel,2026-10-08,Thu,18,BSN,38,10,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,38,29,76.3,Fall 2026,7,1
-S0216,Black Student Union,Social,2026-10-08,Thu,19,MSC,73,54,wings,Wingstop (Fowler Ave),soy,71,16,22.5,Fall 2026,7,1
-S0238,Chess Club,Social,2026-10-09,Fri,15,LIB,21,10,donuts,Dunkin' (MSC),gluten|dairy|eggs,20,11,55.0,Fall 2026,7,1
-S0207,Robotics Club,Workshop,2026-10-09,Fri,16,ENB,28,20,pizza,Domino's (Fowler Ave),gluten|dairy,29,10,34.5,Fall 2026,7,1
-S0178,Indian Student Association,Cultural night,2026-10-09,Fri,19,MSC,132,76,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,135,63,46.7,Fall 2026,7,1
-S0169,Society of Women Engineers,General meeting,2026-10-13,Tue,18,ENB,37,12,pizza,Papa John's (Fletcher Ave),gluten|dairy,42,30,71.4,Fall 2026,8,1
-S0189,Pre-Med Society,Speaker panel,2026-10-13,Tue,19,ISA,67,23,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,69,48,69.6,Fall 2026,8,1
-S0152,Village STEM LLC,Floor event,2026-10-14,Wed,20,VIL,40,9,pizza,Domino's (Fowler Ave),gluten|dairy,40,31,77.5,Fall 2026,8,1
-S0142,ACM,Workshop,2026-10-15,Thu,18,ENB,78,50,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,83,33,39.8,Fall 2026,8,1
-S0239,Chess Club,Social,2026-10-16,Fri,15,LIB,19,11,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,11,50.0,Fall 2026,8,1
-S0208,Robotics Club,Workshop,2026-10-16,Fri,16,ENB,28,14,pizza,Domino's (Fowler Ave),gluten|dairy,27,14,51.9,Fall 2026,8,1
-S0198,Finance Association,General meeting,2026-10-20,Tue,18,BSN,45,19,wraps,Panera Bread,gluten|dairy,48,28,58.3,Fall 2026,9,1
-S0190,Pre-Med Society,Speaker panel,2026-10-20,Tue,19,ISA,61,21,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,61,42,68.9,Fall 2026,9,1
-S0230,Entrepreneurship Club,Workshop,2026-10-21,Wed,17,LIB,40,11,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,41,29,70.7,Fall 2026,9,1
-S0179,Indian Student Association,Social,2026-10-21,Wed,19,MSC,107,96,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,125,32,25.6,Fall 2026,9,1
-S0223,Vietnamese Student Association,Social,2026-10-21,Wed,19,CPR,72,42,banh mi,Pho Quyen (Fowler Ave),gluten|soy,71,27,38.0,Fall 2026,9,1
-S0153,Village STEM LLC,Floor event,2026-10-21,Wed,20,VIL,39,9,pizza,Domino's (Fowler Ave),gluten|dairy,40,31,77.5,Fall 2026,9,1
-S0170,Society of Women Engineers,Speaker panel,2026-10-22,Thu,18,MSC,38,25,pizza,Papa John's (Fletcher Ave),gluten|dairy,43,20,46.5,Fall 2026,9,1
-S0217,Black Student Union,Social,2026-10-22,Thu,19,MSC,80,58,wings,Wingstop (Fowler Ave),soy,79,19,24.1,Fall 2026,9,1
-S0240,Chess Club,Social,2026-10-23,Fri,15,LIB,20,13,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,10,45.5,Fall 2026,9,1
-S0209,Robotics Club,Workshop,2026-10-23,Fri,16,ENB,29,16,pizza,Domino's (Fowler Ave),gluten|dairy,33,17,51.5,Fall 2026,9,1
-S0160,HackJam Workshops,Workshop,2026-10-24,Sat,13,ISA,52,7,sandwich platters,Jason's Deli,gluten|dairy,49,43,87.8,Fall 2026,9,1
-S0247,Campus Rec Outdoors,Social,2026-10-25,Sun,11,REC,39,12,subs,Jersey Mike's,gluten,44,33,75.0,Fall 2026,9,1
-S0171,Society of Women Engineers,General meeting,2026-10-27,Tue,18,ENB,37,13,pizza,Papa John's (Fletcher Ave),gluten|dairy,44,32,72.7,Fall 2026,10,1
-S0191,Pre-Med Society,Speaker panel,2026-10-27,Tue,19,ISA,55,26,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,52,25,48.1,Fall 2026,10,1
-S0210,Robotics Club,General meeting,2026-10-27,Tue,19,ENB,27,14,pizza,Domino's (Fowler Ave),gluten|dairy,28,15,53.6,Fall 2026,10,1
-S0154,Village STEM LLC,Floor event,2026-10-28,Wed,20,VIL,31,9,pizza,Domino's (Fowler Ave),gluten|dairy,34,25,73.5,Fall 2026,10,1
-S0241,Chess Club,Social,2026-10-30,Fri,15,LIB,19,11,donuts,Dunkin' (MSC),gluten|dairy|eggs,21,11,52.4,Fall 2026,10,1
-S0172,Society of Women Engineers,General meeting,2026-11-03,Tue,18,ENB,37,14,pizza,Papa John's (Fletcher Ave),gluten|dairy,42,29,69.0,Fall 2026,11,1
-S0248,Campus Rec Outdoors,General meeting,2026-11-03,Tue,19,REC,32,10,subs,Jersey Mike's,gluten,34,24,70.6,Fall 2026,11,1
-S0143,ACM,General meeting,2026-11-04,Wed,18,ENB,68,17,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,74,57,77.0,Fall 2026,11,1
-S0199,Finance Association,Speaker panel,2026-11-04,Wed,18,BSN,52,16,wraps,Panera Bread,gluten|dairy,57,41,71.9,Fall 2026,11,1
-S0180,Indian Student Association,Social,2026-11-04,Wed,19,MSC,98,71,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,103,36,35.0,Fall 2026,11,1
-S0224,Vietnamese Student Association,Social,2026-11-04,Wed,19,CPR,63,40,banh mi,Pho Quyen (Fowler Ave),gluten|soy,63,22,34.9,Fall 2026,11,1
-S0155,Village STEM LLC,Floor event,2026-11-04,Wed,20,VIL,29,5,pizza,Domino's (Fowler Ave),gluten|dairy,30,25,83.3,Fall 2026,11,1
-S0161,HackJam Workshops,Workshop,2026-11-05,Thu,18,MSC,60,28,sandwich platters,Jason's Deli,gluten|dairy,65,38,58.5,Fall 2026,11,1
-S0231,Entrepreneurship Club,Speaker panel,2026-11-05,Thu,18,BSN,30,10,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,33,23,69.7,Fall 2026,11,1
-S0218,Black Student Union,Social,2026-11-05,Thu,19,MSC,67,62,wings,Wingstop (Fowler Ave),soy,66,8,12.1,Fall 2026,11,1
-S0211,Robotics Club,Workshop,2026-11-06,Fri,16,ENB,25,13,pizza,Domino's (Fowler Ave),gluten|dairy,28,16,57.1,Fall 2026,11,1
-S0173,Society of Women Engineers,General meeting,2026-11-10,Tue,18,ENB,34,14,pizza,Papa John's (Fletcher Ave),gluten|dairy,34,20,58.8,Fall 2026,12,1
-S0192,Pre-Med Society,Speaker panel,2026-11-10,Tue,19,ISA,59,15,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,62,47,75.8,Fall 2026,12,1
-S0144,ACM,General meeting,2026-11-11,Wed,18,ENB,79,17,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,81,65,80.2,Fall 2026,12,1
-S0156,Village STEM LLC,Floor event,2026-11-11,Wed,20,VIL,35,5,pizza,Domino's (Fowler Ave),gluten|dairy,36,31,86.1,Fall 2026,12,1
-S0174,Society of Women Engineers,General meeting,2026-11-17,Tue,18,ENB,41,16,pizza,Papa John's (Fletcher Ave),gluten|dairy,45,31,68.9,Fall 2026,13,1
-S0219,Black Student Union,General meeting,2026-11-17,Tue,19,MSC,89,46,wings,Wingstop (Fowler Ave),soy,88,40,45.5,Fall 2026,13,1
-S0242,Chess Club,Social,2026-11-18,Wed,12,MSC,18,27,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,0,0.0,Fall 2026,13,1
-S0200,Finance Association,Speaker panel,2026-11-18,Wed,18,BSN,38,7,wraps,Panera Bread,gluten|dairy,37,30,81.1,Fall 2026,13,1
-S0181,Indian Student Association,Social,2026-11-18,Wed,19,MSC,85,50,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,87,37,42.5,Fall 2026,13,1
-S0225,Vietnamese Student Association,Social,2026-11-18,Wed,19,CPR,70,31,banh mi,Pho Quyen (Fowler Ave),gluten|soy,77,47,61.0,Fall 2026,13,1
-S0157,Village STEM LLC,Floor event,2026-11-18,Wed,20,VIL,37,5,pizza,Domino's (Fowler Ave),gluten|dairy,39,34,87.2,Fall 2026,13,1
-S0162,HackJam Workshops,Workshop,2026-11-19,Thu,18,MSC,47,8,sandwich platters,Jason's Deli,gluten|dairy,49,41,83.7,Fall 2026,13,1
-S0193,Pre-Med Society,General meeting,2026-11-19,Thu,19,ISA,72,14,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,78,65,83.3,Fall 2026,13,1
-S0212,Robotics Club,Workshop,2026-11-20,Fri,16,ENB,32,14,pizza,Domino's (Fowler Ave),gluten|dairy,30,16,53.3,Fall 2026,13,1
-S0249,Campus Rec Outdoors,Social,2026-11-22,Sun,11,REC,30,9,subs,Jersey Mike's,gluten,28,19,67.9,Fall 2026,13,1
+event_id,club,category,event_type,date,day_of_week,start_hour,location,rsvps,checked_in,food_item,caterer,allergens,servings_ordered,servings_left,leftover_pct,semester,week,rain,exam_period,is_sample
+S0032,Society of Women Engineers,professional,General meeting,2026-01-13,Tue,18,ENB,44,25,pizza,Papa John's (Fletcher Ave),gluten|dairy,45,22,48.9,Spring 2026,1,0,0,1
+S0066,Finance Association,professional,General meeting,2026-01-13,Tue,18,BSN,43,17,wraps,Panera Bread,gluten|dairy,45,28,62.2,Spring 2026,1,0,0,1
+S0052,Pre-Med Society,professional,Speaker panel,2026-01-13,Tue,19,ISA,57,27,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,54,26,48.1,Spring 2026,1,0,0,1
+S0086,Black Student Union,cultural,General meeting,2026-01-13,Tue,19,MSC,70,53,wings,Wingstop (Fowler Ave),soy,71,16,22.5,Spring 2026,1,0,0,1
+S0001,ACM,tech,General meeting,2026-01-14,Wed,18,ENB,63,20,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,60,39,65.0,Spring 2026,1,0,0,1
+S0044,Indian Student Association,cultural,Social,2026-01-14,Wed,19,MSC,97,88,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,91,6,6.6,Spring 2026,1,0,0,1
+S0094,Vietnamese Student Association,cultural,Social,2026-01-14,Wed,19,CPR,58,35,banh mi,Pho Quyen (Fowler Ave),gluten|soy,67,33,49.3,Spring 2026,1,0,0,1
+S0014,Village STEM LLC,residential,Floor event,2026-01-14,Wed,20,VIL,38,43,pizza,Domino's (Fowler Ave),gluten|dairy,42,3,7.1,Spring 2026,1,0,0,1
+S0107,Chess Club,recreation,Social,2026-01-16,Fri,15,LIB,21,10,donuts,Dunkin' (MSC),gluten|dairy|eggs,23,14,60.9,Spring 2026,1,0,0,1
+S0026,HackJam Workshops,tech,Workshop,2026-01-17,Sat,13,ISA,57,10,sandwich platters,Jason's Deli,gluten|dairy,62,53,85.5,Spring 2026,1,1,0,1
+S0121,Campus Rec Outdoors,recreation,Social,2026-01-18,Sun,11,REC,24,11,subs,Jersey Mike's,gluten,27,16,59.3,Spring 2026,1,1,0,1
+S0033,Society of Women Engineers,professional,General meeting,2026-01-20,Tue,18,ENB,40,19,pizza,Papa John's (Fletcher Ave),gluten|dairy,43,23,53.5,Spring 2026,2,0,0,1
+S0108,Chess Club,recreation,Social,2026-01-21,Wed,12,MSC,23,36,donuts,Dunkin' (MSC),gluten|dairy|eggs,27,0,0.0,Spring 2026,2,0,0,1
+S0015,Village STEM LLC,residential,Floor event,2026-01-21,Wed,20,VIL,39,22,pizza,Domino's (Fowler Ave),gluten|dairy,41,21,51.2,Spring 2026,2,0,0,1
+S0053,Pre-Med Society,professional,General meeting,2026-01-22,Thu,19,ISA,42,21,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,48,26,54.2,Spring 2026,2,0,0,1
+S0074,Robotics Club,tech,Workshop,2026-01-23,Fri,16,ENB,27,20,pizza,Domino's (Fowler Ave),gluten|dairy,27,8,29.6,Spring 2026,2,0,0,1
+S0002,ACM,tech,Social,2026-01-23,Fri,17,MSC,64,32,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,73,44,60.3,Spring 2026,2,0,0,1
+S0122,Campus Rec Outdoors,recreation,General meeting,2026-01-27,Tue,19,REC,38,16,subs,Jersey Mike's,gluten,40,24,60.0,Spring 2026,3,0,0,1
+S0003,ACM,tech,General meeting,2026-01-28,Wed,18,ENB,74,19,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,80,62,77.5,Spring 2026,3,0,0,1
+S0067,Finance Association,professional,Speaker panel,2026-01-28,Wed,18,BSN,36,14,wraps,Panera Bread,gluten|dairy,40,26,65.0,Spring 2026,3,0,0,1
+S0045,Indian Student Association,cultural,Social,2026-01-28,Wed,19,MSC,92,74,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,96,24,25.0,Spring 2026,3,0,0,1
+S0095,Vietnamese Student Association,cultural,Social,2026-01-28,Wed,19,CPR,74,55,banh mi,Pho Quyen (Fowler Ave),gluten|soy,74,19,25.7,Spring 2026,3,0,0,1
+S0016,Village STEM LLC,residential,Floor event,2026-01-28,Wed,20,VIL,34,21,pizza,Domino's (Fowler Ave),gluten|dairy,34,14,41.2,Spring 2026,3,0,0,1
+S0034,Society of Women Engineers,professional,Speaker panel,2026-01-29,Thu,18,MSC,44,38,pizza,Papa John's (Fletcher Ave),gluten|dairy,45,9,20.0,Spring 2026,3,0,0,1
+S0101,Entrepreneurship Club,professional,Speaker panel,2026-01-29,Thu,18,BSN,37,12,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,38,26,68.4,Spring 2026,3,0,0,1
+S0054,Pre-Med Society,professional,General meeting,2026-01-29,Thu,19,ISA,64,27,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,70,45,64.3,Spring 2026,3,0,0,1
+S0087,Black Student Union,cultural,Social,2026-01-29,Thu,19,MSC,75,58,wings,Wingstop (Fowler Ave),soy,86,33,38.4,Spring 2026,3,0,0,1
+S0109,Chess Club,recreation,Social,2026-01-30,Fri,15,LIB,15,9,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,8,47.1,Spring 2026,3,0,0,1
+S0075,Robotics Club,tech,Workshop,2026-01-30,Fri,16,ENB,29,14,pizza,Domino's (Fowler Ave),gluten|dairy,29,16,55.2,Spring 2026,3,0,0,1
+S0035,Society of Women Engineers,professional,General meeting,2026-02-03,Tue,18,ENB,44,20,pizza,Papa John's (Fletcher Ave),gluten|dairy,43,23,53.5,Spring 2026,4,0,0,1
+S0055,Pre-Med Society,professional,Speaker panel,2026-02-03,Tue,19,ISA,52,25,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,58,34,58.6,Spring 2026,4,0,0,1
+S0076,Robotics Club,tech,General meeting,2026-02-03,Tue,19,ENB,30,17,pizza,Domino's (Fowler Ave),gluten|dairy,32,14,43.8,Spring 2026,4,0,0,1
+S0004,ACM,tech,General meeting,2026-02-04,Wed,18,ENB,74,17,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,84,68,81.0,Spring 2026,4,0,0,1
+S0017,Village STEM LLC,residential,Floor event,2026-02-04,Wed,20,VIL,39,15,pizza,Domino's (Fowler Ave),gluten|dairy,38,23,60.5,Spring 2026,4,0,0,1
+S0110,Chess Club,recreation,Social,2026-02-06,Fri,15,LIB,21,12,donuts,Dunkin' (MSC),gluten|dairy|eggs,21,9,42.9,Spring 2026,4,0,0,1
+S0036,Society of Women Engineers,professional,General meeting,2026-02-10,Tue,18,ENB,39,18,pizza,Papa John's (Fletcher Ave),gluten|dairy,45,26,57.8,Spring 2026,5,0,0,1
+S0077,Robotics Club,tech,General meeting,2026-02-10,Tue,19,ENB,29,15,pizza,Domino's (Fowler Ave),gluten|dairy,34,20,58.8,Spring 2026,5,0,0,1
+S0088,Black Student Union,cultural,General meeting,2026-02-10,Tue,19,MSC,83,55,wings,Wingstop (Fowler Ave),soy,91,36,39.6,Spring 2026,5,0,0,1
+S0111,Chess Club,recreation,Social,2026-02-11,Wed,12,MSC,23,36,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,0,0.0,Spring 2026,5,0,0,1
+S0005,ACM,tech,General meeting,2026-02-11,Wed,18,ENB,72,23,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,69,48,69.6,Spring 2026,5,0,0,1
+S0068,Finance Association,professional,Speaker panel,2026-02-11,Wed,18,BSN,43,11,wraps,Panera Bread,gluten|dairy,47,37,78.7,Spring 2026,5,0,0,1
+S0096,Vietnamese Student Association,cultural,Social,2026-02-11,Wed,19,CPR,64,47,banh mi,Pho Quyen (Fowler Ave),gluten|soy,74,30,40.5,Spring 2026,5,0,0,1
+S0018,Village STEM LLC,residential,Floor event,2026-02-11,Wed,20,VIL,42,15,pizza,Domino's (Fowler Ave),gluten|dairy,39,25,64.1,Spring 2026,5,0,0,1
+S0027,HackJam Workshops,tech,Workshop,2026-02-12,Thu,18,MSC,50,19,sandwich platters,Jason's Deli,gluten|dairy,55,36,65.5,Spring 2026,5,0,0,1
+S0102,Entrepreneurship Club,professional,Speaker panel,2026-02-12,Thu,18,BSN,38,8,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,35,27,77.1,Spring 2026,5,0,0,1
+S0056,Pre-Med Society,professional,General meeting,2026-02-12,Thu,19,ISA,59,19,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,64,46,71.9,Spring 2026,5,0,0,1
+S0046,Indian Student Association,cultural,Cultural night,2026-02-13,Fri,19,MSC,106,71,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,115,50,43.5,Spring 2026,5,1,0,1
+S0123,Campus Rec Outdoors,recreation,Social,2026-02-15,Sun,11,REC,36,11,subs,Jersey Mike's,gluten,41,31,75.6,Spring 2026,5,0,0,1
+S0037,Society of Women Engineers,professional,General meeting,2026-02-17,Tue,18,ENB,47,20,pizza,Papa John's (Fletcher Ave),gluten|dairy,53,33,62.3,Spring 2026,6,0,0,1
+S0078,Robotics Club,tech,General meeting,2026-02-17,Tue,19,ENB,32,18,pizza,Domino's (Fowler Ave),gluten|dairy,35,17,48.6,Spring 2026,6,0,0,1
+S0112,Chess Club,recreation,Social,2026-02-18,Wed,12,MSC,19,30,donuts,Dunkin' (MSC),gluten|dairy|eggs,20,0,0.0,Spring 2026,6,0,0,1
+S0019,Village STEM LLC,residential,Floor event,2026-02-18,Wed,20,VIL,39,9,pizza,Domino's (Fowler Ave),gluten|dairy,39,30,76.9,Spring 2026,6,0,0,1
+S0006,ACM,tech,Workshop,2026-02-19,Thu,18,ENB,67,44,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,68,23,33.8,Spring 2026,6,0,0,1
+S0057,Pre-Med Society,professional,General meeting,2026-02-19,Thu,19,ISA,63,24,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,64,41,64.1,Spring 2026,6,0,0,1
+S0038,Society of Women Engineers,professional,General meeting,2026-02-24,Tue,18,ENB,46,18,pizza,Papa John's (Fletcher Ave),gluten|dairy,54,36,66.7,Spring 2026,7,0,1,1
+S0124,Campus Rec Outdoors,recreation,General meeting,2026-02-24,Tue,19,REC,34,11,subs,Jersey Mike's,gluten,35,24,68.6,Spring 2026,7,0,1,1
+S0103,Entrepreneurship Club,professional,Workshop,2026-02-25,Wed,17,LIB,42,7,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,39,32,82.1,Spring 2026,7,0,1,1
+S0007,ACM,tech,General meeting,2026-02-25,Wed,18,ENB,72,14,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,67,54,80.6,Spring 2026,7,0,1,1
+S0069,Finance Association,professional,Speaker panel,2026-02-25,Wed,18,BSN,45,12,wraps,Panera Bread,gluten|dairy,50,38,76.0,Spring 2026,7,0,1,1
+S0020,Village STEM LLC,residential,Floor event,2026-02-25,Wed,20,VIL,36,9,pizza,Domino's (Fowler Ave),gluten|dairy,38,30,78.9,Spring 2026,7,0,1,1
+S0058,Pre-Med Society,professional,General meeting,2026-02-26,Thu,19,ISA,58,17,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,54,37,68.5,Spring 2026,7,1,1,1
+S0089,Black Student Union,cultural,Social,2026-02-26,Thu,19,MSC,75,44,wings,Wingstop (Fowler Ave),soy,75,30,40.0,Spring 2026,7,1,1,1
+S0113,Chess Club,recreation,Social,2026-02-27,Fri,15,LIB,19,12,donuts,Dunkin' (MSC),gluten|dairy|eggs,18,6,33.3,Spring 2026,7,0,1,1
+S0079,Robotics Club,tech,Workshop,2026-02-27,Fri,16,ENB,25,13,pizza,Domino's (Fowler Ave),gluten|dairy,26,13,50.0,Spring 2026,7,0,1,1
+S0047,Indian Student Association,cultural,Cultural night,2026-02-27,Fri,19,MSC,105,67,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,115,51,44.3,Spring 2026,7,0,1,1
+S0028,HackJam Workshops,tech,Workshop,2026-02-28,Sat,13,ISA,52,7,sandwich platters,Jason's Deli,gluten|dairy,61,54,88.5,Spring 2026,7,0,1,1
+S0097,Vietnamese Student Association,cultural,Cultural night,2026-02-28,Sat,18,MSC,83,35,banh mi,Pho Quyen (Fowler Ave),gluten|soy,82,48,58.5,Spring 2026,7,0,1,1
+S0008,ACM,tech,General meeting,2026-03-04,Wed,18,ENB,72,15,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,68,54,79.4,Spring 2026,8,0,1,1
+S0059,Pre-Med Society,professional,General meeting,2026-03-05,Thu,19,ISA,67,20,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,73,54,74.0,Spring 2026,8,0,1,1
+S0114,Chess Club,recreation,Social,2026-03-06,Fri,15,LIB,18,7,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,10,58.8,Spring 2026,8,0,1,1
+S0039,Society of Women Engineers,professional,General meeting,2026-03-10,Tue,18,ENB,42,18,pizza,Papa John's (Fletcher Ave),gluten|dairy,40,22,55.0,Spring 2026,9,1,0,1
+S0125,Campus Rec Outdoors,recreation,General meeting,2026-03-10,Tue,19,REC,34,11,subs,Jersey Mike's,gluten,37,26,70.3,Spring 2026,9,1,0,1
+S0115,Chess Club,recreation,Social,2026-03-11,Wed,12,MSC,22,35,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,0,0.0,Spring 2026,9,0,0,1
+S0009,ACM,tech,General meeting,2026-03-11,Wed,18,ENB,79,18,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,82,64,78.0,Spring 2026,9,0,0,1
+S0070,Finance Association,professional,Speaker panel,2026-03-11,Wed,18,BSN,51,16,wraps,Panera Bread,gluten|dairy,60,45,75.0,Spring 2026,9,0,0,1
+S0021,Village STEM LLC,residential,Floor event,2026-03-11,Wed,20,VIL,41,8,pizza,Domino's (Fowler Ave),gluten|dairy,44,36,81.8,Spring 2026,9,0,0,1
+S0060,Pre-Med Society,professional,General meeting,2026-03-12,Thu,19,ISA,64,18,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,65,47,72.3,Spring 2026,9,0,0,1
+S0090,Black Student Union,cultural,Social,2026-03-12,Thu,19,MSC,74,53,wings,Wingstop (Fowler Ave),soy,76,24,31.6,Spring 2026,9,0,0,1
+S0048,Indian Student Association,cultural,Cultural night,2026-03-13,Fri,19,MSC,125,93,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,131,34,26.0,Spring 2026,9,0,0,1
+S0080,Robotics Club,tech,Workshop,2026-03-13,Fri,19,ENB,24,10,pizza,Domino's (Fowler Ave),gluten|dairy,25,16,64.0,Spring 2026,9,0,0,1
+S0040,Society of Women Engineers,professional,General meeting,2026-03-24,Tue,18,ENB,45,19,pizza,Papa John's (Fletcher Ave),gluten|dairy,44,26,59.1,Spring 2026,11,0,0,1
+S0081,Robotics Club,tech,General meeting,2026-03-24,Tue,19,ENB,29,14,pizza,Domino's (Fowler Ave),gluten|dairy,30,16,53.3,Spring 2026,11,0,0,1
+S0091,Black Student Union,cultural,General meeting,2026-03-24,Tue,19,MSC,70,46,wings,Wingstop (Fowler Ave),soy,77,35,45.5,Spring 2026,11,0,0,1
+S0126,Campus Rec Outdoors,recreation,General meeting,2026-03-24,Tue,19,REC,31,13,subs,Jersey Mike's,gluten,36,23,63.9,Spring 2026,11,0,0,1
+S0010,ACM,tech,General meeting,2026-03-25,Wed,18,ENB,63,19,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,72,52,72.2,Spring 2026,11,0,0,1
+S0071,Finance Association,professional,Speaker panel,2026-03-25,Wed,18,BSN,49,12,wraps,Panera Bread,gluten|dairy,52,41,78.8,Spring 2026,11,0,0,1
+S0049,Indian Student Association,cultural,Social,2026-03-25,Wed,19,MSC,98,73,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,110,38,34.5,Spring 2026,11,0,0,1
+S0098,Vietnamese Student Association,cultural,Social,2026-03-25,Wed,19,CPR,72,51,banh mi,Pho Quyen (Fowler Ave),gluten|soy,77,25,32.5,Spring 2026,11,0,0,1
+S0022,Village STEM LLC,residential,Floor event,2026-03-25,Wed,20,VIL,42,7,pizza,Domino's (Fowler Ave),gluten|dairy,43,36,83.7,Spring 2026,11,0,0,1
+S0029,HackJam Workshops,tech,Workshop,2026-03-26,Thu,18,MSC,45,21,sandwich platters,Jason's Deli,gluten|dairy,43,21,48.8,Spring 2026,11,0,0,1
+S0104,Entrepreneurship Club,professional,Speaker panel,2026-03-26,Thu,18,BSN,35,10,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,40,30,75.0,Spring 2026,11,0,0,1
+S0061,Pre-Med Society,professional,General meeting,2026-03-26,Thu,19,ISA,48,16,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,49,33,67.3,Spring 2026,11,0,0,1
+S0116,Chess Club,recreation,Social,2026-03-27,Fri,15,LIB,27,12,donuts,Dunkin' (MSC),gluten|dairy|eggs,26,14,53.8,Spring 2026,11,0,0,1
+S0041,Society of Women Engineers,professional,General meeting,2026-03-31,Tue,18,ENB,34,13,pizza,Papa John's (Fletcher Ave),gluten|dairy,32,20,62.5,Spring 2026,12,0,0,1
+S0062,Pre-Med Society,professional,Speaker panel,2026-03-31,Tue,19,ISA,50,20,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,58,39,67.2,Spring 2026,12,0,0,1
+S0117,Chess Club,recreation,Social,2026-04-01,Wed,12,MSC,25,36,donuts,Dunkin' (MSC),gluten|dairy|eggs,27,0,0.0,Spring 2026,12,0,0,1
+S0023,Village STEM LLC,residential,Floor event,2026-04-01,Wed,20,VIL,33,5,pizza,Domino's (Fowler Ave),gluten|dairy,37,32,86.5,Spring 2026,12,0,0,1
+S0011,ACM,tech,Workshop,2026-04-02,Thu,18,ENB,54,32,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,61,31,50.8,Spring 2026,12,0,0,1
+S0082,Robotics Club,tech,Workshop,2026-04-03,Fri,19,ENB,24,11,pizza,Domino's (Fowler Ave),gluten|dairy,27,16,59.3,Spring 2026,12,0,0,1
+S0092,Black Student Union,cultural,General meeting,2026-04-07,Tue,19,MSC,68,55,wings,Wingstop (Fowler Ave),soy,68,13,19.1,Spring 2026,13,0,0,1
+S0127,Campus Rec Outdoors,recreation,General meeting,2026-04-07,Tue,19,REC,34,13,subs,Jersey Mike's,gluten,37,25,67.6,Spring 2026,13,0,0,1
+S0118,Chess Club,recreation,Social,2026-04-08,Wed,12,MSC,20,29,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,0,0.0,Spring 2026,13,1,0,1
+S0072,Finance Association,professional,Speaker panel,2026-04-08,Wed,18,BSN,41,13,wraps,Panera Bread,gluten|dairy,46,33,71.7,Spring 2026,13,1,0,1
+S0050,Indian Student Association,cultural,Social,2026-04-08,Wed,19,MSC,82,70,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,91,27,29.7,Spring 2026,13,1,0,1
+S0099,Vietnamese Student Association,cultural,Social,2026-04-08,Wed,19,CPR,56,26,banh mi,Pho Quyen (Fowler Ave),gluten|soy,64,37,57.8,Spring 2026,13,1,0,1
+S0024,Village STEM LLC,residential,Floor event,2026-04-08,Wed,20,VIL,34,9,pizza,Domino's (Fowler Ave),gluten|dairy,32,23,71.9,Spring 2026,13,1,0,1
+S0105,Entrepreneurship Club,professional,Speaker panel,2026-04-09,Thu,18,BSN,38,9,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,37,28,75.7,Spring 2026,13,1,0,1
+S0063,Pre-Med Society,professional,General meeting,2026-04-09,Thu,19,ISA,64,18,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,67,49,73.1,Spring 2026,13,1,0,1
+S0083,Robotics Club,tech,Workshop,2026-04-10,Fri,16,ENB,29,15,pizza,Domino's (Fowler Ave),gluten|dairy,32,16,50.0,Spring 2026,13,1,0,1
+S0012,ACM,tech,Social,2026-04-10,Fri,17,MSC,65,28,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,62,36,58.1,Spring 2026,13,1,0,1
+S0030,HackJam Workshops,tech,Workshop,2026-04-11,Sat,13,ISA,48,8,sandwich platters,Jason's Deli,gluten|dairy,51,43,84.3,Spring 2026,13,0,0,1
+S0064,Pre-Med Society,professional,Speaker panel,2026-04-14,Tue,19,ISA,66,15,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,75,61,81.3,Spring 2026,14,0,1,1
+S0084,Robotics Club,tech,General meeting,2026-04-14,Tue,19,ENB,32,11,pizza,Domino's (Fowler Ave),gluten|dairy,36,25,69.4,Spring 2026,14,0,1,1
+S0119,Chess Club,recreation,Social,2026-04-15,Wed,12,MSC,18,27,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,0,0.0,Spring 2026,14,0,1,1
+S0042,Society of Women Engineers,professional,Speaker panel,2026-04-16,Thu,18,MSC,46,24,pizza,Papa John's (Fletcher Ave),gluten|dairy,49,27,55.1,Spring 2026,14,0,1,1
+S0065,Pre-Med Society,professional,Speaker panel,2026-04-21,Tue,19,ISA,66,23,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,65,44,67.7,Spring 2026,15,0,1,1
+S0085,Robotics Club,tech,General meeting,2026-04-21,Tue,19,ENB,30,9,pizza,Domino's (Fowler Ave),gluten|dairy,32,23,71.9,Spring 2026,15,0,1,1
+S0093,Black Student Union,cultural,General meeting,2026-04-21,Tue,19,MSC,85,36,wings,Wingstop (Fowler Ave),soy,86,51,59.3,Spring 2026,15,0,1,1
+S0128,Campus Rec Outdoors,recreation,General meeting,2026-04-21,Tue,19,REC,29,7,subs,Jersey Mike's,gluten,29,22,75.9,Spring 2026,15,0,1,1
+S0120,Chess Club,recreation,Social,2026-04-22,Wed,12,MSC,19,30,donuts,Dunkin' (MSC),gluten|dairy|eggs,21,0,0.0,Spring 2026,15,0,1,1
+S0106,Entrepreneurship Club,professional,Workshop,2026-04-22,Wed,17,LIB,42,7,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,48,41,85.4,Spring 2026,15,0,1,1
+S0073,Finance Association,professional,Speaker panel,2026-04-22,Wed,18,BSN,48,11,wraps,Panera Bread,gluten|dairy,52,41,78.8,Spring 2026,15,0,1,1
+S0051,Indian Student Association,cultural,Social,2026-04-22,Wed,19,MSC,77,50,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,73,21,28.8,Spring 2026,15,0,1,1
+S0100,Vietnamese Student Association,cultural,Social,2026-04-22,Wed,19,CPR,55,20,banh mi,Pho Quyen (Fowler Ave),gluten|soy,55,34,61.8,Spring 2026,15,0,1,1
+S0025,Village STEM LLC,residential,Floor event,2026-04-22,Wed,20,VIL,40,5,pizza,Domino's (Fowler Ave),gluten|dairy,46,41,89.1,Spring 2026,15,0,1,1
+S0013,ACM,tech,Workshop,2026-04-23,Thu,18,ENB,56,26,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,59,32,54.2,Spring 2026,15,0,1,1
+S0043,Society of Women Engineers,professional,Speaker panel,2026-04-23,Thu,18,MSC,43,21,pizza,Papa John's (Fletcher Ave),gluten|dairy,40,20,50.0,Spring 2026,15,0,1,1
+S0031,HackJam Workshops,tech,Workshop,2026-04-25,Sat,13,ISA,56,9,sandwich platters,Jason's Deli,gluten|dairy,53,44,83.0,Spring 2026,15,0,1,1
+S0157,Society of Women Engineers,professional,General meeting,2026-08-25,Tue,18,ENB,41,27,pizza,Papa John's (Fletcher Ave),gluten|dairy,48,23,47.9,Fall 2026,1,0,0,1
+S0176,Pre-Med Society,professional,Speaker panel,2026-08-25,Tue,19,ISA,58,26,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,63,36,57.1,Fall 2026,1,0,0,1
+S0226,Chess Club,recreation,Social,2026-08-26,Wed,12,MSC,19,30,donuts,Dunkin' (MSC),gluten|dairy|eggs,20,0,0.0,Fall 2026,1,0,0,1
+S0188,Finance Association,professional,Speaker panel,2026-08-26,Wed,18,BSN,49,26,wraps,Panera Bread,gluten|dairy,48,21,43.8,Fall 2026,1,0,0,1
+S0169,Indian Student Association,cultural,Social,2026-08-26,Wed,19,MSC,84,77,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,87,14,16.1,Fall 2026,1,0,0,1
+S0139,Village STEM LLC,residential,Floor event,2026-08-26,Wed,20,VIL,39,40,pizza,Domino's (Fowler Ave),gluten|dairy,43,3,7.0,Fall 2026,1,0,0,1
+S0220,Entrepreneurship Club,professional,Speaker panel,2026-08-27,Thu,18,BSN,42,13,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,49,36,73.5,Fall 2026,1,0,0,1
+S0207,Black Student Union,cultural,Social,2026-08-27,Thu,19,MSC,79,64,wings,Wingstop (Fowler Ave),soy,81,22,27.2,Fall 2026,1,0,0,1
+S0195,Robotics Club,tech,Workshop,2026-08-28,Fri,16,ENB,28,17,pizza,Domino's (Fowler Ave),gluten|dairy,29,12,41.4,Fall 2026,1,1,0,1
+S0129,ACM,tech,Social,2026-08-28,Fri,17,MSC,63,32,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,62,30,48.4,Fall 2026,1,1,0,1
+S0152,HackJam Workshops,tech,Workshop,2026-08-29,Sat,13,ISA,54,10,sandwich platters,Jason's Deli,gluten|dairy,63,54,85.7,Fall 2026,1,0,0,1
+S0214,Vietnamese Student Association,cultural,Cultural night,2026-08-29,Sat,18,MSC,101,77,banh mi,Pho Quyen (Fowler Ave),gluten|soy,93,14,15.1,Fall 2026,1,0,0,1
+S0237,Campus Rec Outdoors,recreation,Social,2026-08-30,Sun,11,REC,36,16,subs,Jersey Mike's,gluten,40,23,57.5,Fall 2026,1,1,0,1
+S0196,Robotics Club,tech,General meeting,2026-09-01,Tue,19,ENB,32,15,pizza,Domino's (Fowler Ave),gluten|dairy,32,18,56.2,Fall 2026,2,0,0,1
+S0227,Chess Club,recreation,Social,2026-09-02,Wed,12,MSC,16,26,donuts,Dunkin' (MSC),gluten|dairy|eggs,15,0,0.0,Fall 2026,2,0,0,1
+S0130,ACM,tech,General meeting,2026-09-02,Wed,18,ENB,53,15,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,61,46,75.4,Fall 2026,2,0,0,1
+S0140,Village STEM LLC,residential,Floor event,2026-09-02,Wed,20,VIL,33,27,pizza,Domino's (Fowler Ave),gluten|dairy,37,10,27.0,Fall 2026,2,0,0,1
+S0158,Society of Women Engineers,professional,Speaker panel,2026-09-03,Thu,18,MSC,32,21,pizza,Papa John's (Fletcher Ave),gluten|dairy,31,12,38.7,Fall 2026,2,1,0,1
+S0177,Pre-Med Society,professional,General meeting,2026-09-03,Thu,19,ISA,59,21,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,64,44,68.8,Fall 2026,2,1,0,1
+S0189,Finance Association,professional,General meeting,2026-09-08,Tue,18,BSN,39,13,wraps,Panera Bread,gluten|dairy,37,24,64.9,Fall 2026,3,0,0,1
+S0238,Campus Rec Outdoors,recreation,General meeting,2026-09-08,Tue,19,REC,34,14,subs,Jersey Mike's,gluten,40,26,65.0,Fall 2026,3,0,0,1
+S0131,ACM,tech,General meeting,2026-09-09,Wed,18,ENB,63,18,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,62,44,71.0,Fall 2026,3,1,0,1
+S0215,Vietnamese Student Association,cultural,Social,2026-09-09,Wed,19,CPR,65,35,banh mi,Pho Quyen (Fowler Ave),gluten|soy,69,33,47.8,Fall 2026,3,1,0,1
+S0141,Village STEM LLC,residential,Floor event,2026-09-09,Wed,20,VIL,40,23,pizza,Domino's (Fowler Ave),gluten|dairy,43,20,46.5,Fall 2026,3,1,0,1
+S0221,Entrepreneurship Club,professional,Speaker panel,2026-09-10,Thu,18,BSN,43,12,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,41,30,73.2,Fall 2026,3,1,0,1
+S0178,Pre-Med Society,professional,General meeting,2026-09-10,Thu,19,ISA,74,27,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,80,55,68.8,Fall 2026,3,1,0,1
+S0208,Black Student Union,cultural,Social,2026-09-10,Thu,19,MSC,71,53,wings,Wingstop (Fowler Ave),soy,76,24,31.6,Fall 2026,3,1,0,1
+S0228,Chess Club,recreation,Social,2026-09-11,Fri,15,LIB,20,10,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,12,54.5,Fall 2026,3,1,0,1
+S0197,Robotics Club,tech,Workshop,2026-09-11,Fri,16,ENB,34,18,pizza,Domino's (Fowler Ave),gluten|dairy,38,19,50.0,Fall 2026,3,1,0,1
+S0170,Indian Student Association,cultural,Cultural night,2026-09-11,Fri,19,MSC,101,80,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,111,32,28.8,Fall 2026,3,1,0,1
+S0153,HackJam Workshops,tech,Workshop,2026-09-12,Sat,13,ISA,59,10,sandwich platters,Jason's Deli,gluten|dairy,65,55,84.6,Fall 2026,3,1,0,1
+S0179,Pre-Med Society,professional,Speaker panel,2026-09-15,Tue,19,ISA,59,23,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,61,40,65.6,Fall 2026,4,1,0,1
+S0229,Chess Club,recreation,Social,2026-09-16,Wed,12,MSC,16,26,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,0,0.0,Fall 2026,4,0,0,1
+S0142,Village STEM LLC,residential,Floor event,2026-09-16,Wed,20,VIL,36,18,pizza,Domino's (Fowler Ave),gluten|dairy,34,16,47.1,Fall 2026,4,0,0,1
+S0159,Society of Women Engineers,professional,Speaker panel,2026-09-17,Thu,18,MSC,34,27,pizza,Papa John's (Fletcher Ave),gluten|dairy,35,8,22.9,Fall 2026,4,0,0,1
+S0198,Robotics Club,tech,Workshop,2026-09-18,Fri,16,ENB,27,17,pizza,Domino's (Fowler Ave),gluten|dairy,25,8,32.0,Fall 2026,4,0,0,1
+S0132,ACM,tech,Social,2026-09-18,Fri,17,MSC,56,23,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,55,33,60.0,Fall 2026,4,0,0,1
+S0160,Society of Women Engineers,professional,General meeting,2026-09-22,Tue,18,ENB,41,19,pizza,Papa John's (Fletcher Ave),gluten|dairy,47,30,63.8,Fall 2026,5,0,0,1
+S0209,Black Student Union,cultural,General meeting,2026-09-22,Tue,19,MSC,86,52,wings,Wingstop (Fowler Ave),soy,87,34,39.1,Fall 2026,5,0,0,1
+S0239,Campus Rec Outdoors,recreation,General meeting,2026-09-22,Tue,19,REC,35,17,subs,Jersey Mike's,gluten,41,24,58.5,Fall 2026,5,0,0,1
+S0222,Entrepreneurship Club,professional,Workshop,2026-09-23,Wed,17,LIB,34,10,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,40,31,77.5,Fall 2026,5,1,0,1
+S0133,ACM,tech,General meeting,2026-09-23,Wed,18,ENB,59,13,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,67,54,80.6,Fall 2026,5,1,0,1
+S0190,Finance Association,professional,Speaker panel,2026-09-23,Wed,18,BSN,32,10,wraps,Panera Bread,gluten|dairy,36,26,72.2,Fall 2026,5,1,0,1
+S0171,Indian Student Association,cultural,Social,2026-09-23,Wed,19,MSC,71,62,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,76,15,19.7,Fall 2026,5,1,0,1
+S0216,Vietnamese Student Association,cultural,Social,2026-09-23,Wed,19,CPR,65,38,banh mi,Pho Quyen (Fowler Ave),gluten|soy,66,27,40.9,Fall 2026,5,1,0,1
+S0143,Village STEM LLC,residential,Floor event,2026-09-23,Wed,20,VIL,39,13,pizza,Domino's (Fowler Ave),gluten|dairy,42,29,69.0,Fall 2026,5,1,0,1
+S0180,Pre-Med Society,professional,General meeting,2026-09-24,Thu,19,ISA,49,14,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,51,37,72.5,Fall 2026,5,1,0,1
+S0230,Chess Club,recreation,Social,2026-09-25,Fri,15,LIB,17,11,donuts,Dunkin' (MSC),gluten|dairy|eggs,19,9,47.4,Fall 2026,5,0,0,1
+S0199,Robotics Club,tech,Workshop,2026-09-25,Fri,16,ENB,29,14,pizza,Domino's (Fowler Ave),gluten|dairy,31,16,51.6,Fall 2026,5,0,0,1
+S0161,Society of Women Engineers,professional,General meeting,2026-09-29,Tue,18,ENB,35,16,pizza,Papa John's (Fletcher Ave),gluten|dairy,33,16,48.5,Fall 2026,6,0,0,1
+S0181,Pre-Med Society,professional,Speaker panel,2026-09-29,Tue,19,ISA,57,20,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,62,42,67.7,Fall 2026,6,0,0,1
+S0134,ACM,tech,General meeting,2026-09-30,Wed,18,ENB,72,17,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,79,64,81.0,Fall 2026,6,0,0,1
+S0144,Village STEM LLC,residential,Floor event,2026-09-30,Wed,20,VIL,36,12,pizza,Domino's (Fowler Ave),gluten|dairy,42,31,73.8,Fall 2026,6,0,0,1
+S0231,Chess Club,recreation,Social,2026-10-02,Fri,15,LIB,22,13,donuts,Dunkin' (MSC),gluten|dairy|eggs,23,10,43.5,Fall 2026,6,0,0,1
+S0200,Robotics Club,tech,Workshop,2026-10-02,Fri,19,ENB,28,11,pizza,Domino's (Fowler Ave),gluten|dairy,27,16,59.3,Fall 2026,6,0,0,1
+S0162,Society of Women Engineers,professional,General meeting,2026-10-06,Tue,18,ENB,40,11,pizza,Papa John's (Fletcher Ave),gluten|dairy,41,30,73.2,Fall 2026,7,1,1,1
+S0191,Finance Association,professional,General meeting,2026-10-06,Tue,18,BSN,46,12,wraps,Panera Bread,gluten|dairy,43,31,72.1,Fall 2026,7,1,1,1
+S0182,Pre-Med Society,professional,Speaker panel,2026-10-06,Tue,19,ISA,76,21,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,84,63,75.0,Fall 2026,7,1,1,1
+S0240,Campus Rec Outdoors,recreation,General meeting,2026-10-06,Tue,19,REC,36,11,subs,Jersey Mike's,gluten,38,26,68.4,Fall 2026,7,1,1,1
+S0145,Village STEM LLC,residential,Floor event,2026-10-07,Wed,20,VIL,41,11,pizza,Domino's (Fowler Ave),gluten|dairy,44,33,75.0,Fall 2026,7,0,1,1
+S0135,ACM,tech,Workshop,2026-10-08,Thu,18,ENB,70,34,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,67,33,49.3,Fall 2026,7,1,1,1
+S0223,Entrepreneurship Club,professional,Speaker panel,2026-10-08,Thu,18,BSN,38,9,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,38,30,78.9,Fall 2026,7,1,1,1
+S0210,Black Student Union,cultural,Social,2026-10-08,Thu,19,MSC,73,53,wings,Wingstop (Fowler Ave),soy,71,17,23.9,Fall 2026,7,1,1,1
+S0232,Chess Club,recreation,Social,2026-10-09,Fri,15,LIB,21,10,donuts,Dunkin' (MSC),gluten|dairy|eggs,20,11,55.0,Fall 2026,7,0,1,1
+S0201,Robotics Club,tech,Workshop,2026-10-09,Fri,16,ENB,28,20,pizza,Domino's (Fowler Ave),gluten|dairy,29,10,34.5,Fall 2026,7,0,1,1
+S0172,Indian Student Association,cultural,Cultural night,2026-10-09,Fri,19,MSC,132,82,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,135,58,43.0,Fall 2026,7,0,1,1
+S0163,Society of Women Engineers,professional,General meeting,2026-10-13,Tue,18,ENB,37,12,pizza,Papa John's (Fletcher Ave),gluten|dairy,42,30,71.4,Fall 2026,8,0,1,1
+S0183,Pre-Med Society,professional,Speaker panel,2026-10-13,Tue,19,ISA,67,23,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,69,48,69.6,Fall 2026,8,0,1,1
+S0146,Village STEM LLC,residential,Floor event,2026-10-14,Wed,20,VIL,40,9,pizza,Domino's (Fowler Ave),gluten|dairy,40,31,77.5,Fall 2026,8,0,1,1
+S0136,ACM,tech,Workshop,2026-10-15,Thu,18,ENB,78,44,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,83,39,47.0,Fall 2026,8,1,1,1
+S0233,Chess Club,recreation,Social,2026-10-16,Fri,15,LIB,19,11,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,11,50.0,Fall 2026,8,0,1,1
+S0202,Robotics Club,tech,Workshop,2026-10-16,Fri,16,ENB,28,14,pizza,Domino's (Fowler Ave),gluten|dairy,27,14,51.9,Fall 2026,8,0,1,1
+S0192,Finance Association,professional,General meeting,2026-10-20,Tue,18,BSN,45,17,wraps,Panera Bread,gluten|dairy,48,31,64.6,Fall 2026,9,1,0,1
+S0184,Pre-Med Society,professional,Speaker panel,2026-10-20,Tue,19,ISA,61,19,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,61,43,70.5,Fall 2026,9,1,0,1
+S0224,Entrepreneurship Club,professional,Workshop,2026-10-21,Wed,17,LIB,40,11,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,41,29,70.7,Fall 2026,9,0,0,1
+S0173,Indian Student Association,cultural,Social,2026-10-21,Wed,19,MSC,107,96,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,125,32,25.6,Fall 2026,9,0,0,1
+S0217,Vietnamese Student Association,cultural,Social,2026-10-21,Wed,19,CPR,72,42,banh mi,Pho Quyen (Fowler Ave),gluten|soy,71,27,38.0,Fall 2026,9,0,0,1
+S0147,Village STEM LLC,residential,Floor event,2026-10-21,Wed,20,VIL,39,9,pizza,Domino's (Fowler Ave),gluten|dairy,40,31,77.5,Fall 2026,9,0,0,1
+S0164,Society of Women Engineers,professional,Speaker panel,2026-10-22,Thu,18,MSC,38,25,pizza,Papa John's (Fletcher Ave),gluten|dairy,43,20,46.5,Fall 2026,9,1,0,1
+S0211,Black Student Union,cultural,Social,2026-10-22,Thu,19,MSC,80,56,wings,Wingstop (Fowler Ave),soy,79,21,26.6,Fall 2026,9,1,0,1
+S0234,Chess Club,recreation,Social,2026-10-23,Fri,15,LIB,20,13,donuts,Dunkin' (MSC),gluten|dairy|eggs,22,10,45.5,Fall 2026,9,0,0,1
+S0203,Robotics Club,tech,Workshop,2026-10-23,Fri,19,ENB,29,10,pizza,Domino's (Fowler Ave),gluten|dairy,33,23,69.7,Fall 2026,9,0,0,1
+S0154,HackJam Workshops,tech,Workshop,2026-10-24,Sat,13,ISA,52,7,sandwich platters,Jason's Deli,gluten|dairy,49,43,87.8,Fall 2026,9,0,0,1
+S0241,Campus Rec Outdoors,recreation,Social,2026-10-25,Sun,11,REC,39,12,subs,Jersey Mike's,gluten,44,33,75.0,Fall 2026,9,0,0,1
+S0165,Society of Women Engineers,professional,General meeting,2026-10-27,Tue,18,ENB,37,13,pizza,Papa John's (Fletcher Ave),gluten|dairy,44,32,72.7,Fall 2026,10,0,0,1
+S0185,Pre-Med Society,professional,Speaker panel,2026-10-27,Tue,19,ISA,55,26,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,52,25,48.1,Fall 2026,10,0,0,1
+S0204,Robotics Club,tech,General meeting,2026-10-27,Tue,19,ENB,27,14,pizza,Domino's (Fowler Ave),gluten|dairy,28,15,53.6,Fall 2026,10,0,0,1
+S0148,Village STEM LLC,residential,Floor event,2026-10-28,Wed,20,VIL,31,9,pizza,Domino's (Fowler Ave),gluten|dairy,34,25,73.5,Fall 2026,10,0,0,1
+S0235,Chess Club,recreation,Social,2026-10-30,Fri,15,LIB,19,11,donuts,Dunkin' (MSC),gluten|dairy|eggs,21,11,52.4,Fall 2026,10,0,0,1
+S0166,Society of Women Engineers,professional,General meeting,2026-11-03,Tue,18,ENB,37,14,pizza,Papa John's (Fletcher Ave),gluten|dairy,42,29,69.0,Fall 2026,11,0,0,1
+S0242,Campus Rec Outdoors,recreation,General meeting,2026-11-03,Tue,19,REC,32,10,subs,Jersey Mike's,gluten,34,24,70.6,Fall 2026,11,0,0,1
+S0137,ACM,tech,General meeting,2026-11-04,Wed,18,ENB,68,17,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,74,57,77.0,Fall 2026,11,0,0,1
+S0193,Finance Association,professional,Speaker panel,2026-11-04,Wed,18,BSN,52,16,wraps,Panera Bread,gluten|dairy,57,41,71.9,Fall 2026,11,0,0,1
+S0174,Indian Student Association,cultural,Social,2026-11-04,Wed,19,MSC,98,71,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,103,36,35.0,Fall 2026,11,0,0,1
+S0218,Vietnamese Student Association,cultural,Social,2026-11-04,Wed,19,CPR,63,40,banh mi,Pho Quyen (Fowler Ave),gluten|soy,63,22,34.9,Fall 2026,11,0,0,1
+S0149,Village STEM LLC,residential,Floor event,2026-11-04,Wed,20,VIL,29,5,pizza,Domino's (Fowler Ave),gluten|dairy,30,25,83.3,Fall 2026,11,0,0,1
+S0155,HackJam Workshops,tech,Workshop,2026-11-05,Thu,18,MSC,60,28,sandwich platters,Jason's Deli,gluten|dairy,65,38,58.5,Fall 2026,11,0,0,1
+S0225,Entrepreneurship Club,professional,Speaker panel,2026-11-05,Thu,18,BSN,30,10,cookies & coffee,Insomnia Cookies,gluten|dairy|eggs,33,23,69.7,Fall 2026,11,0,0,1
+S0212,Black Student Union,cultural,Social,2026-11-05,Thu,19,MSC,67,62,wings,Wingstop (Fowler Ave),soy,66,8,12.1,Fall 2026,11,0,0,1
+S0205,Robotics Club,tech,Workshop,2026-11-06,Fri,16,ENB,25,11,pizza,Domino's (Fowler Ave),gluten|dairy,28,18,64.3,Fall 2026,11,1,0,1
+S0167,Society of Women Engineers,professional,General meeting,2026-11-10,Tue,18,ENB,34,14,pizza,Papa John's (Fletcher Ave),gluten|dairy,34,20,58.8,Fall 2026,12,0,1,1
+S0186,Pre-Med Society,professional,Speaker panel,2026-11-10,Tue,19,ISA,59,15,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,62,47,75.8,Fall 2026,12,0,1,1
+S0138,ACM,tech,General meeting,2026-11-11,Wed,18,ENB,79,17,bagels & cookies,Einstein Bros Bagels (MSC),gluten|dairy,81,65,80.2,Fall 2026,12,0,1,1
+S0150,Village STEM LLC,residential,Floor event,2026-11-11,Wed,20,VIL,35,5,pizza,Domino's (Fowler Ave),gluten|dairy,36,31,86.1,Fall 2026,12,0,1,1
+S0168,Society of Women Engineers,professional,General meeting,2026-11-17,Tue,18,ENB,41,16,pizza,Papa John's (Fletcher Ave),gluten|dairy,45,31,68.9,Fall 2026,13,0,1,1
+S0213,Black Student Union,cultural,General meeting,2026-11-17,Tue,19,MSC,89,46,wings,Wingstop (Fowler Ave),soy,88,40,45.5,Fall 2026,13,0,1,1
+S0236,Chess Club,recreation,Social,2026-11-18,Wed,12,MSC,18,29,donuts,Dunkin' (MSC),gluten|dairy|eggs,17,0,0.0,Fall 2026,13,0,1,1
+S0194,Finance Association,professional,Speaker panel,2026-11-18,Wed,18,BSN,38,7,wraps,Panera Bread,gluten|dairy,37,30,81.1,Fall 2026,13,0,1,1
+S0175,Indian Student Association,cultural,Social,2026-11-18,Wed,19,MSC,85,50,biryani & samosas,Taj Indian Cuisine,gluten|dairy|nuts,87,37,42.5,Fall 2026,13,0,1,1
+S0219,Vietnamese Student Association,cultural,Social,2026-11-18,Wed,19,CPR,70,31,banh mi,Pho Quyen (Fowler Ave),gluten|soy,77,47,61.0,Fall 2026,13,0,1,1
+S0151,Village STEM LLC,residential,Floor event,2026-11-18,Wed,20,VIL,37,5,pizza,Domino's (Fowler Ave),gluten|dairy,39,34,87.2,Fall 2026,13,0,1,1
+S0156,HackJam Workshops,tech,Workshop,2026-11-19,Thu,18,MSC,47,8,sandwich platters,Jason's Deli,gluten|dairy,49,41,83.7,Fall 2026,13,0,1,1
+S0187,Pre-Med Society,professional,General meeting,2026-11-19,Thu,19,ISA,72,14,Chick-fil-A nuggets,Chick-fil-A (MSC),gluten|soy,78,65,83.3,Fall 2026,13,0,1,1
+S0206,Robotics Club,tech,Workshop,2026-11-20,Fri,16,ENB,32,14,pizza,Domino's (Fowler Ave),gluten|dairy,30,16,53.3,Fall 2026,13,0,1,1
+S0243,Campus Rec Outdoors,recreation,Social,2026-11-22,Sun,11,REC,30,9,subs,Jersey Mike's,gluten,28,19,67.9,Fall 2026,13,0,1,1

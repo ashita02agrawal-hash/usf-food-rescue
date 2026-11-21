@@ -1,0 +1,13 @@
+date,event_type,location,start_hour,rsvps,checked_in,servings_ordered,servings_left,rain
+1/15/2026,Workshop,ENB,6:00 PM,30,18,24,6,0
+2026-01-22,Workshop,LIB,18:00,32,21,25,4,0
+2026-01-29,General meeting,MSC,18,40,25,30,5,0
+2026-02-05,Workshop,ENB,18,35,20,25,5,1
+2026-02-12,Social,MSC,18,40,32,36,4,0
+2026-02-19,Workshop,ENB,18,34,19,25,6,0
+2026-02-26,General meeting,LIB,18,38,22,28,6,0
+2026-01-15,Workshop,ENB,18,30,18,24,6,0
+2026-03-05,Workshop,UNKNOWN,18,30,20,,,0
+2026-03-12,Workshop,ENB,18,0,20,,,0
+2026-03-19,Workshop,ENB,18,30,150,,,0
+2099-03-26,Workshop,ENB,18,30,20,,,0
