@@ -85,7 +85,7 @@ function livePostCard(p){
     <div class="tablewrap"><table class="claims"><thead><tr><th>Student</th><th>Portions</th><th>Status</th><th></th></tr></thead><tbody>
       ${claims.length? claims.map(c=>`<tr><td>${esc(state.students[c.student]?.name||"Student")}</td><td class="num">${c.portions}</td><td>${claimStatus(c)}</td>
         <td style="text-align:right">${["held","onway"].includes(c.status)?`<button class="btn primary sm" data-picked="${c.id}">Picked up</button>`:""}</td></tr>`).join("")
-        : `<tr><td colspan="4" class="muted">Students nearby were notified. Claims will appear here.</td></tr>`}
+        : `<tr><td colspan="4" class="muted">Students were notified. Claims will appear here.</td></tr>`}
     </tbody></table></div>
     <div class="row"><button class="btn sm" data-endwin="${p.id}">Close window now</button><span class="small muted">Food out since ${fmtTime(p.outSince)}. Safe until ${fmtTime(p.outSince+2*3600000)} (2-hour rule).</span></div>
   </div>`;
@@ -177,6 +177,7 @@ function openReport(id){
         <label class="f">Food out since<input type="time" id="rOut" value="${outStr}"></label>
         <label class="f">Distribution window<select id="rWin"><option value="15">15 min</option><option value="20" selected>20 min</option><option value="30">30 min</option></select></label>
       </div>
+      <label class="row" style="font-weight:600;font-size:13px"><input type="checkbox" id="rVeg" ${/bagel|cookie|donut|coffee|veg|salad|cheese|fruit/i.test(ev.food_item)?"checked":""}> Vegetarian</label>
       <label class="f">Pickup spot<input type="text" id="rSpot" value="${esc(ev.room?`${LOCS[ev.location]?.name||ev.location} ${ev.room}`:(PICKUP_SPOTS[ev.location]||""))}"></label>
       <div class="f" style="display:grid;gap:6px"><span class="small muted" style="font-weight:600">Allergens</span><div class="chips" id="rAll">${ALLERGENS.map(a=>`<button type="button" class="chip" aria-pressed="${ev.allergens.includes(a)}" data-a="${a}">${a}</button>`).join("")}</div></div>
     </div>
@@ -204,7 +205,7 @@ function submitReport(ev){
     const [hh,mm]=$("#rOut").value.split(":").map(Number); const out=new Date(now()); out.setHours(hh||0,mm||0,0,0);
     const win=+$("#rWin").value, t0=now();
     const allergens=[...document.querySelectorAll("#rAll [aria-pressed=true]")].map(b=>b.dataset.a);
-    const post={id:uid("p"), club:ev.club, eventName:ev.event_type, food:$("#rFood").value||ev.food_item, caterer:$("#rCaterer").value, allergens, location:ev.location, spot:$("#rSpot").value, total:left,
+    const post={id:uid("p"), club:ev.club, eventName:ev.event_type, food:$("#rFood").value||ev.food_item, caterer:$("#rCaterer").value, allergens, veg:$("#rVeg").checked, location:ev.location, spot:$("#rSpot").value, total:left,
       outSince:Math.min(out.getTime(), t0), windowEnd:Math.min(t0+win*60000, out.getTime()+2*3600000), createdAt:t0,  status:"live"};
     state.posts.push(post); ev.postId=post.id;
     state.rotation[ev.club]=(state.rotation[ev.club]||0)+1;
@@ -215,7 +216,7 @@ function submitReport(ev){
     fitFull(); const after=predictEvent(probe).people;
     save(); setModelStatus(); onStateChange();
     toast("Model retrained", `Learned from ${M.n} events. Next ${ev.event_type.toLowerCase()} like this: ${Math.round(after)} people (was ${Math.round(before)}).`);
-    if(ev.postId) toast("Rescue surplus sent", `${left} portions posted. Students nearby were notified.`, "rescue");
+    if(ev.postId) toast("Rescue surplus sent", `${left} portions posted. Students were notified.`, "rescue");
   }, 30);
 }
 
