@@ -1,3 +1,5 @@
+if (!window.setModelStatus) window.setModelStatus = () => {};
+
 // ---------- club theme (USF green & gold, scoped to the club side only) ----------
 const hr12 = h => { const ap = h<12 ? "AM" : "PM"; const x = h%12===0 ? 12 : h%12; return `${x}:00 ${ap}`; };
 const locKey = txt => { const t=(txt||"").trim().toLowerCase(); const hit=Object.entries(LOCS).find(([k,v])=>k.toLowerCase()===t||v.name.toLowerCase()===t); return hit? hit[0] : (txt||"").trim(); };
