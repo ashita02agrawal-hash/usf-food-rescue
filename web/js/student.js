@@ -44,7 +44,7 @@ function pickupCloseAt(p){ return Math.min(p.windowEnd, p.outSince + 2*3600000);
 function renderStudent(){
   const pane = $("#studentPane");
   if(bbSplash){
-    pane.innerHTML = `<div class="bb bb-splash"><img src="img/usf-logo.png" alt="" class="bb-splash-logo"><div class="bb-logo">Platewise</div><p>Predict. Rescue. Waste less.</p></div>`;
+    pane.innerHTML = `<div class="bb bb-splash"><img src="icons/icon-192.png" alt="" class="bb-splash-logo"><div class="bb-logo">Bulls Bites</div><p>Predict. Rescue. Waste less.</p></div>`;
     setTimeout(() => { bbSplash = false; renderStudent(); }, 1100);
     return;
   }
@@ -232,7 +232,7 @@ function notify(p, avoid){
   const body=`${portionsLeft(p)} portions at ${bbPlace(p.location)}${d===null?"":" · "+walk(d)}`;
   toast(`Free food: ${p.food}`, body, "rescue");
   try{ if(ui.alerts && "Notification" in window && Notification.permission==="granted"){
-    const title="Platewise: free "+p.food, opts={body, icon:"icons/icon-192.png", tag:p.id};
+    const title="Bulls Bites: free "+p.food, opts={body, icon:"icons/icon-192.png", tag:p.id};
     // Phones only allow notifications through the service worker
     if(navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.ready.then(r=>r.showNotification(title,opts)).catch(()=>{});
     else new Notification(title, opts); } }catch(e){}

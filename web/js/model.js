@@ -174,7 +174,7 @@ function fitBacktest(){
     return {event_id:r.event_id,club:r.club,category:categoryOf(r),actual:r.checked_in,predicted,
       ordered_rsvp:r.rsvps,ordered_campus:campus*r.rsvps*BUFFER,ordered_model:predicted*BUFFER};
   });
-  const strategies=[['Order for every RSVP','ordered_rsvp'],['Campus average','ordered_campus'],['Platewise','ordered_model']].map(([strategy,key])=>({
+  const strategies=[['Order for every RSVP','ordered_rsvp'],['Campus average','ordered_campus'],['Bulls Bites','ordered_model']].map(([strategy,key])=>({
     strategy,servings_ordered:points.reduce((s,p)=>s+p[key],0),
     servings_wasted:points.reduce((s,p)=>s+Math.max(0,p[key]-p.actual),0),
     events_ran_short:points.filter(p=>p.actual-p[key]>.1*p.actual).length,
@@ -186,7 +186,7 @@ function fitBacktest(){
 }
 function backtestHeadline(result=M.backtest){
   if(!result)return 'Run fitBacktest() to evaluate held-out sample events.';
-  return `On held-out sample events, Platewise cut food waste by about ${Math.floor(result.cut*20)*5}% compared with ordering for every RSVP (average error ${result.mae.toFixed(1)} people).`;
+  return `On held-out sample events, Bulls Bites cut food waste by about ${Math.floor(result.cut*20)*5}% compared with ordering for every RSVP (average error ${result.mae.toFixed(1)} people).`;
 }
 // Predict a planned event for a club
 function predictEvent(ev){

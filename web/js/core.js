@@ -4,7 +4,7 @@
  */
 "use strict";
 /* ============================================================
-   Platewise: predict, then rescue.
+   Bulls Bites: predict, then rescue.
    All data shown is SAMPLE DATA generated to mirror patterns seen at USF.
    ============================================================ */
 
@@ -62,7 +62,7 @@ function seed(club){
   const c = META.clubs.find(c=>c.club===club) || META.clubs[0];
   if(!state.planned.some(p=>p.club===club && p.status==="planned")){
     const ev = {id:uid("e"), club, event_type: club==="Village STEM LLC"?"Floor event":"General meeting", date:todayStr(), start_hour:h, location:c.home, rsvps: club==="ACM"?70:36, food_item:c.food_item, caterer:c.caterer, allergens:c.allergens.slice(), status:"planned"};
-    const p = predictEvent(ev); ev.pred = Math.round(p.people); ev.recServings = p.servings; ev.ordered = ev.rsvps; // ordered for all RSVPs before Platewise
+    const p = predictEvent(ev); ev.pred = Math.round(p.people); ev.recServings = p.servings; ev.ordered = ev.rsvps; // ordered for all RSVPs before Bulls Bites
     state.planned.push(ev);
   }
   // a live post from another club so the student feed isn't empty

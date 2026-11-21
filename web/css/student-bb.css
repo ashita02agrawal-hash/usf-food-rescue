@@ -4,7 +4,7 @@
 
 /* splash */
 #studentPane .bb-splash{display:grid;place-items:center;align-content:center;gap:8px;min-height:540px;background:var(--accent);color:#fff;text-align:center;border:0}
-#studentPane .bb-splash-logo{height:56px;width:auto;filter:brightness(0) invert(1);opacity:.95}
+#studentPane .bb-splash-logo{height:72px;width:72px;border-radius:18px;box-shadow:0 0 0 2px rgba(207,196,147,.5)}
 #studentPane .bb-logo{font-size:30px;font-weight:700;color:var(--gold);letter-spacing:-.01em}
 #studentPane .bb-splash p{margin:0;color:#d6ebe0;font-size:14px}
 
@@ -95,6 +95,6 @@
   .stage.student-only #studentPane .bb{border:0;border-radius:0;box-shadow:none;max-width:none;min-height:calc(100vh - 60px);display:grid;grid-template-rows:1fr auto}
   .stage.student-only #studentPane .bb-nav{position:fixed;left:0;right:0;bottom:0}
   .stage.student-only #studentPane .bb-body{padding-bottom:84px}
-  .stage.student-only #studentPane .bb-splash{min-height:calc(100vh - 60px)}
+  .stage.student-only #studentPane .bb.bb-splash{min-height:calc(100vh - 60px);grid-template-rows:none;align-content:center}
 }
 @media (max-width:700px){ body:has(.stage.student-only) #toasts{bottom:calc(84px + env(safe-area-inset-bottom,0px))} }
