@@ -49,7 +49,7 @@ The club marks each pickup as done from its own screen, so the counts stay hones
 
 ## How the prediction works
 
-We didn't use a chatbot for this. The model is a **gradient-boosted decision tree model**, so it trains in the browser in under a second and retrains the moment a club reports results.
+We didn't use a chatbot for this. The model is a **gradient-boosted decision tree model** that we wrote in plain JavaScript, so it trains in the browser in under a second and retrains the moment a club reports results.
 
 - **What it predicts:** each event's *show rate* (people who checked in ÷ RSVPs), which is then multiplied by the RSVP count.
 - **What it looks at:** the club, event type, day, start time, building, RSVP count, week of the semester, exam periods, the club's recent show rate, the club's show rate for that kind of event, and how much food was left last time. It only uses information from *earlier* events, so it never "peeks" at the answer.
