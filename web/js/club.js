@@ -1,4 +1,4 @@
-if (!window.setModelStatus) window.setModelStatus = () => {};
+if (!globalThis.setModelStatus) globalThis.setModelStatus = () => {};
 
 // ---------- USF academic calendar (check dates against usf.edu) ----------
 // factor = share of normal turnout expected that week (0.4 = 40%)

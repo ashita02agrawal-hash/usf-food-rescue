@@ -62,6 +62,40 @@ We didn't use a chatbot for this. The model is a **gradient-boosted decision tre
 
 The full model write-up, including a scikit-learn version for comparison and the evaluation scripts, is in [`model/README.md`](model/README.md).
 
+## Architecture
+
+Everything runs in the browser. There's no backend server and no database: the app is static files on GitHub Pages, the model trains on the phone, and app data is saved in the browser.
+
+```mermaid
+flowchart LR
+  subgraph Club["Club side (club.js)"]
+    plan["Plan an event"] --> rec["Recommendation<br/>order + why"]
+    report["Report results"]
+    post["Post leftovers"]
+  end
+  subgraph Model["Model (model.js)"]
+    data[("Sample history<br/>+ reported / uploaded events")] --> gbm["Gradient-boosted trees<br/>+ cold-start priors"]
+  end
+  plan --> gbm
+  gbm --> rec
+  cal["USF calendar<br/>(breaks, finals)"] --> rec
+  report -->|retrain| data
+  report --> post
+  post --> state[("Shared state (core.js)<br/>saved in the browser")]
+  state <-->|"same phone: BroadcastChannel<br/>two phones: sync code over ntfy.sh (sync.js)"| state2[("Student's copy")]
+  subgraph Student["Student side (student.js)"]
+    feed["Live feed<br/>veg + allergen filters"] --> claim["Reserve: 60 s hold<br/>15 min pickup"]
+    claim --> rules["No-show strikes"]
+  end
+  state2 --> feed
+  claim --> state2
+```
+
+- **Hosting:** GitHub Pages serves the `web/` folder. A GitHub Actions workflow redeploys it on every merge to `main`.
+- **Installable app:** a web app manifest and a service worker (`sw.js`) let it install on a phone's home screen and keep loading on bad Wi-Fi.
+- **Sync:** tabs on the same device sync instantly. Two phones sync through a short sync code over the free ntfy.sh relay, which only ever carries demo data.
+- **Tech:** plain HTML, CSS and JavaScript (no framework), Poppins font, and a gradient-boosted tree model written from scratch. There's also a Python/scikit-learn copy of the model for evaluation, plus Node tests that check both versions agree.
+
 ## Try it
 
 Open the **[live app](https://ashita02agrawal-hash.github.io/usf-food-rescue/)** and tap **Start demo** to see the club and student sides together. On a phone, add it to your home screen and it opens like a normal app.
@@ -106,7 +140,8 @@ web/                  the app (plain HTML, CSS and JavaScript, no framework)
   js/app.js           login screen, demo tools, startup
   css/                styles (one shared USF theme)
   data/               sample event history the app learns from
-model/                Python version of the model, evaluation and tests
+model/                Python version of the model, evaluation and parity tests
+tests/                app flow tests (run with node --test)
 data/                 the same sample data as a spreadsheet, plus an example upload
 ```
 
