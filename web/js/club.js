@@ -1,3 +1,52 @@
+// ---------- club theme (USF green & gold, scoped to the club side only) ----------
+const hr12 = h => { const ap = h<12 ? "AM" : "PM"; const x = h%12===0 ? 12 : h%12; return `${x}:00 ${ap}`; };
+const locKey = txt => { const t=(txt||"").trim().toLowerCase(); const hit=Object.entries(LOCS).find(([k,v])=>k.toLowerCase()===t||v.name.toLowerCase()===t); return hit? hit[0] : (txt||"").trim(); };
+(function clubTheme(){
+  if(document.getElementById("clubTheme")) return;
+  const st=document.createElement("style"); st.id="clubTheme";
+  st.textContent = `
+  #clubPane{--accent:#006747;--accent-ink:#ffffff;--accent-soft:#e3f1ea;--pred:#9a7d1e;--pred-soft:#f5efd6;
+    --bg:#f4f8f4;--surface:#ffffff;--sunk:#eef4ef;--ink:#0f2a1f;--muted:#5b6f64;--line:#d6e4da;color:var(--ink);color-scheme:light}
+  #clubPane .card,#clubPane .tile{background:#fff;border:1px solid #d6e4da;border-radius:18px;box-shadow:0 2px 6px rgba(0,103,71,.06),0 10px 28px rgba(0,103,71,.08)}
+  #clubPane .rec{background:linear-gradient(135deg,#006747 0%,#0b8a5f 100%);color:#fff;border-radius:18px;padding:18px}
+  #clubPane .rec .muted,#clubPane .rec .eyebrow{color:#d7efe3}
+  #clubPane .rec .big{color:#fff!important}
+  #clubPane .rec .compare{background:rgba(255,255,255,.14);color:#fff;border-radius:12px}
+  #clubPane .rec .tag{background:#CFC493;color:#0f2a1f}
+  #clubPane .rec .btn.primary{background:#CFC493;color:#0f2a1f;border:none}
+  #clubPane .rec summary{color:#fff}
+  #clubPane .rec .why{background:rgba(255,255,255,.95);color:#0f2a1f;border-radius:12px;padding:10px}
+  #clubPane .btn.primary{background:#006747;color:#fff;border-radius:999px}
+  #clubPane .tabs button[aria-selected="true"]{color:#006747;border-color:#006747}
+  #clubPane input,#clubPane select,#clubPane textarea{background:#fff;color:#0f2a1f;border:1px solid #cfe0d5;border-radius:12px}
+  #clubPane .tile .big{color:#006747}
+  #clubPane .eyebrow{color:#006747}
+  `;
+  st.textContent += `
+  #clubPane{font-family:"Poppins","Inter",system-ui,sans-serif}
+  #clubPane h1,#clubPane h2,#clubPane h3,#clubPane .big{font-family:"Poppins","Inter",system-ui,sans-serif;font-weight:700}
+  #clubPane .usf-badge{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#006747;color:#CFC493;
+    font-weight:800;font-size:14px;letter-spacing:.04em;border:2px solid #CFC493;margin-right:8px;box-shadow:0 4px 12px rgba(0,103,71,.25)}
+  #clubPane .card,#clubPane .tile,#clubPane .ev{transition:transform .18s ease,box-shadow .18s ease}
+  #clubPane .card:hover,#clubPane .tile:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,103,71,.10),0 16px 36px rgba(0,103,71,.12)}
+  #clubPane .btn{transition:transform .12s ease,filter .15s ease;cursor:pointer}
+  #clubPane .btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+  #clubPane .btn:active{transform:scale(.97)}
+  #clubPane .tabs button{transition:color .15s ease,border-color .15s ease;cursor:pointer}
+  #clubPane .tabs button:hover{color:#006747}
+  #clubPane input:focus,#clubPane select:focus{outline:none;border-color:#006747;box-shadow:0 0 0 4px rgba(0,103,71,.15)}
+  #clubPane input,#clubPane select{transition:border-color .15s ease,box-shadow .15s ease}
+  #clubBody > *{animation:clubIn .28s ease both}
+  #clubPane .rec .big{animation:clubPop .35s ease both}
+  @keyframes clubIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @keyframes clubPop{from{transform:scale(.92);opacity:.4}to{transform:none;opacity:1}}
+  @media (prefers-reduced-motion:reduce){#clubPane *{animation:none!important;transition:none!important}}
+  `;
+  if(!document.getElementById("clubFont")){ const l=document.createElement("link"); l.id="clubFont"; l.rel="stylesheet";
+    l.href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"; document.head.appendChild(l); }
+  document.head.appendChild(st);
+})();
+
 /* club.js
  * Owner: Club-app teammate
  * Club console: events & live rescue, plan an event, report results, insights & CSV upload.
@@ -8,7 +57,7 @@ function renderClub(){
   const club = ui.club, tab = ui.clubTab || "events";
   $("#clubPane").innerHTML = `
     <div class="pane-head">
-      <div class="who"><div class="avatar">${esc(club.split(" ").map(w=>w[0]).join("").slice(0,3))}</div><div><div>${esc(club)}</div><div class="small muted">Club console</div></div></div>
+      <div class="who"><div class="usf-badge" aria-label="USF">USF</div><div class="avatar">${esc(club.split(" ").map(w=>w[0]).join("").slice(0,3))}</div><div><div>${esc(club)}</div><div class="small muted">Club console</div></div></div>
       <div class="spacer"></div>
       <select id="clubSwitch" aria-label="Switch club" style="width:auto">${META.clubs.map(c=>`<option ${c.club===club?"selected":""}>${esc(c.club)}</option>`).join("")}</select>
     </div>
@@ -35,7 +84,7 @@ function renderClubDynamic(){
       <div style="margin-top:6px">${planned.length? planned.map(ev=>`
         <div class="ev">
           ${dateBox(ev.date)}
-          <div style="min-width:0"><div style="font-weight:600">${esc(ev.event_type)} · ${fmtHour(ev.start_hour)} · ${esc(LOCS[ev.location]?.name||ev.location)}</div>
+          <div style="min-width:0"><div style="font-weight:600">${esc(ev.event_type)} · ${hr12(ev.start_hour)} · ${esc(LOCS[ev.location]?.name||ev.location)}</div>
             <div class="small muted">${ev.rsvps} RSVPs · Platewise expects <b class="num" style="color:var(--pred)">${ev.pred}</b> · order ${ev.recServings} servings of ${esc(ev.food_item)}</div></div>
           <div class="act"><button class="btn primary sm" data-report="${ev.id}">Report results</button></div>
         </div>`).join("") : `<p class="muted">No upcoming events. Plan one to get a food recommendation.</p>`}</div>
@@ -64,7 +113,7 @@ function livePostCard(p){
     </div>
     <div class="grid2">
       <div><div class="eyebrow">Portions left</div><div class="big num">${left}<small>of ${p.total}</small></div></div>
-      <div><div class="eyebrow">On duty</div><div style="font-weight:600;margin-top:6px">${esc(p.onDuty)}</div><div class="small muted">Stays until the window closes, then can leave</div></div>
+      <div><div class="eyebrow">Pickup spot</div><div style="font-weight:600;margin-top:6px">${esc(p.spot)}</div><div class="small muted">Window closes automatically</div></div>
     </div>
     <div class="tablewrap"><table class="claims"><thead><tr><th>Student</th><th>Portions</th><th>Status</th><th></th></tr></thead><tbody>
       ${claims.length? claims.map(c=>`<tr><td>${esc(state.students[c.student]?.name||"Student")}</td><td class="num">${c.portions}</td><td>${claimStatus(c)}</td>
@@ -97,10 +146,11 @@ function renderPlan(){
       <div class="grid2">
         <label class="f">Event type<select id="pType">${TYPES.map(t=>`<option ${t===typ?"selected":""}>${t}</option>`).join("")}</select></label>
         <label class="f">Date<input type="date" id="pDate" value="${ds}"></label>
-        <label class="f">Start time<select id="pHour">${[...Array(13)].map((_,i)=>i+9).map(h=>`<option value="${h}" ${h===(hist.at(-1)?.start_hour||18)?"selected":""}>${fmtHour(h)}</option>`).join("")}</select></label>
-        <label class="f">Location<select id="pLoc">${Object.entries(LOCS).map(([k,v])=>`<option value="${k}" ${k===c.home?"selected":""}>${esc(v.name)}</option>`).join("")}</select></label>
+        <label class="f">Start time<select id="pHour">${[...Array(24).keys()].map(h=>`<option value="${h}" ${h===(hist.at(-1)?.start_hour||18)?"selected":""}>${hr12(h)}</option>`).join("")}</select></label>
+        <label class="f">Building<input type="text" id="pLoc" value="${esc(LOCS[c.home]?.name||"")}" placeholder="e.g. ENB"></label>
         <label class="f">RSVPs so far<input type="number" id="pRsvp" min="1" max="500" value="${rsvp}"></label>
-        <label class="f">Food<select id="pFood">${[...new Set([c.food_item,...Object.keys(FOOD_UNITS)])].map(f=>`<option ${f===c.food_item?"selected":""}>${esc(f)}</option>`).join("")}</select></label>
+        <label class="f">Room<input type="text" id="pRoom" placeholder="e.g. 109"></label>
+        <label class="f">Food<input type="text" id="pFood" value="${esc(c.food_item)}" placeholder="e.g. Pub Subs"></label>
       </div>
     </form>
     <div class="card" id="recBox"></div>
@@ -109,7 +159,7 @@ function renderPlan(){
 }
 function planEvent(){
   const c=META.clubs.find(x=>x.club===ui.club);
-  return {club:ui.club, event_type:$("#pType").value, date:$("#pDate").value||todayStr(), start_hour:+$("#pHour").value, location:$("#pLoc").value, rsvps:clamp(+$("#pRsvp").value||1,1,500), food_item:$("#pFood").value, caterer:c.caterer, allergens:c.allergens.slice()};
+  return {club:ui.club, event_type:$("#pType").value, date:$("#pDate").value||todayStr(), start_hour:+$("#pHour").value, location:locKey($("#pLoc").value), rsvps:clamp(+$("#pRsvp").value||1,1,500), food_item:$("#pFood").value.trim()||c.food_item, room:$("#pRoom").value.trim(), caterer:c.caterer, allergens:c.allergens.slice()};
 }
 function updateRec(){
   if(!M.full){ $("#recBox").innerHTML=`<p class="muted">Training the model on ${META.events.length} sample events…</p>`; return; }
@@ -118,20 +168,18 @@ function updateRec(){
   const reasons = Object.entries(p.groups).filter(([,v])=>Math.abs(v)>=0.5).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,6);
   const maxAbs = Math.max(4, ...reasons.map(r=>Math.abs(r[1])));
   $("#recBox").innerHTML = `<div class="rec">
-    <div class="row" style="justify-content:space-between"><div class="eyebrow">Platewise recommendation</div><span class="tag">Model trained on ${M.n} events</span></div>
+    <div class="row" style="justify-content:space-between"><div class="eyebrow">Our recommendation</div><span class="tag">Learned from ${M.n} events</span></div>
     <div class="rec-hero">
-      <div><div class="small muted">Expected turnout</div><div class="big num" style="color:var(--pred)">${Math.round(p.people)}<small>people</small></div><div class="small muted num">Likely range ${p.low}–${p.high} of ${ev.rsvps} RSVPs</div></div>
-      <div><div class="small muted">Order</div><div class="big num">${u.n}<small>${esc(u.unit)}</small></div><div class="small muted">${p.servings} servings, 15% buffer${u.note?" · "+esc(u.note):""}</div></div>
+      <div><div class="small muted">Order</div><div class="big num">${u.n}<small>${esc(u.unit)}</small></div><div class="small muted">${u.note?esc(u.note):"Includes a small buffer"}</div></div>
+      <div><div class="small muted">Expect about</div><div class="big num" style="color:var(--pred)">${Math.round(p.people)}<small>people</small></div><div class="small muted num">out of ${ev.rsvps} RSVPs</div></div>
     </div>
-    <div class="compare">Ordering for all ${ev.rsvps} RSVPs (${ua.n} ${esc(ua.unit)}) would likely leave <b class="num">${waste}</b> servings uneaten, about <b class="num">$${waste*COST_PER_SERVING}</b> (est. $${COST_PER_SERVING} a serving).</div>
-    <div class="stack" style="gap:8px">
-      <div class="row" style="justify-content:space-between"><h3>Why this number</h3><span class="small muted">People added or removed vs. campus baseline (${Math.round(p.base)})</span></div>
-      <div class="why">${reasons.map(([g,v])=>{ const w=Math.abs(v)/maxAbs*50; return `<div class="why-row"><span>${esc(reasonLabel(g,p.feats))}</span>
+    <div class="compare">You'll save about <b class="num">$${waste*COST_PER_SERVING}</b> and <b class="num">${waste}</b> servings of waste compared to ordering for every RSVP.</div>
+    <details><summary class="small" style="cursor:pointer;font-weight:600">Why this number?</summary>
+      <div class="why" style="margin-top:8px">${reasons.map(([g,v])=>{ const w=Math.abs(v)/maxAbs*50; return `<div class="why-row"><span>${esc(reasonLabel(g,p.feats))}</span>
         <div class="why-bar" aria-hidden="true"><i style="${v>=0?`left:50%;width:${w}%;background:var(--accent)`:`right:50%;width:${w}%;background:var(--pred)`}"></i></div>
-        <span class="v num">${v>=0?"+":"−"}${Math.abs(v).toFixed(1)}</span></div>`;}).join("")}</div>
-      <div class="small muted">Contributions come from the trees' split paths, so they add up exactly to the prediction.</div>
-    </div>
-    <div class="row"><button class="btn primary" id="saveEv">Save event with this order</button><span class="small muted">You'll report real turnout after, and the model learns from it.</span></div>
+        <span class="v num">${v>=0?"+":"−"}${Math.abs(v).toFixed(1)} people</span></div>`;}).join("")}</div>
+    </details>
+    <div class="row"><button class="btn primary" id="saveEv">Save event</button><span class="small muted">After the event, tap "Report results" so we keep learning.</span></div>
   </div>`;
   $("#saveEv").onclick=()=>{ const e={...ev, id:uid("e"), status:"planned", pred:Math.round(p.people), recServings:p.servings, ordered:p.servings}; state.planned.push(e); save(); toast("Event saved",`Order ${u.n} ${u.unit} for ${ev.event_type.toLowerCase()}.`); ui.clubTab="events"; renderClub(); };
 }
@@ -158,10 +206,8 @@ function openReport(id){
         <label class="f">Food out since<input type="time" id="rOut" value="${outStr}"></label>
         <label class="f">Distribution window<select id="rWin"><option value="15">15 min</option><option value="20" selected>20 min</option><option value="30">30 min</option></select></label>
       </div>
-      <label class="f">Pickup spot<input type="text" id="rSpot" value="${esc(PICKUP_SPOTS[ev.location]||"")}"></label>
+      <label class="f">Pickup spot<input type="text" id="rSpot" value="${esc(ev.room?`${LOCS[ev.location]?.name||ev.location} ${ev.room}`:(PICKUP_SPOTS[ev.location]||""))}"></label>
       <div class="f" style="display:grid;gap:6px"><span class="small muted" style="font-weight:600">Allergens</span><div class="chips" id="rAll">${ALLERGENS.map(a=>`<button type="button" class="chip" aria-pressed="${ev.allergens.includes(a)}" data-a="${a}">${a}</button>`).join("")}</div></div>
-      <label class="f">E-board member on duty<select id="rDuty">${board.map((n,i)=>`<option ${i===rot?"selected":""}>${n}</option>`).join("")}</select></label>
-      <div class="small muted">Rotation: ${board.map((n,i)=>i===rot?`<b>${n}</b>`:n).join(" → ")}. One person stays for the window, everyone else can leave.</div>
     </div>
     <div class="row" style="justify-content:flex-end"><button type="button" class="btn ghost" id="rCancel">Cancel</button><button class="btn rescue" id="rSubmit">Save results & rescue surplus</button></div>
   </form></div>`;
@@ -188,7 +234,7 @@ function submitReport(ev){
     const win=+$("#rWin").value, t0=now();
     const allergens=[...document.querySelectorAll("#rAll [aria-pressed=true]")].map(b=>b.dataset.a);
     const post={id:uid("p"), club:ev.club, eventName:ev.event_type, food:$("#rFood").value||ev.food_item, caterer:$("#rCaterer").value, allergens, location:ev.location, spot:$("#rSpot").value, total:left,
-      outSince:Math.min(out.getTime(), t0), windowEnd:Math.min(t0+win*60000, out.getTime()+2*3600000), createdAt:t0, onDuty:$("#rDuty").value, status:"live"};
+      outSince:Math.min(out.getTime(), t0), windowEnd:Math.min(t0+win*60000, out.getTime()+2*3600000), createdAt:t0,  status:"live"};
     state.posts.push(post); ev.postId=post.id;
     state.rotation[ev.club]=(state.rotation[ev.club]||0)+1;
   }
@@ -280,4 +326,8 @@ function drawChart(club){
   const withP=pts.filter(d=>d.p!=null), err=mean(withP.map(d=>Math.abs(d.p-d.a))), left=mean(rows.map(r=>r.leftover_pct||0));
   $("#chartNote").textContent = `${rows.length} events. Average leftovers today: ${Math.round(left)}% of food ordered. Prediction error for ${club}: ±${err.toFixed(1)} people.`;
 }
+
+
+
+
 
