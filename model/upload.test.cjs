@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
-const {setup}=require('./model.test.cjs');
+const {setup}=require('./test-support.cjs');
 const header='date,event_type,location,start_hour,rsvps,checked_in';
 function parse(csv,options={}){const {run,context}=setup();context.csv=csv;context.options=options;return JSON.parse(run('JSON.stringify(parseClubCSV(csv,"New Club","tech",options))'));}
 test('clean CSV derives features, real-data label and defaults',()=>{

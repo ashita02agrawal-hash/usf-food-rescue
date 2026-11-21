@@ -113,7 +113,7 @@ SEMESTERS = [("Spring 2026", date(2026, 1, 12), 15), ("Fall 2026", date(2026, 8,
 def time_mult(hour: int, loc: str) -> float:
     m = 1.12 if loc == "MSC" else 1.0  # people already in the building stay longer
     if 11 <= hour <= 13:
-        m = 1.08
+        m *= 1.08
     elif hour >= 20:
         m = 0.88
     elif hour <= 10:
@@ -162,9 +162,18 @@ def main() -> None:
                     continue
                 types = [e for e in c["events"] for _ in range(e[4])]
                 etype, loc, dow, hour, _ = rng.choice(types)
+                # Include observed examples of the late-Friday penalty, not only
+                # a formula that never runs for any scheduled sample event.
+                if c['club']=='Robotics Club' and etype=='Workshop' and week>=5 and week%3==0:
+                    hour=19
                 if week == 1 and c["club"] == "Village STEM LLC":
                     etype = "Floor event"
                 day = start + timedelta(weeks=week - 1, days=dow)
+                # One deterministic weather outcome per date, independent of club order.
+                rain = int(random.Random(SEED + day.toordinal()).random() < (.35 if day.month in (8,9) else .15))
+                exam_period = int(week in (7,8) or week >= n_weeks-1)
+                rain_effect = 1 if not rain or (loc == 'VIL' and etype == 'Floor event') else .96 if loc == 'MSC' else .87
+                night_effect = (1.08 if etype in ('Social','Cultural night') else .65) if dow in (4,5) and hour >= 19 else 1
                 rsvp_mean = c["rsvp"] * (1.25 if etype == "Cultural night" else 1.0)
                 rsvp = max(6, round(rng.gauss(rsvp_mean, rsvp_mean * 0.12)))
                 base = c["override"].get(etype, c["rate"] * TYPE_MULT[etype])
@@ -173,6 +182,7 @@ def main() -> None:
                     * DAY_MULT[dow]
                     * time_mult(hour, loc)
                     * week_mult(week, n_weeks, c["decay"])
+                    * rain_effect * night_effect
                     * math.exp(rng.gauss(0, 0.12))
                 )
                 attended = min(round(rsvp * 1.6), max(2, round(rsvp * ratio) + walkins(hour, loc, dow)))
@@ -181,6 +191,10 @@ def main() -> None:
                 eaten = min(ordered, round(attended * rng.uniform(0.9, 1.05)))
                 left = max(0, ordered - eaten)
                 food, caterer, allergens = c["food"]
+                # Consume the same seeded event draws even for the break week:
+                # adding a calendar exclusion must not reshuffle every later event.
+                if sem.startswith('Spring') and week == 10:
+                    continue
                 eid += 1
                 rows.append(dict(
                     event_id=f"S{eid:04d}", club=c["club"], category=c["category"], event_type=etype,
@@ -189,13 +203,13 @@ def main() -> None:
                     caterer=caterer, allergens="|".join(allergens),
                     servings_ordered=ordered, servings_left=left,
                     leftover_pct=round(100 * left / ordered, 1), semester=sem, week=week,
-                    is_sample=1,
+                    rain=rain, exam_period=exam_period, is_sample=1,
                 ))
     rows.sort(key=lambda r: (r["date"], r["start_hour"]))
 
     (ROOT / "data").mkdir(exist_ok=True)
-    with open(ROOT / "data" / "sample_events.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+    with open(ROOT / "data" / "sample_events.csv", "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()), lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
 
@@ -210,9 +224,21 @@ def main() -> None:
         "events": rows,
     }
     (ROOT / "web" / "data").mkdir(parents=True, exist_ok=True)
-    with open(ROOT / "web" / "data" / "sample_events.json", "w") as f:
+    with open(ROOT / "web" / "data" / "sample_events.json", "w", encoding="utf-8") as f:
         json.dump(meta, f, separators=(",", ":"))
     print(f"wrote {len(rows)} sample events")
+    village=[r for r in rows if r['club']=='Village STEM LLC' and r['week']>=7]
+    near=[r for r in village if r['checked_in'] in (5,6)]
+    acm=[r for r in rows if r['club']=='ACM' and r['event_type']=='General meeting']
+    print('SAMPLE story check: Village late events (RSVPs, turnout):', [(r['rsvps'],r['checked_in']) for r in near[:6]])
+    print(f"SAMPLE story check: ACM general meetings average {sum(r['checked_in'] for r in acm)/len(acm):.1f} attendees / {sum(r['rsvps'] for r in acm)/len(acm):.1f} RSVPs")
+    # Controlled generator comparison, not a causal estimate from different clubs.
+    saved=rng.getstate()
+    for hour,dow in [(12,2),(21,5)]:
+        print(f'SAMPLE mechanism check: expected MSC walk-ins at hour {hour}, weekday index {dow}: '+
+              f"{sum(walkins(hour,'MSC',dow) for _ in range(1000))/1000:.1f}; ENB: "+
+              f"{sum(walkins(hour,'ENB',dow) for _ in range(1000))/1000:.1f}")
+    rng.setstate(saved)
 
 
 if __name__ == "__main__":

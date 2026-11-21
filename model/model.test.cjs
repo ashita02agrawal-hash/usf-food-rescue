@@ -1,13 +1,5 @@
-const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
-const root=path.resolve(__dirname,'..');
-function setup(){
- const context=vm.createContext({Date,localStorage:{getItem:()=>null,setItem:()=>{}},console});
- for(const file of ['core','model'])vm.runInContext(fs.readFileSync(path.join(root,'web/js/'+file+'.js'),'utf8'),context);
- context.meta=JSON.parse(fs.readFileSync(path.join(root,'web/data/sample_events.json'),'utf8'));
- const run=code=>vm.runInContext(code,context);
- run('META=meta;LOCS=META.locations;CLUBS=META.clubs.map(c=>c.club);state=freshState();buildCols();');
- return {run,context};
-}
+const test=require('node:test'),assert=require('node:assert/strict');
+const {setup}=require('./test-support.cjs');
 test('future and simultaneous outcomes cannot change history features',()=>{
  const {run}=setup();
  run('globalThis.rows=META.events.slice(0,20);globalThis.first=engineer(rows);rows[19]={...rows[19],checked_in:9999};globalThis.second=engineer(rows);');
@@ -24,4 +16,3 @@ test('confidence thresholds and error downgrade',()=>{
  const {run}=setup();assert.equal(run('modelConfidence(2).level'),'low');assert.equal(run('modelConfidence(3).level'),'medium');
  assert.equal(run('modelConfidence(8).level'),'high');assert.equal(run('modelConfidence(8,20,30).level'),'medium');
 });
-module.exports={setup};

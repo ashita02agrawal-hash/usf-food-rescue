@@ -13,6 +13,11 @@ let META, CLUBS, LOCS, COLS;
 const CLUB_CATEGORIES = {ACM:"tech","HackJam Workshops":"tech","Robotics Club":"tech","Pre-Med Society":"professional","Finance Association":"professional","Entrepreneurship Club":"professional","Society of Women Engineers":"professional","Indian Student Association":"cultural","Black Student Union":"cultural","Vietnamese Student Association":"cultural","Village STEM LLC":"residential","Chess Club":"recreation","Campus Rec Outdoors":"recreation"};
 const categoryOf = r => r.category || META?.clubs?.find(c=>c.club===r.club)?.category || CLUB_CATEGORIES[r.club] || "";
 const beforeEvent = (a,b) => a.date<b.date || (a.date===b.date && +a.start_hour<+b.start_hour);
+function calendarFeatures(r){
+  const week=semesterWeek(r.date),semester=semesterName(r.date);
+  return {week,semester,day_of_week:dow(r.date),rain:r.rain===true||+r.rain===1?1:0,
+    exam_period:week===7||week===8||week>=(semester.startsWith('Fall')?12:14)?1:0};
+}
 function historyIndex(){ return {all:[],types:new Map(),categories:new Map(),categoryTypes:new Map(),clubs:new Map()}; }
 function addHistory(h,r){
   const push=a=>{a.push(r);a.rateSum=(a.rateSum||0)+r.checked_in/r.rsvps;};
@@ -43,7 +48,7 @@ function buildCols(){
     ...TYPES.map(t=>({k:"type:"+t, g:"type"})),
     ...DAYS.map(d=>({k:"day:"+d, g:"day"})),
     ...Object.keys(LOCS).map(l=>({k:"loc:"+l, g:"loc"})),
-    {k:"hour",g:"hour"},{k:"rsvps",g:"rsvps"},{k:"week",g:"week"},
+    {k:"hour",g:"hour"},{k:"rsvps",g:"rsvps"},{k:"week",g:"week"},{k:"rain",g:"rain"},{k:"exam_period",g:"exam_period"},
     {k:"club_rate",g:"club_rate"},{k:"club_type_rate",g:"club_type_rate"},{k:"prev_left",g:"prev_left"},{k:"n_events",g:"n_events"},
   ];
 }
@@ -58,7 +63,7 @@ function engineer(rows, mode="layered"){
   // Score simultaneous events as a batch before adding any of their outcomes.
   for(let i=0;i<sorted.length;){
     let j=i+1;while(j<sorted.length && !beforeEvent(sorted[i],sorted[j]))j++;
-    for(let k=i;k<j;k++)out.push({...sorted[k],...historyFeatures(h,sorted[k],mode)});
+    for(let k=i;k<j;k++)out.push({...sorted[k],...calendarFeatures(sorted[k]),...historyFeatures(h,sorted[k],mode)});
     for(let k=i;k<j;k++)addHistory(h,sorted[k]);i=j;
   }
   return out;
@@ -68,7 +73,7 @@ function vec(e){
   COLS.forEach((c,j)=>{
     const [g,v] = c.k.split(":");
     if(v!==undefined){ x[j] = (g==="club"&&e.club===v)||(g==="type"&&e.event_type===v)||(g==="day"&&e.day_of_week===v)||(g==="loc"&&e.location===v) ? 1 : 0; }
-    else x[j] = {hour:e.start_hour,rsvps:e.rsvps,week:e.week,club_rate:e.club_rate,club_type_rate:e.club_type_rate,prev_left:e.prev_left,n_events:e.n_events}[c.k];
+    else x[j] = {hour:e.start_hour,rsvps:e.rsvps,week:e.week,rain:e.rain,exam_period:e.exam_period,club_rate:e.club_rate,club_type_rate:e.club_type_rate,prev_left:e.prev_left,n_events:e.n_events}[c.k];
   });
   return x;
 }
@@ -137,7 +142,7 @@ function localLearnedRows(){
 function trainingRows(){ return [...META.events, ...localLearnedRows()]; }
 function fitFull(){
   const rows = engineer(trainingRows());
-  const X = rows.map(vec), y = rows.map(r=>r.checked_in/r.rsvps);
+  const X = rows.map(vec), y = rows.map(r=>clamp(r.checked_in/r.rsvps,.03,1.6));
   M.full = trainGBM(X,y); M.n = rows.length;
   // global importance = mean |contribution| in people, grouped
   const imp = {};
@@ -150,7 +155,7 @@ function fitOOF(){
   const size=Math.max(1,Math.ceil(rows.length/6));
   for(let start=size;start<rows.length;start+=size){
     const tr=rows.slice(0,start).filter(r=>beforeEvent(r,rows[start]));if(!tr.length)continue;
-    const m=trainGBM(tr.map(vec),tr.map(r=>r.checked_in/r.rsvps),{trees:140});
+    const m=trainGBM(tr.map(vec),tr.map(r=>clamp(r.checked_in/r.rsvps,.03,1.6)),{trees:140});
     rows.slice(start,start+size).forEach(r=>{const p=coldStartRate(explain(m,vec(r)).value,r)*r.rsvps,error=r.checked_in-p;
       M.oof[r.event_id]=p;errs.push(Math.abs(error));(M.clubResid[r.club]||(M.clubResid[r.club]=[])).push(error);
       M.residualPoints.push({club:r.club,date:r.date,start_hour:r.start_hour,error});});
@@ -161,8 +166,8 @@ function fitBacktest(){
   // Same split as model/train_eval.py: train before Fall 2026 week 9, test after.
   const rows = engineer(META.events);
   const isTest = r => r.semester==="Fall 2026" && r.week>=9;
-  const tr=rows.filter(r=>!isTest(r)), te=rows.filter(isTest);
-  const m=trainGBM(tr.map(vec), tr.map(r=>r.checked_in/r.rsvps));
+  const tr=rows.filter(r=>r.date<'2026-10-19'), te=rows.filter(isTest);
+  const m=trainGBM(tr.map(vec), tr.map(r=>clamp(r.checked_in/r.rsvps,.03,1.6)));
   const campus=mean(tr.map(r=>r.checked_in/r.rsvps));
   const points=te.map(r=>{
     const predicted=coldStartRate(explain(m,vec(r)).value,r)*r.rsvps;
@@ -187,8 +192,14 @@ function backtestHeadline(result=M.backtest){
 function predictEvent(ev){
   const prior = sortEvents(trainingRows()).filter(r=>r.date<ev.date || (r.date===ev.date && r.start_hour<ev.start_hour));
   const f = histFeatures(prior, ev.club, ev.event_type, ev.category);
-  const e = {...ev, ...f, week:semesterWeek(ev.date), day_of_week:dow(ev.date)};
-  const x = vec(e), ex = explain(M.full, x);
+  const e = {...ev, ...f,...calendarFeatures(ev)};
+  // Historical queries must also exclude future outcomes from the fitted trees.
+  let model=M.full;
+  if(!model||prior.length!==M.n){
+    const rows=engineer(prior);
+    model=rows.length?trainGBM(rows.map(vec),rows.map(r=>clamp(r.checked_in/r.rsvps,.03,1.6))):{base:.55,lr:.07,d:COLS.length,trees:[]};
+  }
+  const x = vec(e), ex = explain(model, x);
   const rate = coldStartRate(ex.value,e), people = rate*ev.rsvps;
   const resid = (M.residualPoints||[]).filter(r=>r.club===ev.club && beforeEvent(r,ev)).map(r=>r.error);
   const typical=resid.length>3?Math.sqrt(mean(resid.map(v=>v*v))):0;
@@ -213,6 +224,8 @@ function reasonLabel(g, e){
   switch(g){
     case "cold_start": return "Similar-club prior while history is limited";
     case "rate_limit": return "Show-rate safety limit";
+    case "rain": return e.rain?"Rain expected":"No rain expected";
+    case "exam_period": return e.exam_period?"Exam period":"Outside exam period";
     case "club": return `${e.club}'s own pattern`;
     case "type": return `Event type: ${e.event_type.toLowerCase()}`;
     case "day": return `${DAY_NAMES[e.day_of_week]}`;
@@ -227,7 +240,7 @@ function reasonLabel(g, e){
   }
   return g;
 }
-const GROUP_NAMES = {club:"Which club",type:"Event type",day:"Day of week",loc:"Location",hour:"Start time",rsvps:"RSVP count",week:"Point in semester",club_rate:"Club's recent show rate",club_type_rate:"Club + event type history",prev_left:"Last event's leftovers",n_events:"Club history length"};
+const GROUP_NAMES = {club:"Which club",type:"Event type",day:"Day of week",loc:"Location",hour:"Start time",rsvps:"RSVP count",week:"Point in semester",rain:"Rain expected",exam_period:"Exam period",club_rate:"Club's recent show rate",club_type_rate:"Club + event type history",prev_left:"Last event's leftovers",n_events:"Club history length",cold_start:"Similar-club prior",rate_limit:"Show-rate safety limit"};
 
 // CSV backend only. No DOM, relay calls, or dependencies.
 function csvRecords(text){
@@ -300,6 +313,7 @@ function parseClubCSV(text,club,category='',options={}){
       ...optional,day_of_week:dow(date),week:semesterWeek(date),semester:semesterName(date),
       leftover_pct:optional.servings_ordered>0&&optional.servings_left!==undefined?100*optional.servings_left/optional.servings_ordered:null,
       rain:Number(v.rain||0),is_sample:0};
+    Object.assign(event,calendarFeatures(event));
     if(seen.has(key(event))){fail(row,'Duplicate event for this club, date and hour');continue;}
     seen.add(key(event));
     // Deterministic unique ids make parsing side-effect free and repeatable.
@@ -312,8 +326,11 @@ function parseClubCSV(text,club,category='',options={}){
 function importClubCSV(text,club,category='',options={}){
   const result=parseClubCSV(text,club,category,{...options,existingRows:trainingRows()});
   if(result.accepted.length){
+    const combined=[...state.learned.privateUploads,...result.accepted];
+    // Fail before mutating memory if the browser cannot persist the upload.
+    try{localStorage.setItem(LEARNED_STORAGE_KEY,JSON.stringify(combined));}
+    catch(error){throw new Error('Could not save club history on this device. No rows were added.');}
     state.learned.privateUploads.push(...result.accepted);
-    store.set(LEARNED_STORAGE_KEY,state.learned.privateUploads);
     fitFull();M.oof={};M.clubResid={};M.residualPoints=[];M.mae=null;
   }
   return {...result,added:result.accepted.length,skipped:result.problems.length,trainingSize:trainingRows().length,
