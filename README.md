@@ -1,4 +1,4 @@
-# usf-food-rescue (Platewise)
+# usf-food-rescue (Bulls Bites)
 
 > Current UI: event planning uses manually entered serving counts; prediction panels and model insights have been removed from both roles. The student prediction feature has been deleted. The club model implementation in `web/js/model.js`, the `model/` scripts, and training data are retained for programmatic use, and reported events still update the model. This project has no separate prediction server; the retained JavaScript engine runs locally. The model explanation and original demo walkthrough below describe the earlier prediction UI.
 
@@ -6,7 +6,7 @@ A platform that predicts food demand and helps rescue surplus food from events a
 
 HackJam'26 · USF Tampa · Off Grid track
 
-Clubs and LLCs order food for everyone who RSVPs, a fraction show up, and the rest gets thrown out. Platewise fixes both ends:
+Clubs and LLCs order food for everyone who RSVPs, a fraction show up, and the rest gets thrown out. Bulls Bites fixes both ends:
 
 1. **Predict.** Our own model (gradient-boosted trees, not an LLM) learns each club's real turnout from its RSVP and check-in history and recommends how much food to order.
 2. **Rescue.** Whatever is still left over goes out as a "Rescue surplus" to students nearby: a short hold, a 15-minute pickup window, and a club "Picked up" button.
@@ -120,7 +120,7 @@ Sample-data results (train before Fall 2026 week 9, test after):
 |---|---|---|
 | Order for every RSVP (today) | 1161 | 27.2 |
 | Campus-wide average show rate | 409 | 10.2 |
-| **Platewise model** | **234** | **4.1** |
+| **Bulls Bites model** | **234** | **4.1** |
 
 About **80% less food wasted**. Reproduce with `pip install scikit-learn pandas` then `python3 model/train_eval.py`.
 

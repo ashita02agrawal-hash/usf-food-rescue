@@ -173,7 +173,7 @@ details.demo summary{cursor:pointer;color:var(--muted);font-weight:600}
 /* ---------- shared USF look (club console + student app) ---------- */
 .top{box-shadow:0 1px 0 var(--line)}
 .top .brand{color:var(--accent)}
-.top-logo{height:28px;width:auto;flex:none}
+.top-logo{height:30px;width:30px;border-radius:8px;flex:none}
 .tag{background:var(--gold-soft);color:var(--gold-ink)}
 .card,.tile{border-radius:var(--r)}
 .btn{border-radius:999px;transition:background-color .15s ease,filter .15s ease}

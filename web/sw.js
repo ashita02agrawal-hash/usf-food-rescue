@@ -4,9 +4,9 @@
  * (the cache is only a fallback when you're offline).
  * Bump VERSION if you add a new file that must work offline.
  */
-const VERSION = "platewise-v5";
+const VERSION = "bullsbites-v6";
 const SHELL = [
-  "./", "index.html", "manifest.webmanifest", "css/styles.css", "css/student-bb.css", "img/usf-logo.png",
+  "./", "index.html", "manifest.webmanifest", "css/styles.css", "css/student-bb.css", "img/usf-logo.png", "img/bb-logo.svg",
   "js/core.js", "js/model.js", "js/club.js", "js/student.js", "js/sync.js", "js/app.js",
   "data/sample_events.json", "icons/icon-192.png", "icons/icon-512.png",
 ];

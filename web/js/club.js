@@ -52,7 +52,7 @@ function renderClubDynamic(){
         <div class="ev">
           ${dateBox(ev.date)}
           <div style="min-width:0"><div style="font-weight:600">${esc(ev.event_type)} · ${hr12(ev.start_hour)} · ${esc(LOCS[ev.location]?.name||ev.location)}</div>
-            <div class="small muted">${ev.rsvps} RSVPs · Platewise expects <b class="num" style="color:var(--pred)">${ev.pred}</b> · order ${ev.recServings} servings of ${esc(ev.food_item)}</div></div>
+            <div class="small muted">${ev.rsvps} RSVPs · Bulls Bites expects <b class="num" style="color:var(--pred)">${ev.pred}</b> · order ${ev.recServings} servings of ${esc(ev.food_item)}</div></div>
           <div class="act"><button class="btn primary sm" data-report="${ev.id}">Report results</button></div>
         </div>`).join("") : `<p class="muted">No upcoming events. Plan one to get a food recommendation.</p>`}</div>
     </div>
@@ -238,7 +238,7 @@ function renderInsights(){
         <div><h3>Predicted vs. actual turnout</h3><div class="small muted">Predictions are out-of-sample: the model never saw that event when predicting it.</div></div>
         <select id="insSem" aria-label="Semester" style="width:auto">${sems.map(x=>`<option ${x===sem?"selected":""}>${esc(x)}</option>`).join("")}</select>
       </div>
-      <div class="legend"><span><i style="border-color:var(--muted);border-top-style:dashed"></i>RSVPs (what clubs order for)</span><span><i style="border-color:var(--accent)"></i>Actually checked in</span><span><i style="border-color:var(--pred)"></i>Platewise prediction</span></div>
+      <div class="legend"><span><i style="border-color:var(--muted);border-top-style:dashed"></i>RSVPs (what clubs order for)</span><span><i style="border-color:var(--accent)"></i>Actually checked in</span><span><i style="border-color:var(--pred)"></i>Bulls Bites prediction</span></div>
       <div class="chart" id="chart"></div>
       <div class="small muted" id="chartNote"></div>
     </div>
