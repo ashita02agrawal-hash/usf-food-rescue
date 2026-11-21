@@ -10,10 +10,10 @@ function app(){
   return {run,node};
 }
 test('club engine trains, predicts and learns without prediction UI',()=>{
-  const a=app();assert.equal(a.run('M.n'),249);
+  const a=app();assert.equal(a.run('M.n'),a.run('META.events.length'));
   const p=a.run('predictEvent({club:"ACM",event_type:"General meeting",date:"2026-11-25",start_hour:18,location:"ENB",rsvps:73,food_item:"bagels & cookies"})');
   assert.ok(Number.isFinite(p.people)&&p.servings>0);
-  a.run('state.learned.push({...META.events[0],event_id:"new"});fitFull()');assert.equal(a.run('M.n'),250);
+  a.run('state.learned.push({...META.events[0],event_id:"new"});fitFull()');assert.equal(a.run('M.n'),a.run('META.events.length')+1);
 });
 test('club renders manual event planning and safely restores an old insights tab',()=>{
   const a=app();a.run('ui.clubTab="insights";renderClub()');assert.equal(a.run('ui.clubTab'),'events');
@@ -36,7 +36,7 @@ test('result reporting preserves model learning and rescue publication',()=>{
   assert.doesNotMatch(a.node('#sheetRoot').innerHTML,/expected|retrain|predicted/i);
   for(const [id,v] of Object.entries({rIn:'20',rLeft:'8',rOut:'12:00',rWin:'20',rFood:'pizza',rCaterer:'Cafe',rSpot:'Lobby',rDuty:'Sam'}))a.node('#'+id).value=v;
   a.node('#rRescue').checked=true;a.run('submitReport(state.planned[0])');
-  assert.equal(a.run('state.learned.length'),1);assert.equal(a.run('M.n'),250);assert.equal(a.run('state.posts.at(-1).total'),8);
+  assert.equal(a.run('state.learned.length'),1);assert.equal(a.run('M.n'),a.run('META.events.length')+1);assert.equal(a.run('state.posts.at(-1).total'),8);
 });
 test('retired student modules are absent and all offline shell files exist',()=>{
   for(const f of ['web/js/claim_sim.js','web/js/student_food.js','web/data/sample_events.csv'])assert.equal(fs.existsSync(f),false);
