@@ -1,4 +1,4 @@
-"""Bundle web/ into one self-contained HTML page for sharing (dist/platewise.html).
+"""Bundle web/ into one self-contained HTML page for sharing (dist/bullsbites.html).
 
 The app is split into several files so three people can work without stepping
 on each other. Some hosts (like a Claude Artifact) want a single page, so this
@@ -26,9 +26,9 @@ def main() -> None:
         html,
     )
     (DIST / "data").mkdir(parents=True, exist_ok=True)
-    (DIST / "platewise.html").write_text(html)
+    (DIST / "bullsbites.html").write_text(html)
     shutil.copy(WEB / "data" / "sample_events.json", DIST / "data" / "sample_events.json")
-    print("wrote dist/platewise.html")
+    print("wrote dist/bullsbites.html")
 
 
 if __name__ == "__main__":

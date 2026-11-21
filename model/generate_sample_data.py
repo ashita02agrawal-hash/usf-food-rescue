@@ -1,4 +1,4 @@
-"""Generate SAMPLE event history for Platewise.
+"""Generate SAMPLE event history for Bulls Bites.
 
 No real USF data exists yet, so this script builds a realistic, clearly labeled
 sample dataset that follows patterns the team has seen on campus:

@@ -1,4 +1,4 @@
-"""Offline training + evaluation for the Platewise turnout model (SAMPLE DATA).
+"""Offline training + evaluation for the Bulls Bites turnout model (SAMPLE DATA).
 
 The web app trains the same kind of model (gradient-boosted regression trees on
 show rate) in the browser so it can retrain live when a club reports results.
@@ -125,7 +125,7 @@ def evaluate(mode="layered",df=None):
     points["ordered_campus"]=tr.show_rate.mean()*te.rsvps*BUFFER
     points["ordered_model"]=pred*BUFFER
     strategies=[]
-    for name,col in [("Order for every RSVP","ordered_rsvp"),("Campus average","ordered_campus"),("Platewise","ordered_model")]:
+    for name,col in [("Order for every RSVP","ordered_rsvp"),("Campus average","ordered_campus"),("Bulls Bites","ordered_model")]:
         order=points[col]; actual=points.actual
         strategies.append(dict(strategy=name,servings_ordered=float(order.sum()),servings_wasted=float(np.maximum(0,order-actual).sum()),
           events_ran_short=int((actual-order>.1*actual).sum()),mae_people=float(np.abs(order/(1 if col=="ordered_rsvp" else BUFFER)-actual).mean())))
@@ -135,7 +135,7 @@ def evaluate(mode="layered",df=None):
 
 def headline(r):
     pct=int(np.floor(r["cut"]*100/5)*5)
-    return f"On held-out sample events, Platewise cut food waste by about {pct}% compared with ordering for every RSVP (average error {r['mae']:.1f} people)."
+    return f"On held-out sample events, Bulls Bites cut food waste by about {pct}% compared with ordering for every RSVP (average error {r['mae']:.1f} people)."
 
 
 def main():

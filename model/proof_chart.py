@@ -32,7 +32,7 @@ def main():
     fig.savefig(out/'predicted_vs_actual.png',dpi=160);plt.close(fig)
     fig,ax=canvas('Less food left over on held-out events')
     waste=[s['servings_wasted'] for s in r['strategies']]
-    bars=ax.bar(['Order for every RSVP','Campus average','Platewise'],waste,color=['#94a3b8','#64748b','#059669'],width=.58)
+    bars=ax.bar(['Order for every RSVP','Campus average','Bulls Bites'],waste,color=['#94a3b8','#64748b','#059669'],width=.58)
     ax.set_ylabel('Servings wasted');ax.set_ylim(0,max(waste)*1.22)
     for b,value in zip(bars,waste):ax.text(b.get_x()+b.get_width()/2,value+max(waste)*.025,f'{value:,.0f}',ha='center',fontsize=24,weight='bold')
     fig.text(.10,.85,f"{r['cut']*100:.1f}% less waste vs. ordering for every RSVP · 15% safety buffer",fontsize=20,color='#475569')
