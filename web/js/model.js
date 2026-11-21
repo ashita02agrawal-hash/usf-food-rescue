@@ -123,7 +123,18 @@ function coldStartRate(raw,e){
 
 // Model state
 const M = { full:null, n:0, mae:null, oof:{}, backtest:null, importance:null, clubResid:{} };
-function trainingRows(){ return [...META.events, ...state.learned]; }
+const LEARNED_STORAGE_KEY='pw_model_learned';
+function localLearnedRows(){
+  // The core broadcasts state.learned's array entries to other tabs. Keep CSV
+  // uploads in its non-enumerable private sublist, never in those shared entries.
+  // trainingRows merges both lists; existing Report results callers keep working.
+  if(!state.learned)state.learned=[];
+  if(!Object.hasOwn(state.learned,'privateUploads')){
+    Object.defineProperty(state.learned,'privateUploads',{value:store.get(LEARNED_STORAGE_KEY)||[],enumerable:false});
+  }
+  return [...state.learned,...state.learned.privateUploads];
+}
+function trainingRows(){ return [...META.events, ...localLearnedRows()]; }
 function fitFull(){
   const rows = engineer(trainingRows());
   const X = rows.map(vec), y = rows.map(r=>r.checked_in/r.rsvps);
@@ -217,3 +228,94 @@ function reasonLabel(g, e){
   return g;
 }
 const GROUP_NAMES = {club:"Which club",type:"Event type",day:"Day of week",loc:"Location",hour:"Start time",rsvps:"RSVP count",week:"Point in semester",club_rate:"Club's recent show rate",club_type_rate:"Club + event type history",prev_left:"Last event's leftovers",n_events:"Club history length"};
+
+// CSV backend only. No DOM, relay calls, or dependencies.
+function csvRecords(text){
+  text=String(text).replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n');
+  const records=[];let fields=[],field='',quoted=false,closed=false,line=1,start=1,error='';
+  const endField=()=>{fields.push(field.trim());field='';closed=false;};
+  const endRow=()=>{endField();if(fields.some(v=>v!=='')||error)records.push({row:start,fields,error});fields=[];error='';start=line+1;};
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(quoted){if(c==='"'){if(text[i+1]==='"'){field+='"';i++;}else{quoted=false;closed=true;}}else{field+=c;if(c==='\n')line++;}continue;}
+    if(c==='"'&&!field.trim()&&!closed){field='';quoted=true;}
+    else if(c===',')endField();
+    else if(c==='\n'){endRow();line++;}
+    else{if(closed&&c.trim())error='Unexpected text after closing quote';field+=c;}
+  }
+  if(quoted)error='Unclosed quoted field';
+  if(field||fields.length||error)endRow();
+  return records;
+}
+function uploadDate(value){
+  let m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(value),y,month,day;
+  if(m)[,y,month,day]=m;
+  else{m=/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(value);if(!m)return null;[,month,day,y]=m;}
+  const date=new Date(+y,+month-1,+day,12);
+  return date.getFullYear()===+y&&date.getMonth()===+month-1&&date.getDate()===+day?`${y}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`:null;
+}
+function uploadHour(value){
+  const m=/^(\d{1,2})(?::([0-5]\d))?\s*(AM|PM)?$/i.exec(value);if(!m)return null;
+  let hour=+m[1];if(m[3]){if(hour<1||hour>12)return null;hour=hour%12+(m[3].toUpperCase()==='PM'?12:0);}
+  if(hour>23)return null;return hour+(+(m[2]||0))/60;
+}
+function parseClubCSV(text,club,category='',options={}){
+  const accepted=[],problems=[],records=csvRecords(text);
+  const fail=(row,reason)=>problems.push({row,reason});
+  const header=records.shift();if(!header){fail(1,'CSV is empty');return {accepted,problems};}
+  const names=header.fields.map(s=>s.toLowerCase().replace(/[\s_]/g,''));
+  const required=['date','eventtype','location','starthour','rsvps','checkedin'];
+  const missing=required.filter(k=>!names.includes(k));
+  if(header.error||missing.length||new Set(names).size!==names.length||!String(club).trim()){
+    fail(header.row,header.error||(missing.length?'Missing required columns: '+missing.join(', '):!String(club).trim()?'Club name is required':'Duplicate column names'));
+    return {accepted,problems};
+  }
+  const today=options.today||(()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;})();
+  const existing=options.existingRows||[],key=r=>JSON.stringify([r.club,r.date,+r.start_hour]);
+  const seen=new Set(existing.map(key)),ids=new Set(existing.map(r=>r.event_id));
+  const locations=options.locations||Object.keys(LOCS),types=options.types||TYPES;
+  for(const [index,record] of records.entries()){
+    const {row,fields,error}=record;
+    if(index>=2000){fail(row,'Import limit is 2,000 data rows');continue;}
+    if(error||fields.length!==names.length){fail(row,error||'Column count does not match the header');continue;}
+    const v=Object.fromEntries(names.map((k,i)=>[k,fields[i]])),issues=[];
+    const date=uploadDate(v.date),start_hour=uploadHour(v.starthour),rsvps=Number(v.rsvps),checked_in=Number(v.checkedin);
+    const location=v.location.toUpperCase(),event_type=types.find(t=>t.toLowerCase()===v.eventtype.toLowerCase());
+    if(!date)issues.push('Invalid date; use YYYY-MM-DD or M/D/YYYY');else if(date>today)issues.push('Date is in the future');
+    if(start_hour===null)issues.push('Invalid start hour; use 18, 18:00 or 6:00 PM');
+    if(!locations.includes(location))issues.push('Unknown location; valid codes: '+locations.join(', '));
+    if(!event_type)issues.push('Unknown event type; valid types: '+types.join(', '));
+    if(!v.rsvps||!Number.isFinite(rsvps)||rsvps<=0)issues.push('RSVPs must be greater than 0');
+    if(!v.checkedin||!Number.isFinite(checked_in)||checked_in<0)issues.push('Check-ins must be 0 or greater');
+    if(Number.isFinite(rsvps)&&checked_in>3*rsvps)issues.push('Check-ins exceed 3 times RSVPs');
+    const optional={};
+    for(const [column,field] of [['servingsordered','servings_ordered'],['servingsleft','servings_left']]){
+      if(v[column]){const n=Number(v[column]);if(!Number.isFinite(n)||n<0)issues.push(field+' must be 0 or greater');else optional[field]=n;}
+    }
+    if(optional.servings_left>optional.servings_ordered)issues.push('Servings left cannot exceed servings ordered');
+    if(v.rain&&!['0','1'].includes(v.rain))issues.push('Rain must be 0 or 1');
+    if(v.examperiod&&!['0','1'].includes(v.examperiod))issues.push('Exam period must be 0 or 1');
+    if(issues.length){fail(row,issues.join('; '));continue;}
+    const event={club:String(club).trim(),category,event_type,date,start_hour,location,rsvps,checked_in,
+      ...optional,day_of_week:dow(date),week:semesterWeek(date),semester:semesterName(date),
+      leftover_pct:optional.servings_ordered>0&&optional.servings_left!==undefined?100*optional.servings_left/optional.servings_ordered:null,
+      rain:Number(v.rain||0),is_sample:0};
+    if(seen.has(key(event))){fail(row,'Duplicate event for this club, date and hour');continue;}
+    seen.add(key(event));
+    // Deterministic unique ids make parsing side-effect free and repeatable.
+    const base='U:'+encodeURIComponent(event.club)+':'+date+':'+start_hour;let id=base,n=1;
+    while(ids.has(id))id=base+':'+n++;ids.add(id);event.event_id=id;
+    accepted.push(event);
+  }
+  return {accepted,problems};
+}
+function importClubCSV(text,club,category='',options={}){
+  const result=parseClubCSV(text,club,category,{...options,existingRows:trainingRows()});
+  if(result.accepted.length){
+    state.learned.privateUploads.push(...result.accepted);
+    store.set(LEARNED_STORAGE_KEY,state.learned.privateUploads);
+    fitFull();M.oof={};M.clubResid={};M.residualPoints=[];M.mae=null;
+  }
+  return {...result,added:result.accepted.length,skipped:result.problems.length,trainingSize:trainingRows().length,
+    confidence:modelConfidence(trainingRows().filter(r=>r.club===club).length)};
+}
