@@ -355,3 +355,52 @@
   border-radius: 16px;
   border: 1px solid var(--border-light);
 }
+
+.usf-top-logo {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.bb-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bb-club-logo {
+  display: block;
+  margin: 0 auto;
+  max-height: 120px;
+  max-width: 210px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.bb-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.bb-title-row h3 {
+  margin: 0;
+}
+
+.bb-meta-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bb-meta-badges .bb-live,
+.bb-meta-badges .bb-count {
+  position: static;
+  white-space: nowrap;
+}

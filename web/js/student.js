@@ -3,6 +3,21 @@
 
 let bbSplash = true;
 const BB_LB_PER_SERVING = 0.5;
+const BB_CLUB_LOGOS = {
+  "ACM": "icons/acm.jpg",
+  "Finance Association": "icons/finance.png",
+  "Robotics Club": "icons/robotics.jpg",
+  "Vietnamese Student Assocation": "icons/vsa.jpg",
+  "Entrepreneurship Club": "icons/entrepreneurship.png",
+  "Chess Club": "icons/chess.jpg",
+  "Campus Rec Outdoors": "icons/campusrec.png",
+};
+
+function bbClubLogo(club) {
+  const src = BB_CLUB_LOGOS[club];
+  if (!src) return "";
+  return `<img src="${esc(src)}" alt="${esc(club)} logo" class="bb-club-logo" onerror="this.remove()">`;
+}
 const bbPicked = who => state.claims.filter(c => c.status === "picked" && (!who || c.student === who)).reduce((s, c) => s + c.portions, 0);
 const bbGo = (sv, extra) => { ui.sv = sv; Object.assign(ui, extra || {}); store.set("pw_ui", ui); renderStudent(); };
 
@@ -54,12 +69,18 @@ function bbHome({st, near, avoid, myActive, live, allCampusLive}){
 }
 
 function bbCard({p, d, left}){
-  return `<article class="bb-card"><div class="bb-img"><span class="bb-live">● LIVE</span><span class="bb-count">${left} serving${left === 1 ? "" : "s"}</span></div>
+  return `<article class="bb-card"><div class="bb-img">${bbClubLogo(p.club)}</div>
     <div class="bb-cbody">
-      <h3>${esc(p.food)}</h3>
+      <div class="bb-title-row">
+        <h3>${esc(p.food)}</h3>
+        <div class="bb-meta-badges">
+          <span class="bb-live">● LIVE</span>
+          <span class="bb-count">${left} serving${left === 1 ? "" : "s"}</span>
+        </div>
+      </div>
       <p><b>Building:</b> ${esc(p.spot)} (${esc(p.location)})</p>
       <p><b>Pickup Deadline:</b> <b class="num" data-until="${p.windowEnd}">${mmss(p.windowEnd - now())}</b> left</p>
-      <p style="font-size:0.8rem; color:var(--forest); font-weight:600; margin-top:4px;"><b>Food Type:</b> ${esc(p.eventName || "Club Event Leftovers")} (${esc(p.club)})</p>
+      <p style="font-size:0.8rem; color:var(--forest); font-weight:600; margin-top:4px;"><b>Club:</b> ${esc(p.eventName || "Club Event Leftovers")} (${esc(p.club)})</p>
       <button class="bb-btn" data-open="${p.id}">Reserve & Claim Food →</button>
     </div></article>`;
 }
@@ -77,7 +98,7 @@ function bbDetail(x){
   const can = !st.suspended && !myActive && left > 0;
   return `<div style="margin-bottom:12px;"><button class="bb-btn ghost" data-go="home" style="width:auto; padding:6px 14px;">← Back</button></div>
     <div class="bb-card">
-      <div class="bb-img"><span class="bb-live">● LIVE</span><span class="bb-count">${left} serving${left === 1 ? "" : "s"}</span></div>
+      <div class="bb-img"><span class="bb-live">● LIVE</span>${bbClubLogo(p.club)}<span class="bb-count">${left} serving${left === 1 ? "" : "s"}</span></div>
       <div class="bb-cbody">
         <h1>${esc(p.food)}</h1>
         <p><b>Location:</b> ${esc(p.spot)} (${esc(p.location)})</p>
