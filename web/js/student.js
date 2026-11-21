@@ -3,11 +3,12 @@
  * Student app: live feed, claim hold, pickup timer, no-show policy, alerts.
  */
 "use strict";
+function pickupCloseAt(p){ return Math.min(p.windowEnd,p.outSince+2*3600000); }
 // ---------- student ----------
 function renderStudent(){
   const st=state.students[ME]; const near=ui.near||"LIB";
   const myActive = state.claims.find(c=>c.student===ME && ["held","onway"].includes(c.status));
-  const live = state.posts.filter(p=>p.status==="live").map(p=>({p, d:haversine(LOCS[near],LOCS[p.location]), left:portionsLeft(p)})).sort((a,b)=>a.d-b.d);
+  const live = state.posts.filter(p=>p.status==="live").map(p=>({p, d:haversine(LOCS[ui.near||"LIB"],LOCS[p.location]), left:portionsLeft(p)})).sort((a,b)=>a.d-b.d);
   const recent = state.posts.filter(p=>p.status==="closed").slice(-2).reverse();
   const avoid = ui.avoid||[];
   // notifications for posts not seen before
@@ -40,14 +41,15 @@ function renderStudent(){
   $("#alertsBtn").onclick=async()=>{ ui.alerts=true; store.set("pw_ui",ui); try{ if("Notification" in window && Notification.permission==="default") await Notification.requestPermission(); }catch(e){} renderStudent(); toast("Alerts on","You'll get a ping when food is posted nearby."); };
   $("#avoid").onclick=e=>{ const b=e.target.closest("[data-av]"); if(!b) return; const a=b.dataset.av; ui.avoid = avoid.includes(a)? avoid.filter(x=>x!==a) : [...avoid,a]; store.set("pw_ui",ui); renderStudent(); };
   $("#studentPane").querySelectorAll("[data-claim]").forEach(b=>b.onclick=()=>claim(b.dataset.claim, +b.dataset.n));
-  $("#studentPane").querySelectorAll("[data-confirm]").forEach(b=>b.onclick=()=>{ const c=state.claims.find(c=>c.id===b.dataset.confirm); const p=state.posts.find(p=>p.id===c.postId); c.status="onway"; c.pickupBy=Math.min(now()+POLICY.pickupMin*60000, p.windowEnd); save(); onStateChange(); });
+  $("#studentPane").querySelectorAll("[data-confirm]").forEach(b=>b.onclick=()=>{ const c=state.claims.find(c=>c.id===b.dataset.confirm); const p=c&&state.posts.find(p=>p.id===c.postId); if(!p || c.status!=="held" || c.holdUntil<now() || pickupCloseAt(p)<=now()) return; c.status="onway"; c.pickupBy=Math.min(now()+POLICY.pickupMin*60000, pickupCloseAt(p)); save(); onStateChange(); });
   $("#studentPane").querySelectorAll("[data-cancel]").forEach(b=>b.onclick=()=>cancelClaim(b.dataset.cancel));
 }
 function portionsLeftClosed(p){ return p.total - state.claims.filter(c=>c.postId===p.id && c.status==="picked").reduce((s,c)=>s+c.portions,0); }
 function walk(d){ const m=Math.round(d/10)*10, min=Math.max(1,Math.round(d/80)); return `${m<1000?m+" m":(d/1609).toFixed(1)+" mi"} · ${min} min walk`; }
 function postCard({p,d,left}, myActive, st, avoid, isNew){
   const flagged = p.allergens.filter(a=>avoid.includes(a));
-  const can = !st.suspended && !myActive && left>0 && p.windowEnd-now()>3*60000;
+  const closeAt=pickupCloseAt(p);
+  const can = !st.suspended && !myActive && left>0 && closeAt-now()>3*60000;
   return `<article class="post ${isNew?"new":""}">
     <div class="post-top"><div style="min-width:0"><div class="row" style="gap:6px">${isNew?'<span class="pill live"><span class="dot"></span>New</span>':""}<span class="small muted">${esc(p.club)} · ${esc(p.eventName)}</span></div><h3 style="margin-top:4px">${esc(p.food)}</h3></div>
       <div class="left"><b class="num">${left}</b><span class="small muted">of ${p.total} left</span></div></div>
@@ -57,10 +59,10 @@ function postCard({p,d,left}, myActive, st, avoid, isNew){
       <div><dt>Food out since</dt><dd>${fmtTime(p.outSince)} <span class="muted">· safe until ${fmtTime(p.outSince+2*3600000)}</span></dd></div>
       <div><dt>From</dt><dd>${esc(p.caterer||"Not listed")}</dd></div>
       <div><dt>Allergens</dt><dd class="chips">${p.allergens.length?p.allergens.map(a=>`<span class="chip ${flagged.includes(a)?"warn":""}">${esc(a)}</span>`).join(""):'<span class="muted">None listed</span>'}</dd></div>
-      <div><dt>Closes in</dt><dd><b class="num" data-until="${p.windowEnd}">${mmss(p.windowEnd-now())}</b> <span class="muted">· ${esc(p.onDuty)} is handing out</span></dd></div>
+      <div><dt>Closes in</dt><dd><b class="num" data-until="${closeAt}">${mmss(closeAt-now())}</b> <span class="muted">· ${esc(p.onDuty)} is handing out</span></dd></div>
     </dl>
     <div class="row">${[1,2].filter(n=>n<=POLICY.maxPortions).map(n=>`<button class="btn ${n===1?"primary":""}" data-claim="${p.id}" data-n="${n}" ${can&&left>=n?"":"disabled"}>Claim ${n}</button>`).join("")}
-      <span class="small muted">${st.suspended?"Claiming paused":myActive?"Finish your current pickup first":left<=0?"All claimed":p.windowEnd-now()<=3*60000?"Closing soon":`Held for ${POLICY.holdSec}s, then ${POLICY.pickupMin} min to pick up`}</span></div>
+      <span class="small muted">${st.suspended?"Claiming paused":myActive?"Finish your current pickup first":left<=0?"All claimed":closeAt-now()<=3*60000?"Closing soon":`Held for ${POLICY.holdSec}s, then ${POLICY.pickupMin} min to pick up`}</span></div>
   </article>`;
 }
 function myClaimBox(c){
@@ -73,8 +75,11 @@ function myClaimBox(c){
 }
 function claim(postId, n){
   const st=state.students[ME], p=state.posts.find(p=>p.id===postId);
-  if(!p || st.suspended || portionsLeft(p)<n) return;
-  const t=now(); state.claims.push({id:uid("c"), postId, student:ME, portions:n, createdAt:t, holdUntil:t+POLICY.holdSec*1000, status:"held"});
+  if(!p || p.status!=="live" || st.suspended || !Number.isInteger(n) || n<1 || n>POLICY.maxPortions ||
+    portionsLeft(p)<n || pickupCloseAt(p)-now()<=3*60000 ||
+    state.claims.some(c=>c.student===ME && ["held","onway"].includes(c.status))) return;
+  const t=now(), c={id:uid("c"), postId, student:ME, portions:n, createdAt:t, holdUntil:t+POLICY.holdSec*1000, status:"held"};
+  state.claims.push(c);
   save(); onStateChange();
 }
 function cancelClaim(id){
@@ -85,10 +90,11 @@ function cancelClaim(id){
 }
 function notify(p, avoid){
   if(p.allergens.some(a=>avoid.includes(a))) return;
-  const d = haversine(LOCS[ui.near||"LIB"], LOCS[p.location]);
-  toast(`Rescue surplus: ${p.food}`, `${p.total} portions at ${LOCS[p.location].name} · ${walk(d)}`, "rescue");
+  const d = haversine(LOCS[ui.near||"LIB"],LOCS[p.location]);
+  const body=`${portionsLeft(p)} portions at ${LOCS[p.location].name} · ${walk(d)}`;
+  toast(`Rescue surplus: ${p.food}`, body, "rescue");
   try{ if(ui.alerts && "Notification" in window && Notification.permission==="granted"){
-    const title="Platewise: free "+p.food, opts={body:`${p.total} portions · ${p.spot}`, icon:"icons/icon-192.png", tag:p.id};
+    const title="Platewise: free "+p.food, opts={body, icon:"icons/icon-192.png", tag:p.id};
     // Phones only allow notifications through the service worker
     if(navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.ready.then(r=>r.showNotification(title,opts)).catch(()=>{});
     else new Notification(title, opts); } }catch(e){}

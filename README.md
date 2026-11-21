@@ -1,5 +1,7 @@
 # usf-food-rescue (Platewise)
 
+> Current UI: event planning uses manually entered serving counts; prediction panels and model insights have been removed from both roles. The student prediction feature has been deleted. The club model implementation in `web/js/model.js`, the `model/` scripts, and training data are retained for programmatic use, and reported events still update the model. This project has no separate prediction server; the retained JavaScript engine runs locally. The model explanation and original demo walkthrough below describe the earlier prediction UI.
+
 A platform that predicts food demand and helps rescue surplus food from events across the USF community.
 
 HackJam'26 · USF Tampa · Off Grid track

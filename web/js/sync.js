@@ -34,8 +34,10 @@ function relayConnect(code){
       try {
         const msg = JSON.parse(ev.data);
         if (msg.event && msg.event !== "message") return;
+        const data = JSON.parse(msg.message);
+        if (!data || !data.updatedAt || !Array.isArray(data.posts) || !Array.isArray(data.claims)) return;
         Relay.gotRemote = true;
-        applySlim(JSON.parse(msg.message), Relay.joining);  // a phone that is joining adopts the room's state
+        applySlim(data, Relay.joining);  // a phone that is joining adopts the room's state
       } catch (e) { /* ignore anything that isn't our state */ }
     };
     es.onerror = () => relaySetStatus(es.readyState === 2 ? "error" : "connecting");
