@@ -62,6 +62,8 @@ async function boot(){
   if(!ui.club && !ui.student && innerWidth>=1060){ /* landing */ }
   // train on full data first (fast) so the planner works immediately
   fitFull(); render(); setModelStatus();
+  if(typeof relayBoot==="function") relayBoot();
+  if("serviceWorker" in navigator && location.protocol!=="file:") navigator.serviceWorker.register("sw.js").catch(()=>{});
   setTimeout(()=>{ fitOOF(); fitBacktest(); setModelStatus(); if((ui.clubTab)==="insights" && !$("#clubPane").hidden) renderInsights(); }, 50);
   try{ bc=new BroadcastChannel("platewise"); bc.onmessage=e=>applyRemote(e.data); }catch(e){}
   addEventListener("storage", e=>{ if(e.key==="pw_state") applyRemote(store.get("pw_state")); });

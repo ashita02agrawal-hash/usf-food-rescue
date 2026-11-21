@@ -20,7 +20,22 @@ You only need Python 3. From the repo folder:
 python3 -m http.server 8000 --directory web
 ```
 
-Open http://localhost:8000 and click **Start demo**. No installs, no build step. Edit a file, then refresh the browser.
+Open http://localhost:8000 and click **Start demo**. No installs, no build step. Edit a file, then refresh the browser (the app always fetches the newest code when it's online; if something looks stale, hard-refresh with Cmd/Ctrl+Shift+R).
+
+## Use it as a phone app
+
+Live app: **https://ashita02agrawal-hash.github.io/usf-food-rescue/** (redeploys on every merge to `main`).
+
+- **iPhone (Safari):** open the link, tap Share, then **Add to Home Screen**.
+- **Android (Chrome):** open the link, tap the ⋮ menu, then **Install app** (or **Add to Home screen**).
+
+It opens full screen like a normal app and still loads on bad Wi-Fi.
+
+**Two-phone demo (club phone + student phone):** on the club phone, log in as a club, open **Demo tools** at the bottom and tap **Create sync code**, then **Copy join link** and open that link on the student phone (or type the code into **Join**). Posts, claims and "Picked up" now show up on both phones within a second. Sync goes through the free public relay ntfy.sh, so only demo data goes through it.
+
+**Notifications:** on the student phone tap **Turn on alerts**. On iPhone this only works from the home-screen app (iOS 16.4+), not from Safari.
+
+**First-time hosting setup (once, repo owner):** Settings → Pages → Source: **GitHub Actions**, then Actions → "Deploy app to GitHub Pages" → **Run workflow**.
 
 ## Who owns what
 
@@ -29,7 +44,7 @@ Open http://localhost:8000 and click **Start demo**. No installs, no build step.
 | `web/js/model.js`, `model/`, `data/` | Turnout model, features, sample data, Python evaluation | Teammate 1 (model) |
 | `web/js/club.js` | Club console: plan an event, report results, live rescue, insights | Teammate 2 (club app) |
 | `web/js/student.js` | Student app: feed, claim, pickup timer, no-show rule, alerts | Ashita (student app) |
-| `web/js/core.js`, `web/js/app.js`, `web/index.html`, `web/css/styles.css` | Shared: state, sync, login, layout, styles | Shared. Ask in the group chat before changing |
+| `web/js/core.js`, `web/js/app.js`, `web/js/sync.js`, `web/index.html`, `web/css/styles.css`, `web/sw.js`, `web/manifest.webmanifest` | Shared: state, two-phone sync, login, layout, styles, app install | Shared. Ask in the group chat before changing |
 
 Swap names in this table to match who's doing what. Owning a folder means you review PRs that touch it.
 
@@ -75,13 +90,16 @@ web/                    the app (plain HTML, CSS, JavaScript)
   js/model.js           the turnout model (trains in the browser)
   js/club.js            club console
   js/student.js         student app
+  js/sync.js            two-phone live sync (club phone <-> student phone)
   js/app.js             login, demo tools, boot (loaded last)
+  sw.js, manifest.webmanifest, icons/   make it installable as a phone app
   data/sample_events.json   sample event history the app trains on
 model/
   generate_sample_data.py   makes data/sample_events.csv and web/data/sample_events.json
   train_eval.py             scikit-learn version of the model + accuracy report
 data/sample_events.csv      the same sample data as a spreadsheet
 scripts/build_single_file.py  bundles web/ into one page for sharing (dist/)
+.github/workflows/pages.yml   publishes web/ to GitHub Pages on every push to main
 ```
 
 The scripts aren't modules. They share globals and load in the order in `index.html`, so a function in `core.js` can be called from `club.js`.

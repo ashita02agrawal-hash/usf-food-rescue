@@ -87,7 +87,11 @@ function notify(p, avoid){
   if(p.allergens.some(a=>avoid.includes(a))) return;
   const d = haversine(LOCS[ui.near||"LIB"], LOCS[p.location]);
   toast(`Rescue surplus: ${p.food}`, `${p.total} portions at ${LOCS[p.location].name} · ${walk(d)}`, "rescue");
-  try{ if(ui.alerts && "Notification" in window && Notification.permission==="granted") new Notification("Platewise: free "+p.food, {body:`${p.total} portions · ${p.spot}`}); }catch(e){}
+  try{ if(ui.alerts && "Notification" in window && Notification.permission==="granted"){
+    const title="Platewise: free "+p.food, opts={body:`${p.total} portions · ${p.spot}`, icon:"icons/icon-192.png", tag:p.id};
+    // Phones only allow notifications through the service worker
+    if(navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.ready.then(r=>r.showNotification(title,opts)).catch(()=>{});
+    else new Notification(title, opts); } }catch(e){}
   try{ navigator.vibrate && navigator.vibrate(120); }catch(e){}
 }
 

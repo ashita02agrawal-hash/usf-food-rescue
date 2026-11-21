@@ -72,13 +72,13 @@ function seed(club){
   }
 }
 let room=null, bc=null;
-function save(){ state.updatedAt=Date.now(); store.set("pw_state", state); try{bc&&bc.postMessage(state)}catch(e){} roomSync(); }
+function save(){ state.updatedAt=Date.now(); store.set("pw_state", state); try{bc&&bc.postMessage(state)}catch(e){} roomSync(); if(typeof relayPublish==="function") relayPublish(); }
 // Cross-device sync over the artifact room: messages max out at 4 KiB, so send only the live rescue slice.
 function slim(){ const posts=state.posts.filter(p=>p.status==="live").concat(state.posts.filter(p=>p.status!=="live").slice(-2)); const ids=new Set(posts.map(p=>p.id));
   return {updatedAt:state.updatedAt, offsetMs:state.offsetMs, posts, claims:state.claims.filter(c=>ids.has(c.postId)), students:state.students}; }
 function roomSync(){ if(!room) return; try{ let d=slim(); if(JSON.stringify(d).length>3900){ d.posts=d.posts.filter(p=>p.status==="live"); } room.emit("sync", d).catch(()=>{}); }catch(e){} }
-function applySlim(d){
-  if(!d || !d.updatedAt || d.updatedAt<=state.updatedAt) return;
+function applySlim(d, force){
+  if(!d || !d.updatedAt || (!force && d.updatedAt<=state.updatedAt)) return;
   const byId=(arr,inc)=>{ const m=new Map(arr.map(x=>[x.id,x])); (inc||[]).forEach(x=>m.set(x.id,x)); return [...m.values()]; };
   state.posts=byId(state.posts,d.posts); state.claims=byId(state.claims,d.claims); if(d.students) state.students=d.students; state.offsetMs=d.offsetMs||0; state.updatedAt=d.updatedAt;
   store.set("pw_state",state); onStateChange(); }
