@@ -1,53 +1,19 @@
 if (!window.setModelStatus) window.setModelStatus = () => {};
 
-// ---------- club theme (USF green & gold, scoped to the club side only) ----------
+// ---------- USF academic calendar (check dates against usf.edu) ----------
+// factor = share of normal turnout expected that week (0.4 = 40%)
+const USF_CALENDAR = [
+  {name:"Thanksgiving break", from:"2026-11-25", to:"2026-11-29", factor:0.4},
+  {name:"Fall finals week",   from:"2026-12-05", to:"2026-12-11", factor:0.6},
+  {name:"Spring break",       from:"2026-03-09", to:"2026-03-15", factor:0.4},
+  {name:"Spring finals week", from:"2026-04-25", to:"2026-05-01", factor:0.6},
+];
+const calendarFor = date => USF_CALENDAR.find(c => date >= c.from && date <= c.to);
+
+// ---------- helpers ----------
 const hr12 = h => { const ap = h<12 ? "AM" : "PM"; const x = h%12===0 ? 12 : h%12; return `${x}:00 ${ap}`; };
 const locKey = txt => { const t=(txt||"").trim().toLowerCase(); const hit=Object.entries(LOCS).find(([k,v])=>k.toLowerCase()===t||v.name.toLowerCase()===t); return hit? hit[0] : (txt||"").trim(); };
-(function clubTheme(){
-  if(document.getElementById("clubTheme")) return;
-  const st=document.createElement("style"); st.id="clubTheme";
-  st.textContent = `
-  #clubPane{--accent:#006747;--accent-ink:#ffffff;--accent-soft:#e3f1ea;--pred:#9a7d1e;--pred-soft:#f5efd6;
-    --bg:#f4f8f4;--surface:#ffffff;--sunk:#eef4ef;--ink:#0f2a1f;--muted:#5b6f64;--line:#d6e4da;color:var(--ink);color-scheme:light}
-  #clubPane .card,#clubPane .tile{background:#fff;border:1px solid #d6e4da;border-radius:18px;box-shadow:0 2px 6px rgba(0,103,71,.06),0 10px 28px rgba(0,103,71,.08)}
-  #clubPane .rec{background:linear-gradient(135deg,#006747 0%,#0b8a5f 100%);color:#fff;border-radius:18px;padding:18px}
-  #clubPane .rec .muted,#clubPane .rec .eyebrow{color:#d7efe3}
-  #clubPane .rec .big{color:#fff!important}
-  #clubPane .rec .compare{background:rgba(255,255,255,.14);color:#fff;border-radius:12px}
-  #clubPane .rec .tag{background:#CFC493;color:#0f2a1f}
-  #clubPane .rec .btn.primary{background:#CFC493;color:#0f2a1f;border:none}
-  #clubPane .rec summary{color:#fff}
-  #clubPane .rec .why{background:rgba(255,255,255,.95);color:#0f2a1f;border-radius:12px;padding:10px}
-  #clubPane .btn.primary{background:#006747;color:#fff;border-radius:999px}
-  #clubPane .tabs button[aria-selected="true"]{color:#006747;border-color:#006747}
-  #clubPane input,#clubPane select,#clubPane textarea{background:#fff;color:#0f2a1f;border:1px solid #cfe0d5;border-radius:12px}
-  #clubPane .tile .big{color:#006747}
-  #clubPane .eyebrow{color:#006747}
-  `;
-  st.textContent += `
-  #clubPane{font-family:"Poppins","Inter",system-ui,sans-serif}
-  #clubPane h1,#clubPane h2,#clubPane h3,#clubPane .big{font-family:"Poppins","Inter",system-ui,sans-serif;font-weight:700}
-  #clubPane .usf-badge{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#006747;color:#CFC493;
-    font-weight:800;font-size:14px;letter-spacing:.04em;border:2px solid #CFC493;margin-right:8px;box-shadow:0 4px 12px rgba(0,103,71,.25)}
-  #clubPane .card,#clubPane .tile,#clubPane .ev{transition:transform .18s ease,box-shadow .18s ease}
-  #clubPane .card:hover,#clubPane .tile:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,103,71,.10),0 16px 36px rgba(0,103,71,.12)}
-  #clubPane .btn{transition:transform .12s ease,filter .15s ease;cursor:pointer}
-  #clubPane .btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
-  #clubPane .btn:active{transform:scale(.97)}
-  #clubPane .tabs button{transition:color .15s ease,border-color .15s ease;cursor:pointer}
-  #clubPane .tabs button:hover{color:#006747}
-  #clubPane input:focus,#clubPane select:focus{outline:none;border-color:#006747;box-shadow:0 0 0 4px rgba(0,103,71,.15)}
-  #clubPane input,#clubPane select{transition:border-color .15s ease,box-shadow .15s ease}
-  #clubBody > *{animation:clubIn .28s ease both}
-  #clubPane .rec .big{animation:clubPop .35s ease both}
-  @keyframes clubIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  @keyframes clubPop{from{transform:scale(.92);opacity:.4}to{transform:none;opacity:1}}
-  @media (prefers-reduced-motion:reduce){#clubPane *{animation:none!important;transition:none!important}}
-  `;
-  if(!document.getElementById("clubFont")){ const l=document.createElement("link"); l.id="clubFont"; l.rel="stylesheet";
-    l.href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"; document.head.appendChild(l); }
-  document.head.appendChild(st);
-})();
+
 
 /* club.js
  * Owner: Club-app teammate
@@ -59,15 +25,14 @@ function renderClub(){
   const club = ui.club, tab = ui.clubTab || "events";
   $("#clubPane").innerHTML = `
     <div class="pane-head">
-      <div class="who"><div class="usf-badge" aria-label="USF">USF</div><div class="avatar">${esc(club.split(" ").map(w=>w[0]).join("").slice(0,3))}</div><div><div>${esc(club)}</div><div class="small muted">Club console</div></div></div>
+      <div class="who"><img class="usf-logo" src="img/usf-logo.png" alt="USF Bulls"><div class="avatar">${esc(club.split(" ").map(w=>w[0]).join("").slice(0,3))}</div><div><div>${esc(club)}</div><div class="small muted">Club console</div></div></div>
       <div class="spacer"></div>
-      <select id="clubSwitch" aria-label="Switch club" style="width:auto">${META.clubs.map(c=>`<option ${c.club===club?"selected":""}>${esc(c.club)}</option>`).join("")}</select>
+      <span class="tag">Signed in as ${esc(club)}</span>
     </div>
     <div class="tabs" role="tablist">
       ${[["events","Events & rescue"],["plan","Plan an event"],["insights","Insights & history"]].map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${tab===k}">${l}</button>`).join("")}
     </div>
     <div id="clubBody"></div>`;
-  $("#clubSwitch").onchange = e=>{ ui.club=e.target.value; seed(ui.club); save(); store.set("pw_ui",ui); renderClub(); };
   $("#clubPane").querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{ ui.clubTab=b.dataset.tab; store.set("pw_ui",ui); renderClub(); });
   if(tab==="plan") renderPlan(); else if(tab==="insights") renderInsights(); else renderClubDynamic();
 }
@@ -165,7 +130,10 @@ function planEvent(){
 }
 function updateRec(){
   if(!M.full){ $("#recBox").innerHTML=`<p class="muted">Training the model on ${META.events.length} sample events…</p>`; return; }
-  const ev=planEvent(), p=predictEvent(ev), u=units(p.servings, ev.food_item), ua=units(ev.rsvps, ev.food_item);
+  const ev=planEvent(), p=predictEvent(ev);
+  const cal = calendarFor(ev.date);
+  if(cal){ p.people *= cal.factor; p.servings = Math.ceil(p.servings * cal.factor); }
+  const u=units(p.servings, ev.food_item), ua=units(ev.rsvps, ev.food_item);
   const waste = Math.max(0, ev.rsvps - p.servings);
   const reasons = Object.entries(p.groups).filter(([,v])=>Math.abs(v)>=0.5).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,6);
   const maxAbs = Math.max(4, ...reasons.map(r=>Math.abs(r[1])));
@@ -176,6 +144,7 @@ function updateRec(){
       <div><div class="small muted">Expect about</div><div class="big num" style="color:var(--pred)">${Math.round(p.people)}<small>people</small></div><div class="small muted num">out of ${ev.rsvps} RSVPs</div></div>
     </div>
     <div class="compare">You'll save about <b class="num">$${waste*COST_PER_SERVING}</b> and <b class="num">${waste}</b> servings of waste compared to ordering for every RSVP.</div>
+    ${cal?`<div class="compare"><b>USF calendar: ${esc(cal.name)}.</b> Expect about ${Math.round(cal.factor*100)}% of normal turnout, so the order is scaled down.</div>`:""}
     <details><summary class="small" style="cursor:pointer;font-weight:600">Why this number?</summary>
       <div class="why" style="margin-top:8px">${reasons.map(([g,v])=>{ const w=Math.abs(v)/maxAbs*50; return `<div class="why-row"><span>${esc(reasonLabel(g,p.feats))}</span>
         <div class="why-bar" aria-hidden="true"><i style="${v>=0?`left:50%;width:${w}%;background:var(--accent)`:`right:50%;width:${w}%;background:var(--pred)`}"></i></div>
@@ -252,20 +221,22 @@ function submitReport(ev){
 
 // ---------- insights ----------
 function renderInsights(){
-  const club = ui.insClub || ui.club;
+  const club = ui.club;
+  const sems = [...new Set(trainingRows().filter(r=>r.club===club).map(r=>r.semester))];
+  const sem = sems.includes(ui.insSem) ? ui.insSem : (sems.at(-1)||"");
   const bt=M.backtest;
   const clubs = META.clubs.map(c=>c.club);
   $("#clubBody").innerHTML = `<div class="stack">
     <div class="tiles">
       <div class="tile"><div class="eyebrow">Waste cut</div><div class="big num" style="color:var(--accent)">${bt?Math.round(bt.cut*100)+"%":"…"}</div><div class="small muted">vs. ordering for every RSVP, on ${bt?bt.n:"…"} held-out sample events</div></div>
       <div class="tile"><div class="eyebrow">Servings saved</div><div class="big num">${bt?Math.round(bt.servingsSaved):"…"}</div><div class="small muted">about $${bt?Math.round(bt.servingsSaved*COST_PER_SERVING).toLocaleString():"…"} in those ${bt?bt.n:""} events</div></div>
-      <div class="tile"><div class="eyebrow">Typical error</div><div class="big num">±${M.mae?M.mae.toFixed(1):"…"}</div><div class="small muted">people per event (5-fold cross-validation)</div></div>
+      <div class="tile"><div class="eyebrow">Typical error</div><div class="big num">±${M.mae?M.mae.toFixed(1):"…"}</div><div class="small muted">Our guess is usually within about this many people. Tested on events the model never saw.</div></div>
       <div class="tile"><div class="eyebrow">Events learned</div><div class="big num">${M.n||"…"}</div><div class="small muted">${state.learned.length} reported or uploaded in the app</div></div>
     </div>
     <div class="card stack">
       <div class="row" style="justify-content:space-between;align-items:flex-start">
         <div><h3>Predicted vs. actual turnout</h3><div class="small muted">Predictions are out-of-sample: the model never saw that event when predicting it.</div></div>
-        <select id="insClub" aria-label="Club" style="width:auto">${clubs.map(c=>`<option ${c===club?"selected":""}>${esc(c)}</option>`).join("")}</select>
+        <select id="insSem" aria-label="Semester" style="width:auto">${sems.map(x=>`<option ${x===sem?"selected":""}>${esc(x)}</option>`).join("")}</select>
       </div>
       <div class="legend"><span><i style="border-color:var(--muted);border-top-style:dashed"></i>RSVPs (what clubs order for)</span><span><i style="border-color:var(--accent)"></i>Actually checked in</span><span><i style="border-color:var(--pred)"></i>Platewise prediction</span></div>
       <div class="chart" id="chart"></div>
@@ -278,30 +249,37 @@ function renderInsights(){
     </div>
     <div class="card stack">
       <div class="row" style="justify-content:space-between"><h3>Upload past events</h3><button class="btn sm" id="exBtn">Fill in an example</button></div>
-      <div class="small muted">Paste your club's RSVP and check-in records as CSV. Food columns are optional. Columns: <code>date,event_type,location,start_hour,rsvps,checked_in,servings_ordered,servings_left</code>. Locations: ${Object.keys(LOCS).join(", ")}.</div>
-      <textarea id="csv" aria-label="CSV of past events" placeholder="2026-09-03,General meeting,ENB,18,64,22,70,40"></textarea>
+      <div class="small muted">Paste your club's RSVP and check-in records as CSV. Food columns are optional. Columns: <code>date,event_type,location,start_hour,rsvps,checked_in,servings_ordered,servings_left</code>. Location can be any building name or code.</div>
+      <textarea id="csv" aria-label="CSV of past events" placeholder="2026-09-03,General meeting,Engineering Building II,18,64,22,70,40"></textarea>
       <div class="row"><button class="btn primary" id="upBtn">Teach the model these events</button><span class="small muted" id="upMsg"></span></div>
     </div>
   </div>`;
-  $("#insClub").onchange=e=>{ ui.insClub=e.target.value; renderInsights(); };
-  drawChart(club);
-  $("#exBtn").onclick=()=>{ $("#csv").value = "date,event_type,location,start_hour,rsvps,checked_in,servings_ordered,servings_left\n2026-11-02,General meeting,ENB,18,66,19,70,47\n2026-11-09,Workshop,ENB,18,58,31,60,25\n2026-11-16,Social,MSC,17,62,40,65,22"; };
+  $("#insSem").onchange=e=>{ ui.insSem=e.target.value; renderInsights(); };
+  drawChart(club, sem);
+  $("#exBtn").onclick=()=>{ $("#csv").value = "date,event_type,location,start_hour,rsvps,checked_in,servings_ordered,servings_left\n2026-11-02,General meeting,ENB,18,66,19,70,47\n2026-11-09,Workshop,ENB,18,58,31,60,25\n2026-11-16,Social,Juniper-Poplar Hall,17,62,40,65,22"; };
   $("#upBtn").onclick=()=>uploadCsv(club);
 }
 function uploadCsv(club){
-  const lines=$("#csv").value.trim().split(/\r?\n/).filter(Boolean); let added=0, bad=0;
-  for(const ln of lines){ const p=ln.split(",").map(s=>s.trim()); if(/^date$/i.test(p[0])) continue;
-    const [date,type,loc,hour,rsvps,inn,ord,left]=p;
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!TYPES.includes(type)||!LOCS[loc]||!(+rsvps>0)||!(+inn>=0)){ bad++; continue; }
-    const o=+ord||+rsvps, l=left!==undefined&&left!==""? +left : Math.max(0,o-(+inn));
-    state.learned.push({event_id:uid("u"), club, event_type:type, date, day_of_week:dow(date), start_hour:+hour||18, location:loc, rsvps:+rsvps, checked_in:+inn, servings_ordered:o, servings_left:l, leftover_pct:Math.round(1000*l/o)/10, semester:semesterName(date), week:semesterWeek(date), is_sample:0});
+  const COLS_CSV=["date","event_type","location","start_hour","rsvps","checked_in","servings_ordered","servings_left"];
+  const norm=h=>h.toLowerCase().replace(/[^a-z]/g,"");
+  const split=ln=>{ const out=[]; let cur="", q=false; for(const ch of ln){ if(ch==='"') q=!q; else if(ch===","&&!q){ out.push(cur.trim()); cur=""; } else cur+=ch; } out.push(cur.trim()); return out; };
+  const lines=$("#csv").value.trim().split(/\r?\n/).filter(l=>l.trim()); let added=0, bad=0, order=COLS_CSV;
+  for(const ln of lines){ const p=split(ln);
+    // A header row can list the columns in any order.
+    if(/^date$/i.test(p[0]) || p.some(x=>norm(x)==="eventtype")){ order=p.map(h=>COLS_CSV.find(c=>norm(c)===norm(h))||null); continue; }
+    const v={}; order.forEach((k,i)=>{ if(k) v[k]=p[i]; });
+    const date=v.date, type=TYPES.find(t=>t.toLowerCase()===(v.event_type||"").toLowerCase()), loc=locKey(v.location);
+    const rsvps=+v.rsvps, inn=+v.checked_in;
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date||"")||!type||!loc||!(rsvps>0)||!(inn>=0)||v.checked_in===""||v.checked_in===undefined){ bad++; continue; }
+    const o=+v.servings_ordered||rsvps, l=v.servings_left!==undefined&&v.servings_left!==""? +v.servings_left : Math.max(0,o-inn);
+    state.learned.push({event_id:uid("u"), club, event_type:type, date, day_of_week:dow(date), start_hour:clamp(Math.round(+v.start_hour||18),0,23), location:loc, rsvps, checked_in:inn, servings_ordered:o, servings_left:l, leftover_pct:Math.round(1000*l/o)/10, semester:semesterName(date), week:semesterWeek(date), is_sample:0});
     added++; }
-  if(!added){ $("#upMsg").textContent = bad? `None of the ${bad} rows matched the columns above.` : "Paste some rows first."; return; }
+  if(!added){ $("#upMsg").textContent = bad? `None of the ${bad} rows matched. Check the date (YYYY-MM-DD) and event type (${TYPES.join(", ")}).` : "Paste some rows first."; return; }
   $("#upMsg").textContent="Retraining…";
   setTimeout(()=>{ fitFull(); save(); setModelStatus(); renderInsights(); toast("History uploaded", `Learned ${added} events for ${club}${bad?`, skipped ${bad} rows that didn't match`:""}.`); },30);
 }
-function drawChart(club){
-  const rows = sortEvents(trainingRows().filter(r=>r.club===club));
+function drawChart(club, sem){
+  const rows = sortEvents(trainingRows().filter(r=>r.club===club && (!sem || r.semester===sem)));
   const box=$("#chart"); if(!rows.length){ box.innerHTML='<p class="muted">No history yet.</p>'; return; }
   const W=720,H=260,pl=34,pr=12,pt=10,pb=28;
   const pts = rows.map(r=>({r, rs:r.rsvps, a:r.checked_in, p: r.pred ?? M.oof[r.event_id]}));
@@ -328,8 +306,4 @@ function drawChart(club){
   const withP=pts.filter(d=>d.p!=null), err=mean(withP.map(d=>Math.abs(d.p-d.a))), left=mean(rows.map(r=>r.leftover_pct||0));
   $("#chartNote").textContent = `${rows.length} events. Average leftovers today: ${Math.round(left)}% of food ordered. Prediction error for ${club}: ±${err.toFixed(1)} people.`;
 }
-
-
-
-
 

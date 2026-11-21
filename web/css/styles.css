@@ -1,33 +1,27 @@
 /* Layout: club console (wide) beside a student phone; on phones the two roles are tabs. */
 :root{
-  --bg:#f3f6f2; --surface:#ffffff; --sunk:#e9eee8; --ink:#13241c; --muted:#56685f; --line:#d8e1da;
-  --accent:#0b7a55; --accent-ink:#ffffff; --accent-soft:#dcefe5;
-  --pred:#b87500; --pred-soft:#f6ead2;
-  --rescue:#c4420f; --rescue-soft:#fbe4d8;
+  /* USF brand: green #006747, gold #CFC493. One light theme for the whole app. */
+  --bg:#f4f7f4; --surface:#ffffff; --sunk:#eef3ef; --ink:#10261d; --muted:#5a6d64; --line:#dce6df;
+  --accent:#006747; --accent-ink:#ffffff; --accent-soft:#e3f0e9; --accent-deep:#004d35;
+  --gold:#CFC493; --gold-soft:#f4f0dc; --gold-ink:#5c5320;
+  --pred:#8a6d12; --pred-soft:#f4eed6;
+  --rescue:#c2410c; --rescue-soft:#fbe9df;
   --good:#16794a; --warn:#a15c00; --bad:#b42318;
-  --shadow:0 1px 2px rgba(20,40,30,.06),0 6px 20px rgba(20,40,30,.06);
-  --display:"Bricolage Grotesque","Inter",system-ui,sans-serif;
-  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --r:12px;
+  --shadow:0 1px 2px rgba(16,38,29,.05),0 4px 16px rgba(16,38,29,.06);
+  --display:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:14px;
+  color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0c1411; --surface:#141f1a; --sunk:#1a2721; --ink:#e4eee8; --muted:#94a89d; --line:#26362e;
-  --accent:#21996b; --accent-ink:#04140d; --accent-soft:#163a2b;
-  --pred:#bf8018; --pred-soft:#3a2c12; --rescue:#f07a45; --rescue-soft:#3d2216;
-  --good:#3fbf7f; --warn:#e3a335; --bad:#f47166; --shadow:0 1px 2px rgba(0,0,0,.3); color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0c1411; --surface:#141f1a; --sunk:#1a2721; --ink:#e4eee8; --muted:#94a89d; --line:#26362e;
-  --accent:#21996b; --accent-ink:#04140d; --accent-soft:#163a2b;
-  --pred:#bf8018; --pred-soft:#3a2c12; --rescue:#f07a45; --rescue-soft:#3d2216;
-  --good:#3fbf7f; --warn:#e3a335; --bad:#f47166; --shadow:0 1px 2px rgba(0,0,0,.3); color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-width:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;letter-spacing:-.01em}
 h2{font-size:20px} h3{font-size:16px}
 button,input,select,textarea{font:inherit;color:inherit}
 .num{font-variant-numeric:tabular-nums}
-.big{font-family:var(--display);font-size:40px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.big{font-family:var(--display);font-size:40px;font-weight:700;line-height:1;letter-spacing:-.02em}
 .big small{font-size:15px;font-weight:600;color:var(--muted);letter-spacing:0;margin-left:4px}
 .muted{color:var(--muted)}
 .small{font-size:12px}
@@ -173,5 +167,67 @@ details.demo summary{cursor:pointer;color:var(--muted);font-weight:600}
 .foot{max-width:1400px;margin:24px auto 0;color:var(--muted);font-size:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .login{max-width:880px;margin:30px auto;display:grid;gap:18px}
 .login-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.hero-line{font-family:var(--display);font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+.hero-line{font-family:var(--display);font-size:clamp(28px,6vw,44px);font-weight:700;line-height:1.05;letter-spacing:-.02em}
 .hero-line em{font-style:normal;color:var(--accent)}
+
+/* ---------- shared USF look (club console + student app) ---------- */
+.top{box-shadow:0 1px 0 var(--line)}
+.top .brand{color:var(--accent)}
+.top-logo{height:28px;width:auto;flex:none}
+.tag{background:var(--gold-soft);color:var(--gold-ink)}
+.card,.tile{border-radius:var(--r)}
+.btn{border-radius:999px;transition:background-color .15s ease,filter .15s ease}
+.btn.sm{border-radius:999px}
+.btn.primary:hover{background:var(--accent-deep);filter:none}
+.tabs button{transition:color .15s ease,border-color .15s ease}
+.tabs button:hover{color:var(--accent)}
+.tabs button[aria-selected="true"]{color:var(--accent)}
+.tabs{scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none}
+input[type=number],input[type=text],input[type=date],input[type=time],select,textarea{border-radius:10px;transition:border-color .15s ease,box-shadow .15s ease}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,103,71,.14)}
+.eyebrow{color:var(--accent)}
+.tile .big{color:var(--accent)}
+.pane-head .usf-logo{height:40px;width:auto;flex:none}
+
+/* recommendation card */
+#recBox:has(.rec){padding:0;overflow:hidden}
+.rec{background:var(--accent);color:#fff;padding:18px}
+.rec .muted,.rec .eyebrow,.rec summary{color:#d6ebe0}
+.rec .big,.rec .big[style]{color:#fff!important}
+.rec .big small{color:#cfe5d9}
+.rec .compare{background:rgba(255,255,255,.12);color:#fff}
+.rec .tag{background:var(--gold);color:var(--ink)}
+.rec .btn.primary{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.rec .btn.primary:hover{background:#ddd4a8}
+.rec .why{background:#fff;color:var(--ink);border-radius:10px;padding:10px}
+
+/* ---------- phones ---------- */
+@media (max-width:700px){
+  body{font-size:15px}
+  .top{gap:8px;padding-block:8px}
+  .top .tag{display:none}
+  .seg{width:100%;order:3}
+  .seg button{flex:1}
+  .wrap{padding-top:12px}
+  .card{padding:14px}
+  .tiles{grid-template-columns:1fr 1fr}
+  .tile{padding:12px}
+  .tile .big{font-size:26px}
+  .grid2{grid-template-columns:1fr}
+  .rec-hero{grid-template-columns:1fr 1fr}
+  .big{font-size:34px}
+  .why-row{grid-template-columns:minmax(0,1fr) 70px 70px}
+  .imp-row{grid-template-columns:minmax(0,1fr) 70px 34px}
+  .pane-head .tag{display:none}
+  .pane-head .usf-logo{height:32px}
+  .login{margin:12px auto}
+  .sheet-bg{place-items:end center;padding:0}
+  .sheet{border-radius:18px 18px 0 0;max-height:92vh}
+  .claims{font-size:12px}
+  #toasts{left:16px;right:16px;max-width:none}
+}
+.stack{grid-template-columns:minmax(0,1fr)}
+.chart svg{max-width:100%}
+code{overflow-wrap:anywhere;word-break:break-word}

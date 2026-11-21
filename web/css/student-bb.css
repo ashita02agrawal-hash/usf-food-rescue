@@ -1,0 +1,100 @@
+/* student-bb.css: student app (Rithva). Uses the shared tokens in styles.css. */
+#studentPane .bb{max-width:440px;margin:0 auto;background:var(--bg);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+#studentPane .bb-body{padding:18px 16px 16px;display:grid;gap:14px;min-height:540px;align-content:start}
+
+/* splash */
+#studentPane .bb-splash{display:grid;place-items:center;align-content:center;gap:8px;min-height:540px;background:var(--accent);color:#fff;text-align:center;border:0}
+#studentPane .bb-splash-logo{height:56px;width:auto;filter:brightness(0) invert(1);opacity:.95}
+#studentPane .bb-logo{font-size:30px;font-weight:700;color:var(--gold);letter-spacing:-.01em}
+#studentPane .bb-splash p{margin:0;color:#d6ebe0;font-size:14px}
+
+/* header */
+#studentPane .bb-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+#studentPane .bb-top h1{font-size:22px;font-weight:700}
+#studentPane .bb-top p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+#studentPane .bb-bell{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);color:var(--muted);cursor:pointer}
+#studentPane .bb-bell.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+
+/* impact hero */
+#studentPane .bb-hero{background:var(--accent);color:#fff;border-radius:var(--r);padding:16px 18px;display:grid;gap:2px}
+#studentPane .bb-hero p{margin:0;font-size:13px;color:#d6ebe0}
+#studentPane .bb-hero b{font-size:28px;font-weight:700;color:var(--gold);line-height:1.15}
+#studentPane .bb-hero span{font-size:12px;color:#d6ebe0}
+
+/* sections */
+#studentPane .bb-sec{display:grid;gap:8px;margin-top:4px}
+#studentPane .bb-sec h2{font-size:17px;font-weight:600}
+#studentPane .bb-sec p{margin:-4px 0 0;font-size:13px;color:var(--muted)}
+#studentPane .bb-near{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);font-weight:500}
+#studentPane .bb-near select{flex:1;min-width:0;font-weight:500}
+
+/* food cards */
+#studentPane .bb-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;padding:12px;box-shadow:var(--shadow)}
+#studentPane .bb-pad{display:block;padding:16px}
+#studentPane .bb-img{width:76px;height:76px;border-radius:12px;background:var(--sunk);display:grid;place-items:center;overflow:hidden}
+#studentPane .bb-club-logo{width:100%;height:100%;object-fit:contain;background:#fff}
+#studentPane .bb-initials{font-weight:700;color:var(--accent);font-size:18px}
+#studentPane .bb-cbody{min-width:0;display:grid;gap:8px}
+#studentPane .bb-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+#studentPane .bb-title-row h3{font-size:16px;font-weight:600;line-height:1.25}
+#studentPane .bb-title-row h1{font-size:20px;font-weight:700;line-height:1.2}
+#studentPane .bb-title-row .pill{flex:none}
+#studentPane .bb-facts{margin:0;display:grid;gap:3px;font-size:13px}
+#studentPane .bb-facts div{display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px}
+#studentPane .bb-facts dt{color:var(--muted)}
+#studentPane .bb-facts dd{margin:0;overflow-wrap:anywhere}
+#studentPane .bb-note{margin:0;font-size:12px;color:var(--muted)}
+
+/* detail view: logo on top */
+#studentPane .bb-back + .bb-card{grid-template-columns:minmax(0,1fr)}
+#studentPane .bb-back + .bb-card .bb-img{width:100%;height:96px}
+#studentPane .bb-back + .bb-card .bb-club-logo{width:auto;max-width:200px}
+
+/* buttons */
+#studentPane .bb-btn{width:100%;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:999px;padding:11px 16px;font-weight:600;font-size:14px;cursor:pointer;transition:background-color .15s ease}
+#studentPane .bb-btn:hover{background:var(--accent-deep)}
+#studentPane .bb-btn.ghost{background:var(--surface);color:var(--accent);border-color:var(--line)}
+#studentPane .bb-btn.ghost:hover{background:var(--sunk)}
+#studentPane .bb-btn[disabled]{opacity:.45;cursor:not-allowed}
+#studentPane .bb-claims{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#studentPane .bb-back{justify-self:start;display:inline-flex;align-items:center;gap:4px;background:none;border:0;color:var(--accent);font-weight:600;cursor:pointer;padding:4px 0}
+
+/* active reservation banner */
+#studentPane .bb-active{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--gold-soft);color:var(--ink);border:1px solid var(--gold);border-radius:var(--r);padding:12px 14px;font-weight:600;cursor:pointer;text-align:left}
+#studentPane .bb-active b{font-size:18px;color:var(--gold-ink)}
+
+/* hold / success screens */
+#studentPane .bb-center{text-align:center;display:grid;gap:10px;justify-items:center;padding:12px 4px}
+#studentPane .bb-center h1{font-size:22px;font-weight:700}
+#studentPane .bb-center > p{margin:0;color:var(--muted)}
+#studentPane .bb-ring{width:120px;height:120px;border-radius:50%;border:4px solid var(--accent);background:var(--accent-soft);display:grid;place-items:center;align-content:center;color:var(--accent)}
+#studentPane .bb-ring b{font-size:28px;font-weight:700}
+#studentPane .bb-ring span{font-size:12px}
+#studentPane .bb-check{width:64px;height:64px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center}
+#studentPane .bb-pick{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;text-align:left;display:grid;gap:4px}
+#studentPane .bb-pick > span{font-size:13px;color:var(--muted)}
+#studentPane .bb-pick > b{font-size:32px;font-weight:700;color:var(--accent);line-height:1.1}
+#studentPane .bb-pick p{margin:0;font-size:13px}
+
+#studentPane .bb-empty{text-align:center;color:var(--muted);font-size:13px;padding:22px 16px;background:var(--surface);border:1px dashed var(--line);border-radius:var(--r)}
+#studentPane .bb-board{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:rank}
+#studentPane .bb-board li{counter-increment:rank;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+#studentPane .bb-board li::before{content:counter(rank);font-weight:700;color:var(--accent)}
+#studentPane .bb-board b{color:var(--accent)}
+#studentPane .banner{margin:0}
+
+/* bottom tab bar: sticks to the bottom of the student app */
+#studentPane .bb-nav{position:sticky;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+#studentPane .bb-nav button{background:none;border:0;display:grid;justify-items:center;gap:2px;padding:6px 2px;font-size:11px;font-weight:500;color:var(--muted);cursor:pointer}
+#studentPane .bb-nav button[aria-current="page"]{color:var(--accent);font-weight:600}
+
+/* on a phone the student app fills the screen instead of sitting in a frame */
+@media (max-width:700px){
+  .stage.student-only #studentPane{margin:-12px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0}
+  body:has(.stage.student-only) .wrap{padding-bottom:96px}
+  .stage.student-only #studentPane .bb{border:0;border-radius:0;box-shadow:none;max-width:none;min-height:calc(100vh - 60px);display:grid;grid-template-rows:1fr auto}
+  .stage.student-only #studentPane .bb-nav{position:fixed;left:0;right:0;bottom:0}
+  .stage.student-only #studentPane .bb-body{padding-bottom:84px}
+  .stage.student-only #studentPane .bb-splash{min-height:calc(100vh - 60px)}
+}
+@media (max-width:700px){ body:has(.stage.student-only) #toasts{bottom:calc(84px + env(safe-area-inset-bottom,0px))} }

@@ -43,6 +43,6 @@ test('retired student modules are absent and all offline shell files exist',()=>
   const worker=fs.readFileSync('web/sw.js','utf8');
   const ctx=vm.createContext({self:{addEventListener(){}}});vm.runInContext(worker,ctx);
   for(const p of vm.runInContext('SHELL',ctx))assert.ok(fs.existsSync('web/'+p),p);
-  assert.match(worker,/platewise-v4/);
+  assert.match(worker,/platewise-v5/);
   const html=fs.readFileSync('web/index.html','utf8');assert.doesNotMatch(html,/claim_sim|student_food|modelStatus/);
 });
