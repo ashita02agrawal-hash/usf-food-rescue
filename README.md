@@ -1,144 +1,118 @@
-# usf-food-rescue (Bulls Bites)
+# Bulls Bites
 
-> Current UI: event planning uses manually entered serving counts; prediction panels and model insights have been removed from both roles. The student prediction feature has been deleted. The club model implementation in `web/js/model.js`, the `model/` scripts, and training data are retained for programmatic use, and reported events still update the model. This project has no separate prediction server; the retained JavaScript engine runs locally. The model explanation and original demo walkthrough below describe the earlier prediction UI.
+**Order the right amount of food. Rescue what's left.**
 
-A platform that predicts food demand and helps rescue surplus food from events across the USF community.
+HackJam'26 · USF Tampa
 
-HackJam'26 · USF Tampa · Off Grid track
+Live app: **https://ashita02agrawal-hash.github.io/usf-food-rescue/** (works in any browser, and you can add it to your phone's home screen)
 
-Clubs and LLCs order food for everyone who RSVPs, a fraction show up, and the rest gets thrown out. Bulls Bites fixes both ends:
+---
 
-1. **Predict.** Our own model (gradient-boosted trees, not an LLM) learns each club's real turnout from its RSVP and check-in history and recommends how much food to order.
-2. **Rescue.** Whatever is still left over goes out as a "Rescue surplus" to students nearby: a short hold, a 15-minute pickup window, and a club "Picked up" button.
-3. **Learn.** After every event the club reports turnout and leftovers, and the model retrains on the spot.
+## The problem
 
-> All data here is **sample data** generated to mirror what we've seen on campus (an LLC whose floor events fell from everyone to 5-6 people, ACM meetings with 50 bagels and few attendees, workshops, MSC walk-in traffic). Every row is labeled `is_sample = 1`.
+If you've been to a club meeting at USF, you've seen this. A club gets 70 RSVPs and orders 70 servings of bagels. Twenty people show up, and the rest of the food goes in the trash at the end of the night.
 
-## Run it (one command)
+We've watched it happen at our own clubs. An LLC floor event where RSVPs stayed at 40 while attendance dropped to five or six. ACM meetings with trays of bagels left on the table. It wastes club money and it wastes food, and plenty of students on campus would have been glad to eat it.
 
-You only need Python 3. From the repo folder:
+The problem has two halves, and we built something for each:
+
+1. **Before the event, clubs over-order** because RSVPs are a bad guess at turnout.
+2. **After the event, the leftovers have nowhere to go.** By the time someone posts "free food in ENB!" in a group chat, it's already in the trash.
+
+## What Bulls Bites does
+
+### For clubs: plan, then report
+
+- **Plan an event.** Enter the event type, date, time, building, RSVP count and food. Bulls Bites predicts how many people will actually show up and tells you how much to order, in real units like "10 bagels" instead of "73 servings". It also shows how much money and food you save compared with ordering for every RSVP.
+- **Why this number?** Every recommendation breaks down what pushed the estimate up or down, like the club's recent show rate, the time slot, or finals week.
+- **USF calendar aware.** During Thanksgiving break, spring break and finals, the recommendation automatically scales down.
+- **Report results.** After the event, the club enters how many people checked in and how much food was left. The model retrains right away, so the next prediction for that club gets better.
+- **Send out the leftovers.** In the same step, the club can post the extra food as a rescue. They add the pickup spot, allergens, whether it's vegetarian, and how long someone will be there handing it out.
+- **Insights.** Each club sees its own predicted vs. actual turnout by semester and what drives its turnout. It can also upload past events from a spreadsheet (CSV) to teach the model its history. Any building works, not just a fixed list.
+
+### For students: see it, reserve it, pick it up
+
+- **Home** shows every live post on campus: what the food is, where it is, which club posted it, how many servings are left, and how long until pickup closes.
+- **Reserve** 1 or 2 servings. They're held for 60 seconds while you tap "I'm on my way", then you have 15 minutes to get there.
+- **Alerts** let you know when a club posts food. You can turn off alerts for allergens you avoid, and set your diet to vegetarian so you only see vegetarian food.
+- **Impact** shows how much food you've kept out of the trash.
+
+### Keeping it fair: the no-show rule
+
+If people reserve food and never show up, it doesn't reach anyone. So:
+
+- Canceling within 60 seconds is free.
+- A missed pickup or a late cancel counts as a strike.
+- 2 strikes in a row, or 3 in a semester, pauses your reservations until next semester. A successful pickup resets the in-a-row count.
+
+The club marks each pickup as done from its own screen, so the counts stay honest. Pickup always closes within two hours of when the food was set out, to follow basic food safety.
+
+## How the prediction works
+
+We didn't use a chatbot for this. The model is a **gradient-boosted decision tree model** that we wrote in plain JavaScript, so it trains in the browser in under a second and retrains the moment a club reports results.
+
+- **What it predicts:** each event's *show rate* (people who checked in ÷ RSVPs), which is then multiplied by the RSVP count.
+- **What it looks at:** the club, event type, day, start time, building, RSVP count, week of the semester, exam periods, the club's recent show rate, the club's show rate for that kind of event, and how much food was left last time. It only uses information from *earlier* events, so it never "peeks" at the answer.
+- **New clubs** with no history start from campus-wide averages for similar clubs and event types, then shift toward their own pattern after a few events. Buildings the model hasn't seen before work the same way.
+- **The order** is the predicted turnout plus a 15% buffer, converted into real units (pizzas, bagels, platters, and so on).
+
+**Results on our sample data:** when we tested on events the model had never seen, it cut wasted food by about **80%** compared with ordering for every RSVP. Its predictions were usually within about **4 people** of actual turnout.
+
+> **About the data:** we don't have real check-in records from USF clubs yet, so every number here comes from **sample data** that we generated to match patterns we've seen on campus (243 events across 13 clubs). Every sample row is labeled as sample data. The next step would be real check-in data from a few clubs to validate the model.
+
+The full model write-up, including a scikit-learn version for comparison and the evaluation scripts, is in [`model/README.md`](model/README.md).
+
+## Try it
+
+Open the **[live app](https://ashita02agrawal-hash.github.io/usf-food-rescue/)** and tap **Start demo** to see the club and student sides together. On a phone, add it to your home screen and it opens like a normal app.
+
+To run it on your own computer, from this folder:
 
 ```bash
 python3 -m http.server 8000 --directory web
 ```
 
-Open http://localhost:8000 and click **Start demo**. No installs, no build step. Edit a file, then refresh the browser (the app always fetches the newest code when it's online; if something looks stale, hard-refresh with Cmd/Ctrl+Shift+R).
+Then open http://localhost:8000. There's nothing to install and no build step.
 
-## Use it as a phone app
+**Two-phone demo:** log in as a club on one phone, open *Demo tools* at the bottom of the page, and create a sync code. Open the join link on a second phone logged in as a student. Posts, reservations and pickups then show up on both phones within a second.
 
-Live app: **https://ashita02agrawal-hash.github.io/usf-food-rescue/** (redeploys on every merge to `main`).
+## The team
 
-- **iPhone (Safari):** open the link, tap Share, then **Add to Home Screen**.
-- **Android (Chrome):** open the link, tap the ⋮ menu, then **Install app** (or **Add to Home screen**).
+| Who | What they built |
+|---|---|
+| **Ashita Agrawal** | Club side: event planning, the recommendation screen, reporting results, Insights and CSV upload, the USF calendar. Also pulled everything together into one app: the shared design and the phone layout. |
+| **Rithva Menon** | Student side: the home feed, reserving and confirming food, the pickup timer, impact and profile screens, and the club logos. |
+| **Nguyen Dang** | The model: the features, the gradient-boosted trees, cold-start handling for new clubs, the sample data generator, and the evaluation and tests. |
 
-It opens full screen like a normal app and still loads on bad Wi-Fi.
+## How we used AI
 
-**Two-phone demo (club phone + student phone):** on the club phone, log in as a club, open **Demo tools** at the bottom and tap **Create sync code**, then **Copy join link** and open that link on the student phone (or type the code into **Join**). Posts, claims and "Picked up" now show up on both phones within a second. Sync goes through the free public relay ntfy.sh, so only demo data goes through it.
+We used an AI coding assistant as a helper while we built this, mostly to:
 
-**Notifications:** on the student phone tap **Turn on alerts**. On iPhone this only works from the home-screen app (iOS 16.4+), not from Safari.
+- talk through the model design and check our feature ideas for "peeking" at future data,
+- debug merge conflicts and layout problems, especially on phones,
+- write first drafts of repetitive code and styles that we then edited and tested ourselves.
 
-**First-time hosting setup (once, repo owner):** Settings → Pages → Source: **GitHub Actions**, then Actions → "Deploy app to GitHub Pages" → **Run workflow**.
+The idea, the product decisions, the no-show rules and the demo all came from us. Every feature was checked by clicking through it in the app. The turnout model itself doesn't use AI at all. It's a small statistical model trained only on event data, and it runs on your phone with no outside service.
 
-## Who owns what
-
-| Folder / file | What it is | Owner |
-|---|---|---|
-| `web/js/model.js`, `model/`, `data/` | Turnout model, features, sample data, Python evaluation | Teammate 1 (model) |
-| `web/js/club.js` | Club console: plan an event, report results, live rescue, insights | Teammate 2 (club app) |
-| `web/js/student.js` | Student app: feed, claim, pickup timer, no-show rule, alerts | Ashita (student app) |
-| `web/js/core.js`, `web/js/app.js`, `web/js/sync.js`, `web/index.html`, `web/css/styles.css`, `web/sw.js`, `web/manifest.webmanifest` | Shared: state, two-phone sync, login, layout, styles, app install | Shared. Ask in the group chat before changing |
-
-Swap names in this table to match who's doing what. Owning a folder means you review PRs that touch it.
-
-## How we work together
-
-`main` always works. Nobody pushes straight to it. Each change goes on its own branch and comes back through a pull request (PR).
-
-**First time only**
-
-```bash
-git clone https://github.com/ashita02agrawal-hash/usf-food-rescue.git
-cd usf-food-rescue
-```
-
-**Every time you start something new**
-
-```bash
-git checkout main
-git pull                              # get everyone's latest work
-git checkout -b student/claim-sounds  # new branch: <area>/<short-name>
-# ...edit, refresh the browser, check it works...
-git add -A
-git commit -m "Play a sound when food is posted"
-git push -u origin student/claim-sounds
-```
-
-Then open GitHub, click **Compare & pull request**, and ask one teammate to review. After it's approved, click **Merge**, and everyone runs `git checkout main && git pull`.
-
-**Rules that keep us out of trouble**
-
-- Small PRs, merged often (a few hours of work, not a whole day). Small PRs rarely conflict.
-- Stay in the files you own. If you need something in a shared file, say so in the chat first.
-- Before you open a PR, click through the demo once (Start demo, plan, report, claim, picked up).
-- If git says there's a **merge conflict**, don't panic: run `git pull origin main` on your branch, open the files it lists, keep the right lines, delete the `<<<<<<<`, `=======`, `>>>>>>>` markers, then commit and push again.
-
-## Project layout
+## What's in the repo
 
 ```
-web/                    the app (plain HTML, CSS, JavaScript)
-  index.html            page skeleton; loads the scripts in order
-  css/styles.css        all styles (add new ones in your area's section)
-  js/core.js            shared utilities, state, sync, view switching
-  js/model.js           the turnout model (trains in the browser)
-  js/club.js            club console
-  js/student.js         student app
-  js/sync.js            two-phone live sync (club phone <-> student phone)
-  js/app.js             login, demo tools, boot (loaded last)
-  sw.js, manifest.webmanifest, icons/   make it installable as a phone app
-  data/sample_events.json   sample event history the app trains on
-model/
-  generate_sample_data.py   makes data/sample_events.csv and web/data/sample_events.json
-  train_eval.py             scikit-learn version of the model + accuracy report
-data/sample_events.csv      the same sample data as a spreadsheet
-scripts/build_single_file.py  bundles web/ into one page for sharing (dist/)
-.github/workflows/pages.yml   publishes web/ to GitHub Pages on every push to main
+web/                  the app (plain HTML, CSS and JavaScript, no framework)
+  js/club.js          club side: plan, report, rescue, insights
+  js/student.js       student side: feed, reserve, pickup, profile
+  js/model.js         the turnout model (trains in the browser)
+  js/core.js          shared data, rules and helpers
+  js/sync.js          live sync between two phones
+  js/app.js           login screen, demo tools, startup
+  css/                styles (one shared USF theme)
+  data/               sample event history the app learns from
+model/                Python version of the model, evaluation and tests
+data/                 the same sample data as a spreadsheet, plus an example upload
 ```
 
-The scripts aren't modules. They share globals and load in the order in `index.html`, so a function in `core.js` can be called from `club.js`.
+## What's next
 
-## The model
-
-- **Target:** show rate = checked in ÷ RSVPs (walk-ins can push it past 100%).
-- **Features:** club, event type, day, start time, location (MSC gets walk-ins from the commuter lounge, between-class traffic and Village freshmen), RSVP count, week of semester, the club's recent show rate, the club's show rate *for this event type*, last event's leftover %, and how much history the club has. History features only use earlier events.
-- **Algorithm:** gradient-boosted trees (180 trees, depth 3), written from scratch in `web/js/model.js` so it trains in under a second and retrains live. `model/train_eval.py` does the same with scikit-learn.
-- **"Why this number":** exact per-feature contributions from each tree's split path, shown in people.
-- **Recommendation:** predicted turnout × 1.15, converted to real units (pizzas, bagels, wings, platters).
-
-Sample-data results (train before Fall 2026 week 9, test after):
-
-| Strategy | Servings wasted | Avg error (people) |
-|---|---|---|
-| Order for every RSVP (today) | 1161 | 27.2 |
-| Campus-wide average show rate | 409 | 10.2 |
-| **Bulls Bites model** | **234** | **4.1** |
-
-About **80% less food wasted**. Reproduce with `pip install scikit-learn pandas` then `python3 model/train_eval.py`.
-
-## Rescue rules
-
-- Every post shows food out since (with a 2-hour food safety limit), allergens, the restaurant or caterer, the pickup spot, walking distance, and portions left.
-- Claim 1 or 2 portions. They're held for 60 seconds while you tap "I'm on my way", then you have 15 minutes to pick up.
-- Clubs set a 15/20/30-minute window. One e-board member stays for it, by rotation.
-- **No-shows:** canceling within 60 seconds is free. A missed pickup or a late cancel is a strike. 2 in a row or 3 in a semester pauses claiming until next semester. A pickup resets the in-a-row count. Limits are in `POLICY` in `web/js/core.js`.
-
-## 2-minute demo script
-
-1. **Start demo**: club console and student phone side by side, ACM on *Plan an event*.
-2. A 73-RSVP general meeting at ENB: about 10 people expected, so order about 12 bagels, not 73. Walk through "Why this number".
-3. Change location to **Marshall Student Center**: turnout roughly doubles from MSC foot traffic.
-4. *Events & rescue* → **Report results** on today's meeting. Save. The model retrains and its next prediction changes.
-5. The student phone pings with the rescue post. Claim 2 → "I'm on my way" → 15:00 timer.
-6. Club taps **Picked up**.
-7. *Insights* → **Village STEM LLC**: RSVPs stay near 40 while turnout falls to 5-6, and the prediction follows it. Close on "80% less waste".
-
-Footer demo tools: skip ahead 5 minutes (shows a no-show strike), simulate another student's claim, reset.
+- Real check-in data from a few USF clubs to validate the model.
+- A campus map, so students can see which posts are closest.
+- USF single sign-on instead of the demo login.
+- A short weekly report for clubs: money saved, food rescued.

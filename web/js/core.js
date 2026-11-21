@@ -68,7 +68,7 @@ function seed(club){
   // a live post from another club so the student feed isn't empty
   if(!state.posts.some(p=>p.status==="live")){
     const t0=now();
-    state.posts.push({id:"p_seed_"+todayStr(), club:"Pre-Med Society", eventName:"Speaker panel", food:"Chick-fil-A nuggets", caterer:"Chick-fil-A (MSC)", allergens:["gluten","soy"], location:"ISA", spot:PICKUP_SPOTS.ISA, total:14, outSince:t0-35*60000, windowEnd:t0+18*60000, createdAt:t0-4*60000, onDuty:"Hannah", status:"live"});
+    state.posts.push({id:"p_seed_"+todayStr(), club:"Pre-Med Society", eventName:"Speaker panel", food:"Chick-fil-A nuggets", caterer:"Chick-fil-A (MSC)", allergens:["gluten","soy"], veg:false, location:"ISA", spot:PICKUP_SPOTS.ISA, total:14, outSince:t0-35*60000, windowEnd:t0+18*60000, createdAt:t0-4*60000, onDuty:"Hannah", status:"live"});
   }
 }
 let room=null, bc=null;

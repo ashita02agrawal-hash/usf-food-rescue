@@ -9,7 +9,7 @@ function renderLogin(){
     <div class="stack">
       <div class="eyebrow">HackJam'26 · USF Tampa</div>
       <div class="hero-line">Share <em>surplus food</em>.<br>Pick it up in minutes.</div>
-      <p class="muted" style="max-width:62ch">Clubs post leftover food from campus events. Students nearby can reserve portions and pick them up before the window closes.</p>
+      <p class="muted" style="max-width:62ch">Clubs post leftover food from campus events. Students can reserve portions and pick them up before the window closes.</p>
     </div>
     <div class="login-grid">
       <form class="card stack" id="clubLogin">

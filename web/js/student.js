@@ -23,7 +23,6 @@ const BB_ICON = {
   check: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`,
   home: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>`,
   impact: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.5-6"/></svg>`,
-  board: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>`,
   profile: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>`,
 };
 
@@ -35,8 +34,8 @@ function bbClubLogo(club) {
 }
 // Building name for a post. Clubs can type any building, so fall back to what they typed.
 const bbPlace = code => LOCS[code]?.name || code || "On campus";
-// Walking distance in meters, or null when we don't have coordinates for that building.
-const bbDist = (from, to) => (LOCS[from] && LOCS[to]) ? haversine(LOCS[from], LOCS[to]) : null;
+// Vegetarian filter: clubs mark a post vegetarian when they send it out.
+const bbVegOnly = () => ui.diet === "veg";
 const bbPicked = who => state.claims.filter(c => c.status === "picked" && (!who || c.student === who)).reduce((s, c) => s + c.portions, 0);
 const bbGo = (sv, extra) => { ui.sv = sv; Object.assign(ui, extra || {}); store.set("pw_ui", ui); renderStudent(); };
 function pickupCloseAt(p){ return Math.min(p.windowEnd, p.outSince + 2*3600000); }
@@ -48,13 +47,13 @@ function renderStudent(){
     setTimeout(() => { bbSplash = false; renderStudent(); }, 1100);
     return;
   }
-  const st = state.students[ME], near = ui.near || "LIB", avoid = ui.avoid || [];
+  const st = state.students[ME], avoid = ui.avoid || [];
   const myActive = state.claims.find(c => c.student === ME && ["held","onway"].includes(c.status));
 
+  // Every live post, the ones closing soonest first.
   const all = state.posts.filter(p => p.status === "live")
-    .map(p => ({p, d: bbDist(near, p.location), left: portionsLeft(p)}))
-    .sort((a, b) => (a.d ?? Infinity) - (b.d ?? Infinity));
-  const nearby = all.filter(x => x.d !== null && x.d < 900);
+    .map(p => ({p, left: portionsLeft(p)}))
+    .sort((a, b) => pickupCloseAt(a.p) - pickupCloseAt(b.p));
 
   // Alert for posts this student hasn't seen yet.
   const seen = new Set(ui.seen || []);
@@ -65,10 +64,10 @@ function renderStudent(){
   if(ui.sv === "claim" && !(myActive && myActive.status === "held")) ui.sv = myActive ? "success" : "home";
   if(ui.sv === "success" && !myActive) ui.sv = "home";
   const sv = ui.sv || "home";
-  const x = {st, near, avoid, myActive, all, nearby};
-  const screens = {home: bbHome, detail: bbDetail, claim: bbClaim, success: bbSuccess, impact: bbImpact, board: bbBoard, profile: bbProfile};
+  const x = {st, avoid, myActive, all};
+  const screens = {home: bbHome, detail: bbDetail, claim: bbClaim, success: bbSuccess, impact: bbImpact, profile: bbProfile};
   const body = (screens[sv] || bbHome)(x);
-  const tabs = [["home","Home"],["impact","Impact"],["board","Leaders"],["profile","Profile"]];
+  const tabs = [["home","Home"],["impact","Impact"],["profile","Profile"]];
   const tab = ["detail","claim","success"].includes(sv) ? "home" : sv;
 
   pane.innerHTML = `<div class="bb"><div class="bb-body">${body}</div>
@@ -76,22 +75,20 @@ function renderStudent(){
   bbBind(pane, x);
 }
 
-function bbHome({st, near, myActive, all, nearby}){
+function bbHome({st, myActive, all}){
   const rescued = bbPicked();
-  const others = all.filter(x => !nearby.includes(x));
+  const shown = bbVegOnly() ? all.filter(x => x.p.veg) : all;
+  const hidden = all.length - shown.length;
   return `<header class="bb-top"><div><h1>Hi, ${esc(st.name.split(" ")[0])}</h1><p>Let’s save some food today</p></div>
       <button class="bb-bell ${ui.alerts ? "on" : ""}" data-alerts aria-label="${ui.alerts ? "Alerts on" : "Turn on alerts"}">${BB_ICON.bell}</button></header>
     <section class="bb-hero"><p>Together, USF has rescued</p><b class="num">${rescued} serving${rescued === 1 ? "" : "s"}</b><span>about ${Math.round(rescued * BB_LB_PER_SERVING)} lbs kept out of the trash</span></section>
     ${st.suspended ? `<div class="banner bad"><b>Claiming is paused for the rest of the semester.</b> You missed ${st.strikes.length} pickups.</div>` : ""}
     ${myActive ? bbActiveBar(myActive) : ""}
-    <div class="bb-sec"><h2>Near you</h2>
-      <label class="bb-near"><span>I’m at</span><select id="near" aria-label="Where you are">${Object.entries(LOCS).map(([k, v]) => `<option value="${k}" ${k === near ? "selected" : ""}>${esc(v.name)}</option>`).join("")}</select></label></div>
-    ${nearby.length ? nearby.map(bbCard).join("") : `<div class="bb-empty">No leftovers within a short walk right now.</div>`}
-    <div class="bb-sec"><h2>Across campus</h2><p>Everything else clubs have posted</p></div>
-    ${others.length ? others.map(bbCard).join("") : `<div class="bb-empty">Nothing else posted on campus right now.</div>`}`;
+    <div class="bb-sec"><h2>Free food right now</h2><p>${shown.length} post${shown.length === 1 ? "" : "s"}${bbVegOnly() ? ` · vegetarian only${hidden ? `, ${hidden} hidden` : ""}` : ""}</p></div>
+    ${shown.length ? shown.map(bbCard).join("") : `<div class="bb-empty">${hidden ? "No vegetarian food posted right now." : "No leftovers right now. You’ll get an alert when a club posts some."}</div>`}`;
 }
 
-function bbCard({p, d, left}){
+function bbCard({p, left}){
   const closeAt = pickupCloseAt(p);
   return `<article class="bb-card"><div class="bb-img">${bbClubLogo(p.club)}</div>
     <div class="bb-cbody">
@@ -101,10 +98,10 @@ function bbCard({p, d, left}){
       </div>
       <dl class="bb-facts">
         <div><dt>Where</dt><dd>${esc(p.spot || bbPlace(p.location))}</dd></div>
-        <div><dt>Distance</dt><dd>${d === null ? esc(bbPlace(p.location)) : walk(d)}</dd></div>
         <div><dt>Closes in</dt><dd><b class="num" data-until="${closeAt}">${mmss(closeAt - now())}</b></dd></div>
         <div><dt>From</dt><dd>${esc(p.club)} · ${esc(p.eventName || "Club event")}</dd></div>
       </dl>
+      ${p.veg ? `<span class="bb-veg">Vegetarian</span>` : ""}
       <button class="bb-btn" data-open="${p.id}">Reserve</button>
     </div></article>`;
 }
@@ -130,6 +127,7 @@ function bbDetail(x){
           <div><dt>Pickup</dt><dd>${esc(p.spot || bbPlace(p.location))}</dd></div>
           <div><dt>Closes in</dt><dd><b class="num" data-until="${closeAt}">${mmss(closeAt - now())}</b></dd></div>
           <div><dt>Hosted by</dt><dd>${esc(p.club)} · ${esc(p.eventName || "Club event")}</dd></div>
+          <div><dt>Diet</dt><dd>${p.veg ? "Vegetarian" : "Not vegetarian"}</dd></div>
           <div><dt>Allergens</dt><dd>${p.allergens.length ? esc(p.allergens.join(", ")) : "None listed"}</dd></div>
         </dl>
         <div class="bb-claims">
@@ -164,19 +162,16 @@ function bbImpact(){
     <section class="bb-hero"><p>Waste prevented</p><b class="num">${Math.round(n * BB_LB_PER_SERVING * 10) / 10} lbs</b><span>${n} serving${n === 1 ? "" : "s"} picked up · about $${n * COST_PER_SERVING} of food</span></section>`;
 }
 
-function bbBoard(){
-  const byClub = {};
-  state.claims.filter(c => c.status === "picked").forEach(c => { const p = state.posts.find(p => p.id === c.postId); if(p) byClub[p.club] = (byClub[p.club] || 0) + c.portions; });
-  const rows = Object.entries(byClub).sort((a, b) => b[1] - a[1]).slice(0, 8);
-  return `<header class="bb-top"><div><h1>Leaderboard</h1><p>Clubs whose leftovers got rescued</p></div></header>
-    ${rows.length ? `<ol class="bb-board">${rows.map(([club, n]) => `<li><span>${esc(club)}</span><b class="num">${n}</b></li>`).join("")}</ol>` : `<div class="bb-empty">The board fills in once students pick up food.</div>`}`;
-}
-
 function bbProfile({st, avoid}){
   return `<header class="bb-top"><div><h1>Profile</h1><p>${esc(st.name)}</p></div></header>
     <section class="bb-card bb-pad">
       <div class="bb-title-row"><h3>Missed pickups</h3><span class="strikes">${[...Array(POLICY.totalLimit)].map((_, i) => `<i class="${i < st.strikes.length ? "on" : ""}"></i>`).join("")}</span></div>
       <p class="bb-note">Cancel within ${POLICY.freeCancelSec} seconds for free. ${POLICY.consecutiveLimit} missed in a row or ${POLICY.totalLimit} in a semester pauses claiming until next semester.</p>
+    </section>
+    <section class="bb-card bb-pad">
+      <h3>What do you eat?</h3>
+      <div class="bb-seg" id="diet" role="group" aria-label="Diet">${[["any","Everything"],["veg","Vegetarian"]].map(([k, l]) => `<button data-diet="${k}" aria-pressed="${(ui.diet || "any") === k}">${l}</button>`).join("")}</div>
+      <p class="bb-note">Vegetarian shows only food the club marked vegetarian, and only alerts you about that food.</p>
     </section>
     <section class="bb-card bb-pad">
       <h3>Hide alerts for</h3>
@@ -199,8 +194,8 @@ function bbBind(pane, x){
     save(); bbGo("success"); onStateChange();
   });
   all("[data-cancel]").forEach(b => b.onclick = () => { cancelClaim(b.dataset.cancel); bbGo("home"); });
-  const near = pane.querySelector("#near");
-  if(near) near.onchange = e => { ui.near = e.target.value; store.set("pw_ui", ui); renderStudent(); };
+  const diet = pane.querySelector("#diet");
+  if(diet) diet.onclick = e => { const b = e.target.closest("[data-diet]"); if(!b) return; ui.diet = b.dataset.diet; store.set("pw_ui", ui); renderStudent(); };
   const av = pane.querySelector("#avoid");
   if(av) av.onclick = e => { const b = e.target.closest("[data-av]"); if(!b) return; const a = b.dataset.av; ui.avoid = x.avoid.includes(a) ? x.avoid.filter(v => v !== a) : [...x.avoid, a]; store.set("pw_ui", ui); renderStudent(); };
   all("[data-alerts]").forEach(b => b.onclick = async () => {
@@ -210,7 +205,6 @@ function bbBind(pane, x){
   });
 }
 
-function walk(d){ const m=Math.round(d/10)*10, min=Math.max(1,Math.round(d/80)); return `${m<1000?m+" m":(d/1609).toFixed(1)+" mi"} · ${min} min walk`; }
 function claim(postId, n){
   const st=state.students[ME], p=state.posts.find(p=>p.id===postId);
   if(!p || p.status!=="live" || st.suspended || !Number.isInteger(n) || n<1 || n>POLICY.maxPortions ||
@@ -227,9 +221,8 @@ function cancelClaim(id){
   save(); onStateChange(); toast(free?"Canceled":"Canceled late", free?"No strike. Portions went back to the pool.":"That counts as a strike. Portions went back to the pool.");
 }
 function notify(p, avoid){
-  if(p.allergens.some(a=>avoid.includes(a))) return;
-  const d = bbDist(ui.near||"LIB", p.location);
-  const body=`${portionsLeft(p)} portions at ${bbPlace(p.location)}${d===null?"":" · "+walk(d)}`;
+  if(p.allergens.some(a=>avoid.includes(a)) || (bbVegOnly() && !p.veg)) return;
+  const body=`${portionsLeft(p)} portions at ${p.spot || bbPlace(p.location)}`;
   toast(`Free food: ${p.food}`, body, "rescue");
   try{ if(ui.alerts && "Notification" in window && Notification.permission==="granted"){
     const title="Bulls Bites: free "+p.food, opts={body, icon:"icons/icon-192.png", tag:p.id};

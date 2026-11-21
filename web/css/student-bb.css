@@ -98,3 +98,9 @@
   .stage.student-only #studentPane .bb.bb-splash{min-height:calc(100vh - 60px);grid-template-rows:none;align-content:center}
 }
 @media (max-width:700px){ body:has(.stage.student-only) #toasts{bottom:calc(84px + env(safe-area-inset-bottom,0px))} }
+#studentPane .bb-veg{justify-self:start;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+#studentPane .bb-seg{display:grid;grid-template-columns:1fr 1fr;background:var(--sunk);border-radius:999px;padding:3px;gap:2px;margin-top:10px}
+#studentPane .bb-seg button{border:0;background:transparent;padding:8px 10px;border-radius:999px;font-weight:600;color:var(--muted);cursor:pointer}
+#studentPane .bb-seg button[aria-pressed="true"]{background:var(--surface);color:var(--accent);box-shadow:var(--shadow)}
+#studentPane .bb-pad .bb-note{margin-top:8px}
+#studentPane .bb-nav{grid-template-columns:repeat(3,1fr)}

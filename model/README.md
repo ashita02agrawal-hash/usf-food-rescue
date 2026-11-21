@@ -1,6 +1,6 @@
-# Platewise club turnout model
+# Bulls Bites club turnout model
 
-Platewise estimates how many people will attend a club event, then recommends enough food for that turnout plus a 15% buffer. This directory contains the model evaluation, generated sample data tools, slide charts, and the handoff for club UI owners. The current evidence is entirely **sample data**, not a measured result at USF.
+Bulls Bites estimates how many people will attend a club event, then recommends enough food for that turnout plus a 15% buffer. This directory contains the model evaluation, generated sample data tools, slide charts, and the handoff for club UI owners. The current evidence is entirely **sample data**, not a measured result at USF.
 
 ## Run and reproduce
 
@@ -77,9 +77,9 @@ Python output shared by `train_eval.py` and `proof_chart.py`:
 |---|---:|---:|---:|---:|
 | Every RSVP | 2118.00 | 1175.00 | 1 | 27.58 |
 | Campus average + 15% | 1253.17 | 400.66 | 6 | 10.23 |
-| Platewise + 15% | 1142.30 | 204.36 | 3 | 3.59 |
+| Bulls Bites + 15% | 1142.30 | 204.36 | 3 | 3.59 |
 
-> On held-out sample events, Platewise cut food waste by about 80% compared with ordering for every RSVP (average error 3.6 people).
+> On held-out sample events, Bulls Bites cut food waste by about 80% compared with ordering for every RSVP (average error 3.6 people).
 
 The headline rounds the 82.6079% reduction **down** to the nearest 5%. JavaScript yields 82.6673% and MAE 3.7485, a cut difference of 0.0594 percentage points. Different tree implementations explain the small discrepancy. The brief's historical reference was about 4.1 people; the untouched baseline ran at about 4.4 in this environment. The final 3.59 meets the requested maximum of 4.4. Changing the generated data also changes problem difficulty, so the before/after full-model numbers are not a controlled real-world improvement estimate.
 
