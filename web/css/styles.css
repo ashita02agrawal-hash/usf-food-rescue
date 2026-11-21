@@ -91,6 +91,17 @@ button.chip[aria-pressed="true"]{background:var(--accent-soft);color:var(--accen
 @keyframes pulse{50%{opacity:.25}}
 @media (prefers-reduced-motion:reduce){.pill.live .dot{animation:none}}
 
+/* recommendation */
+.rec{display:grid;gap:14px}
+.rec-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.compare{background:var(--sunk);border-radius:10px;padding:10px 12px;font-size:13px}
+.why{display:grid;gap:6px}
+.why-row{display:grid;grid-template-columns:minmax(0,1fr) 120px 58px;gap:10px;align-items:center;font-size:13px}
+.why-bar{height:10px;position:relative;background:var(--sunk);border-radius:5px}
+.why-bar i{position:absolute;top:0;bottom:0;border-radius:4px}
+.why-bar::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--muted);opacity:.5}
+.why-row .v{text-align:right;font-weight:600}
+
 /* events */
 .ev{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
 .ev:first-child{border-top:0}
@@ -107,6 +118,18 @@ button.chip[aria-pressed="true"]{background:var(--accent-soft);color:var(--accen
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
 .tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
 .tile .big{font-size:30px}
+
+/* chart */
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{fill:var(--muted);font-size:11px;font-family:var(--body)}
+.chart .gl{stroke:var(--line);stroke-width:1}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:16px;height:0;border-top:2px solid}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);padding:8px 10px;border-radius:8px;font-size:12px;line-height:1.4;white-space:nowrap;transform:translate(-50%,-110%);z-index:3}
+.imp-row{display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr) 40px;gap:10px;align-items:center;font-size:13px}
+.imp-row i{display:block;height:10px;background:var(--accent);border-radius:0 4px 4px 0}
 
 /* phone */
 .phone{background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;position:relative}

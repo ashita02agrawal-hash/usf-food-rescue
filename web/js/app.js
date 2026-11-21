@@ -63,8 +63,9 @@ async function boot(){
   delete ui.foodForecastFood; delete ui.foodForecastLocation;
   store.set("pw_ui",ui);
   if(!ui.club && !ui.student && innerWidth>=1060){ /* landing */ }
-  // Retain the club model engine; prediction UI has been removed.
+  // Train first (fast) so the club recommendation works immediately; then fill the Insights tiles and chart.
   fitFull(); render();
+  setTimeout(()=>{ fitOOF(); fitBacktest(); if(typeof setModelStatus==="function") setModelStatus(); if((ui.clubTab)==="insights" && !$("#clubPane").hidden) renderInsights(); }, 50);
   if(typeof relayBoot==="function") relayBoot();
   if("serviceWorker" in navigator && location.protocol!=="file:") navigator.serviceWorker.register("sw.js").catch(()=>{});
   try{ bc=new BroadcastChannel("platewise"); bc.onmessage=e=>applyRemote(e.data); }catch(e){}
