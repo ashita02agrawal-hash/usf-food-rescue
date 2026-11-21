@@ -152,9 +152,25 @@ function fitBacktest(){
   const isTest = r => r.semester==="Fall 2026" && r.week>=9;
   const tr=rows.filter(r=>!isTest(r)), te=rows.filter(isTest);
   const m=trainGBM(tr.map(vec), tr.map(r=>r.checked_in/r.rsvps));
-  let wasteBase=0, wasteModel=0, ordBase=0, ordModel=0, err=0;
-  te.forEach(r=>{ const p=predictRate(m,vec(r))*r.rsvps, ord=p*BUFFER; ordBase+=r.rsvps; ordModel+=ord; wasteBase+=Math.max(0,r.rsvps-r.checked_in); wasteModel+=Math.max(0,ord-r.checked_in); err+=Math.abs(p-r.checked_in); });
-  M.backtest = {n:te.length, wasteBase, wasteModel, cut:1-wasteModel/wasteBase, mae:err/te.length, servingsSaved:wasteBase-wasteModel};
+  const campus=mean(tr.map(r=>r.checked_in/r.rsvps));
+  const points=te.map(r=>{
+    const predicted=coldStartRate(explain(m,vec(r)).value,r)*r.rsvps;
+    return {event_id:r.event_id,club:r.club,category:categoryOf(r),actual:r.checked_in,predicted,
+      ordered_rsvp:r.rsvps,ordered_campus:campus*r.rsvps*BUFFER,ordered_model:predicted*BUFFER};
+  });
+  const strategies=[['Order for every RSVP','ordered_rsvp'],['Campus average','ordered_campus'],['Platewise','ordered_model']].map(([strategy,key])=>({
+    strategy,servings_ordered:points.reduce((s,p)=>s+p[key],0),
+    servings_wasted:points.reduce((s,p)=>s+Math.max(0,p[key]-p.actual),0),
+    events_ran_short:points.filter(p=>p.actual-p[key]>.1*p.actual).length,
+    mae_people:mean(points.map(p=>Math.abs(p[key]/(key==='ordered_rsvp'?1:BUFFER)-p.actual)))
+  }));
+  const wasteBase=strategies[0].servings_wasted,wasteModel=strategies[2].servings_wasted;
+  M.backtest = {n:te.length,train:tr.length,points,strategies,wasteBase,wasteModel,
+    cut:wasteBase?1-wasteModel/wasteBase:0,mae:strategies[2].mae_people,servingsSaved:wasteBase-wasteModel};
+}
+function backtestHeadline(result=M.backtest){
+  if(!result)return 'Run fitBacktest() to evaluate held-out sample events.';
+  return `On held-out sample events, Platewise cut food waste by about ${Math.floor(result.cut*20)*5}% compared with ordering for every RSVP (average error ${result.mae.toFixed(1)} people).`;
 }
 // Predict a planned event for a club
 function predictEvent(ev){
