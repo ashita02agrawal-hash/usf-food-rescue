@@ -1,0 +1,357 @@
+:root {
+  --bg-cream: #F6F7F2;
+  --forest: #154734;
+  --forest-mid: #1E5E44;
+  --sage-tint: #E4EFE8;
+  --lime-badge: #D9ED92;
+  --gold-accent: #C5E86C;
+  --card-white: #FFFFFF;
+  --text-dark: #10261D;
+  --text-muted: #5A6D64;
+  --border-light: #E2E6DF;
+}
+
+/* Scope styles strictly to the student pane so the club console isn't affected */
+#studentPane {
+  background-color: var(--bg-cream) !important;
+  color: var(--text-dark) !important;
+  font-family: 'Bricolage Grotesque', -apple-system, sans-serif;
+  padding: 16px 16px 92px 16px;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 100vh;
+}
+
+#studentPane .bb {
+  max-width: 420px;
+  margin: 0 auto;
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+}
+
+/* Splash Screen */
+#studentPane .bb-splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--forest);
+  color: #FFFFFF;
+  text-align: center;
+}
+#studentPane .bb-logo {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--gold-accent);
+  margin-bottom: 8px;
+}
+
+/* Top Header */
+#studentPane .bb-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+#studentPane .bb-top h1 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin: 0 0 4px 0;
+}
+#studentPane .bb-top p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+#studentPane .bb-bell {
+  background: var(--card-white);
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+/* Hero Impact Card */
+#studentPane .bb-hero {
+  background: linear-gradient(135deg, var(--forest) 0%, var(--forest-mid) 100%);
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 20px rgba(21, 71, 52, 0.16);
+}
+#studentPane .bb-hero b {
+  display: block;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--gold-accent);
+  margin: 4px 0;
+}
+#studentPane .bb-hero span {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+#studentPane .bb-globe {
+  font-size: 2.5rem;
+}
+
+/* View Mode Toggle */
+#studentPane .bb-view-toggle {
+  display: flex;
+  background: var(--border-light);
+  border-radius: 12px;
+  padding: 3px;
+  margin-bottom: 14px;
+}
+#studentPane .bb-view-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+#studentPane .bb-view-toggle button.active {
+  background: var(--card-white);
+  color: var(--forest);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Map Placeholder Styling */
+#studentPane .bb-map-box {
+  background: var(--card-white);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(16,38,29,0.05);
+}
+#studentPane .bb-map-pins {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+#studentPane .bb-map-pin-btn {
+  background: var(--sage-tint);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--forest);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Filters & Headings */
+#studentPane .bb-sec h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 10px 0;
+}
+#studentPane .bb-near select {
+  width: 100%;
+  background-color: var(--card-white);
+  color: var(--text-dark);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+/* Food Cards */
+#studentPane .bb-card {
+  background-color: var(--card-white);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(16,38,29,0.05);
+}
+#studentPane .bb-img {
+  background: var(--sage-tint);
+  border-radius: 14px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin-bottom: 12px;
+  position: relative;
+}
+#studentPane .bb-emoji { font-size: 2.8rem; }
+#studentPane .bb-live {
+  background-color: var(--lime-badge);
+  color: var(--forest);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+#studentPane .bb-count {
+  background-color: rgba(255,255,255,0.9);
+  border: 1px solid var(--border-light);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+#studentPane .bb-cbody h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin: 0 0 6px 0;
+}
+#studentPane .bb-cbody p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 3px 0;
+}
+#studentPane .bb-btn {
+  width: 100%;
+  background-color: var(--forest);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-top: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+#studentPane .bb-btn:hover { background-color: var(--forest-mid); }
+#studentPane .bb-btn.ghost {
+  background: transparent;
+  color: var(--forest);
+  border: 1px solid var(--border-light);
+}
+
+/* Active Reservation Banner */
+#studentPane .bb-active {
+  width: 100%;
+  background: var(--lime-badge);
+  color: var(--forest);
+  border: 1px solid #c2e267;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+/* Bottom Navigation Bar */
+#studentPane .bb-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 420px;
+  margin: 0 auto;
+  background-color: var(--card-white);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 6px;
+  z-index: 100;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
+}
+#studentPane .bb-nav button {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 5px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+#studentPane .bb-nav button[aria-current="page"] {
+  color: var(--forest);
+  font-weight: 800;
+}
+
+/* Center state screens */
+#studentPane .bb-center {
+  text-align: center;
+  padding: 24px 12px;
+}
+#studentPane .bb-ring {
+  background: var(--sage-tint);
+  border: 4px solid var(--forest);
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  font-weight: 800;
+  color: var(--forest);
+}
+#studentPane .bb-center b { font-size: 1.6rem; }
+#studentPane .bb-check {
+  background: var(--forest);
+  color: #FFFFFF;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 16px auto;
+}
+#studentPane .bb-pick {
+  background: var(--card-white);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 16px 0;
+  text-align: left;
+}
+#studentPane .bb-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 30px;
+  background: var(--card-white);
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
+}
