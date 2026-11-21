@@ -96,6 +96,17 @@ CLUBS = [
          food=("subs", "Jersey Mike's", ["gluten"]), override={}),
 ]
 
+CATEGORIES = {
+    "ACM": "tech", "HackJam Workshops": "tech", "Robotics Club": "tech",
+    "Pre-Med Society": "professional", "Finance Association": "professional",
+    "Entrepreneurship Club": "professional", "Society of Women Engineers": "professional",
+    "Indian Student Association": "cultural", "Black Student Union": "cultural",
+    "Vietnamese Student Association": "cultural", "Village STEM LLC": "residential",
+    "Chess Club": "recreation", "Campus Rec Outdoors": "recreation",
+}
+for club in CLUBS:
+    club["category"] = CATEGORIES[club["club"]]
+
 SEMESTERS = [("Spring 2026", date(2026, 1, 12), 15), ("Fall 2026", date(2026, 8, 24), 13)]
 
 
@@ -139,6 +150,7 @@ def week_mult(week: int, n_weeks: int, decay: float) -> float:
 
 
 def main() -> None:
+    rng.seed(SEED)
     rows = []
     eid = 0
     for sem, start, n_weeks in SEMESTERS:
@@ -171,7 +183,7 @@ def main() -> None:
                 food, caterer, allergens = c["food"]
                 eid += 1
                 rows.append(dict(
-                    event_id=f"S{eid:04d}", club=c["club"], event_type=etype,
+                    event_id=f"S{eid:04d}", club=c["club"], category=c["category"], event_type=etype,
                     date=day.isoformat(), day_of_week=day.strftime("%a"), start_hour=hour,
                     location=loc, rsvps=rsvp, checked_in=attended, food_item=food,
                     caterer=caterer, allergens="|".join(allergens),
@@ -191,7 +203,7 @@ def main() -> None:
         "label": "SAMPLE DATA: generated to mirror patterns observed at USF club events, not real records.",
         "locations": LOCATIONS,
         "clubs": [
-            {"club": c["club"], "food_item": c["food"][0], "caterer": c["food"][1], "allergens": c["food"][2],
+            {"club": c["club"], "category": c["category"], "food_item": c["food"][0], "caterer": c["food"][1], "allergens": c["food"][2],
              "home": c["events"][0][1]}
             for c in CLUBS
         ],

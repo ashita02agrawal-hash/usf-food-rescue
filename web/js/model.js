@@ -10,6 +10,32 @@
 // ============================================================
 const PRIOR_RATE = 0.55, PRIOR_N = 3;
 let META, CLUBS, LOCS, COLS;
+const CLUB_CATEGORIES = {ACM:"tech","HackJam Workshops":"tech","Robotics Club":"tech","Pre-Med Society":"professional","Finance Association":"professional","Entrepreneurship Club":"professional","Society of Women Engineers":"professional","Indian Student Association":"cultural","Black Student Union":"cultural","Vietnamese Student Association":"cultural","Village STEM LLC":"residential","Chess Club":"recreation","Campus Rec Outdoors":"recreation"};
+const categoryOf = r => r.category || META?.clubs?.find(c=>c.club===r.club)?.category || CLUB_CATEGORIES[r.club] || "";
+const beforeEvent = (a,b) => a.date<b.date || (a.date===b.date && +a.start_hour<+b.start_hour);
+function historyIndex(){ return {all:[],types:new Map(),categories:new Map(),categoryTypes:new Map(),clubs:new Map()}; }
+function addHistory(h,r){
+  const push=a=>{a.push(r);a.rateSum=(a.rateSum||0)+r.checked_in/r.rsvps;};
+  const append=(map,key)=>{ if(!map.has(key))map.set(key,[]);push(map.get(key)); };
+  push(h.all);append(h.types,r.event_type);append(h.clubs,r.club);
+  const cat=categoryOf(r);if(cat){append(h.categories,cat);append(h.categoryTypes,cat+"|"+r.event_type);}
+}
+function historyFeatures(h,ev,mode="layered"){
+  const rate=a=>a.checked_in/a.rsvps;
+  const sum=a=>a.rateSum??a.reduce((s,r)=>s+rate(r),0);
+  const average=(a,fallback)=>a.length?sum(a)/a.length:fallback;
+  const shrink=(a,prior)=>(sum(a)+PRIOR_N*prior)/(a.length+PRIOR_N);
+  const club=h.clubs.get(ev.club)||[],cat=categoryOf(ev);
+  const campus=average(h.all,PRIOR_RATE);
+  const type=shrink(h.types.get(ev.event_type)||[],campus);
+  const category=shrink(h.categories.get(cat)||[],campus);
+  const categoryType=shrink(h.categoryTypes.get(cat+"|"+ev.event_type)||[],type);
+  const recent=club.slice(-6),ct=club.filter(r=>r.event_type===ev.event_type).slice(-4);
+  return {club_rate:shrink(recent,mode==="flat"?PRIOR_RATE:category),
+    club_type_rate:shrink(ct,mode==="flat"?PRIOR_RATE:categoryType),
+    prev_left:club.at(-1)?.leftover_pct??30,n_events:club.length,
+    campus_rate:campus,campus_type_rate:type,category_rate:category,category_type_rate:categoryType};
+}
 
 function buildCols(){
   COLS = [
@@ -22,26 +48,20 @@ function buildCols(){
   ];
 }
 // History features computed only from events BEFORE this one (no peeking).
-function histFeatures(prior, club, type){
-  const h = prior.filter(r=>r.club===club);
-  const recent = h.slice(-6).map(r=>r.checked_in/r.rsvps);
-  const ct = h.filter(r=>r.event_type===type).slice(-4).map(r=>r.checked_in/r.rsvps);
-  return {
-    club_rate:(recent.reduce((s,x)=>s+x,0)+PRIOR_RATE*PRIOR_N)/(recent.length+PRIOR_N),
-    club_type_rate:(ct.reduce((s,x)=>s+x,0)+PRIOR_RATE*PRIOR_N)/(ct.length+PRIOR_N),
-    prev_left: h.length && h[h.length-1].leftover_pct!=null ? h[h.length-1].leftover_pct : 30,
-    n_events:h.length,
-  };
+function histFeatures(prior, club, type, category){
+  const h=historyIndex();sortEvents(prior).forEach(r=>addHistory(h,r));
+  return historyFeatures(h,{club,event_type:type,category});
 }
 function sortEvents(rows){ return rows.slice().sort((a,b)=> a.date<b.date?-1:a.date>b.date?1:a.start_hour-b.start_hour); }
-function engineer(rows){
-  const sorted = sortEvents(rows), byClub = {};
-  return sorted.map(r=>{
-    const prior = byClub[r.club] || (byClub[r.club]=[]);
-    const f = histFeatures(prior, r.club, r.event_type);
-    prior.push(r);
-    return {...r, ...f};
-  });
+function engineer(rows, mode="layered"){
+  const sorted=sortEvents(rows),h=historyIndex(),out=[];
+  // Score simultaneous events as a batch before adding any of their outcomes.
+  for(let i=0;i<sorted.length;){
+    let j=i+1;while(j<sorted.length && !beforeEvent(sorted[i],sorted[j]))j++;
+    for(let k=i;k<j;k++)out.push({...sorted[k],...historyFeatures(h,sorted[k],mode)});
+    for(let k=i;k<j;k++)addHistory(h,sorted[k]);i=j;
+  }
+  return out;
 }
 function vec(e){
   const x = new Float64Array(COLS.length);
@@ -78,6 +98,7 @@ function trainGBM(X, y, {trees=180, depth=3, lr=0.07, minLeaf=5, sub=0.85, seed=
   for(let t=0;t<trees;t++){
     for(let i=0;i<n;i++) r[i]=y[i]-F[i];
     const idx=[]; for(let i=0;i<n;i++) if(rng()<sub) idx.push(i);
+    if(!idx.length)idx.push(0);
     const tree=build(idx,0); out.push(tree);
     for(let i=0;i<n;i++) F[i]+=lr*leaf(tree,X[i]);
   }
@@ -95,6 +116,10 @@ function explain(model, x){
   return {value:val, bias, contrib:c};
 }
 const predictRate = (model,x) => clamp(explain(model,x).value, 0.03, 1.6);
+function coldStartRate(raw,e){
+  const weight=Math.min(1,e.n_events/3);
+  return clamp(weight*raw+(1-weight)*(0.75*e.club_rate+0.25*e.club_type_rate),0.03,1.6);
+}
 
 // Model state
 const M = { full:null, n:0, mae:null, oof:{}, backtest:null, importance:null, clubResid:{} };
@@ -109,15 +134,17 @@ function fitFull(){
   M.importance = Object.entries(imp).map(([g,v])=>[g,v/rows.length]).sort((a,b)=>b[1]-a[1]);
 }
 function fitOOF(){
-  // 5-fold out-of-fold predictions for the predicted-vs-actual chart
-  const rows = engineer(META.events), X=rows.map(vec), y=rows.map(r=>r.checked_in/r.rsvps);
-  const rng=makeRng(3), fold=rows.map(()=>Math.floor(rng()*5)), errs=[];
-  for(let k=0;k<5;k++){
-    const tr=rows.map((_,i)=>i).filter(i=>fold[i]!==k);
-    const m=trainGBM(tr.map(i=>X[i]), tr.map(i=>y[i]), {trees:140});
-    rows.forEach((r,i)=>{ if(fold[i]===k){ const p=predictRate(m,X[i])*r.rsvps; M.oof[r.event_id]=p; errs.push(Math.abs(p-r.checked_in)); (M.clubResid[r.club]||(M.clubResid[r.club]=[])).push(r.checked_in-p); } });
+  // Expanding time folds replace random folds, which trained on future outcomes.
+  const rows=engineer(trainingRows()),errs=[];M.oof={};M.clubResid={};M.residualPoints=[];
+  const size=Math.max(1,Math.ceil(rows.length/6));
+  for(let start=size;start<rows.length;start+=size){
+    const tr=rows.slice(0,start).filter(r=>beforeEvent(r,rows[start]));if(!tr.length)continue;
+    const m=trainGBM(tr.map(vec),tr.map(r=>r.checked_in/r.rsvps),{trees:140});
+    rows.slice(start,start+size).forEach(r=>{const p=coldStartRate(explain(m,vec(r)).value,r)*r.rsvps,error=r.checked_in-p;
+      M.oof[r.event_id]=p;errs.push(Math.abs(error));(M.clubResid[r.club]||(M.clubResid[r.club]=[])).push(error);
+      M.residualPoints.push({club:r.club,date:r.date,start_hour:r.start_hour,error});});
   }
-  M.mae = mean(errs);
+  M.mae=errs.length?mean(errs):null;
 }
 function fitBacktest(){
   // Same split as model/train_eval.py: train before Fall 2026 week 9, test after.
@@ -132,21 +159,33 @@ function fitBacktest(){
 // Predict a planned event for a club
 function predictEvent(ev){
   const prior = sortEvents(trainingRows()).filter(r=>r.date<ev.date || (r.date===ev.date && r.start_hour<ev.start_hour));
-  const f = histFeatures(prior, ev.club, ev.event_type);
+  const f = histFeatures(prior, ev.club, ev.event_type, ev.category);
   const e = {...ev, ...f, week:semesterWeek(ev.date), day_of_week:dow(ev.date)};
   const x = vec(e), ex = explain(M.full, x);
-  const rate = clamp(ex.value,0.03,1.6), people = rate*ev.rsvps;
-  const resid = M.clubResid[ev.club] || [];
-  const sd = resid.length>3 ? Math.sqrt(mean(resid.map(v=>v*v))) : Math.max(3, people*0.2);
+  const rate = coldStartRate(ex.value,e), people = rate*ev.rsvps;
+  const resid = (M.residualPoints||[]).filter(r=>r.club===ev.club && beforeEvent(r,ev)).map(r=>r.error);
+  const typical=resid.length>3?Math.sqrt(mean(resid.map(v=>v*v))):0;
+  const sd = Math.max(typical,3,people*(f.n_events<4?0.35:0.2));
+  const confidence=modelConfidence(f.n_events,typical,people);
   const servings = Math.ceil(people*BUFFER);
   // group contributions into human reasons (in people)
   const groups = {};
   COLS.forEach((c,j)=>{ groups[c.g]=(groups[c.g]||0)+ex.contrib[j]*ev.rsvps; });
-  return {people, rate, low:Math.max(1,Math.round(people-sd)), high:Math.round(people+sd), servings, base:ex.bias*ev.rsvps, groups, feats:e};
+  // Account for output clipping so grouped explanations still sum to people.
+  if(rate!==ex.value)groups[f.n_events<3?"cold_start":"rate_limit"]=(rate-ex.value)*ev.rsvps;
+  return {people, rate, low:Math.max(0,Math.round(people-sd)), high:Math.round(people+sd), servings, base:ex.bias*ev.rsvps, groups, feats:e,confidence};
+}
+function modelConfidence(pastEvents,typicalError=0,people=Infinity){
+  let level=pastEvents<3?0:pastEvents<8?1:2;
+  if(typicalError>Math.max(3,people*0.35))level=Math.max(0,level-1);
+  const name=["low","medium","high"][level];
+  return {level:name,pastEvents,text:`${name[0].toUpperCase()+name.slice(1)} confidence · ${pastEvents} past events`};
 }
 function reasonLabel(g, e){
   const L = LOCS[e.location]?.name || e.location;
   switch(g){
+    case "cold_start": return "Similar-club prior while history is limited";
+    case "rate_limit": return "Show-rate safety limit";
     case "club": return `${e.club}'s own pattern`;
     case "type": return `Event type: ${e.event_type.toLowerCase()}`;
     case "day": return `${DAY_NAMES[e.day_of_week]}`;
